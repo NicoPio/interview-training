@@ -18,12 +18,12 @@ Application d'entraînement aux entretiens techniques en développement JavaScri
 ### État actuel détecté
 
 - ✅ Stack technique configurée (Nuxt 4, Nuxt Content, Nuxt UI, Motion, VueUse)
-- ✅ 1 fichier monolithique `content/index.md` avec 26 questions JavaScript
-- ✅ Page d'accueil basique qui affiche le contenu brut
-- ❌ Pas de structure de navigation
-- ❌ Pas de système de cards
-- ❌ Pas de révélation de réponses
-- ❌ Pas de routing par question
+- ✅ Contenu structuré par catégories (javascript, html, css)
+- ✅ Système de routing dynamique par question
+- ✅ Composants QuestionCard et TableOfContents
+- ✅ Navigation par catégorie
+- ✅ Affichage question/réponse simultané
+- ✅ Layout interview avec sidebar
 
 ---
 
@@ -128,15 +128,13 @@ interface Props {
 ```
 
 **Features :**
-- Affichage de la question
-- Bouton "Reveal Answer" avec état `isRevealed`
-- Animation de révélation (motion-v)
+- Affichage de la question et de la réponse
 - Badge de difficulté
 - Badge de catégorie
+- Boutons de partage (favoris, share)
 
 **Critères de succès :**
 - Composant fonctionnel
-- Animations fluides
 - Design avec Nuxt UI (UCard, UButton, UBadge)
 
 ---
@@ -206,7 +204,7 @@ interface Props {
 
 **Actions :**
 - Créer `app/pages/[category]/[slug].vue`
-- Utiliser `queryContent()` pour fetch la question
+- Utiliser `queryContent()` ou `queryCollection()` puis filtrage par slug pour fetch la question
 - Gérer les erreurs 404
 
 **Critères de succès :**
@@ -269,17 +267,18 @@ interface Props {
 
 ### Tâche 4.2 : Mode "Quiz"
 
-**Objectif :** Présenter les questions aléatoirement sans voir les réponses
+**Objectif :** Présenter les questions aléatoirement pour tester ses connaissances
 
 **Actions :**
 - Toggle "Quiz Mode" / "Study Mode"
 - Shuffle des questions
-- Bouton "Check Answer" au lieu de reveal
-- Score final
+- Masquer les réponses initialement en mode quiz
+- Score final et statistiques
 
 **Critères de succès :**
 - Mode distinct du mode révision
 - Logique de scoring
+- Réponses masquées jusqu'à validation
 
 ---
 
@@ -374,8 +373,8 @@ interface Props {
 
 **Actions :**
 - Page transitions
-- Card flip pour révélation réponse
-- Hover effects
+- Card hover effects et scaling
+- Smooth scrolling
 - Loading states
 
 **Critères de succès :**
@@ -389,10 +388,10 @@ interface Props {
 **Objectif :** Navigation au clavier
 
 **Actions :**
-- `Space` : reveal answer
 - `Arrow Left/Right` : prev/next question
 - `/` : focus search
 - `Escape` : close modals
+- `h` : go to home
 - Help modal (`?`)
 
 **Critères de succès :**
