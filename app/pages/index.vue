@@ -1,0 +1,170 @@
+<script setup lang="ts">
+interface Question {
+    id: string
+    title: string
+    meta: {
+        slug: string
+        category: string
+        difficulty?: 'easy' | 'medium' | 'hard'
+        tags?: string[]
+    }
+}
+
+// Fetch all JavaScript questions using queryCollection (Nuxt Content v3 API)
+const { data: questions } = await useAsyncData('questions', async () => {
+    const allContent = await queryCollection('content').all()
+    return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
+})
+
+// Count questions by difficulty
+const stats = computed(() => {
+    if (!questions.value) return { easy: 0, medium: 0, hard: 0, total: 0 }
+
+    const items = questions.value
+    return {
+        easy: items.filter((q) => q.meta.difficulty === 'easy').length,
+        medium: items.filter((q) => q.meta.difficulty === 'medium').length,
+        hard: items.filter((q) => q.meta.difficulty === 'hard').length,
+        total: items.length
+    }
+})
+
+// Difficulty colors
+const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
+    easy: 'success',
+    medium: 'warning',
+    hard: 'error'
+}
+
+useSeoMeta({
+    title: 'JS Interview Prep - Master JavaScript Interview Questions',
+    description: 'Practice JavaScript interview questions with interactive flashcards. Prepare for your next technical interview with curated questions covering ES6, closures, promises, and more.'
+})
+</script>
+
+<template>
+    <div class="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-4 py-16 md:py-24">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="flex justify-center mb-6">
+                    <UIcon name="i-heroicons-code-bracket" class="text-6xl text-primary-500" />
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                    Master JavaScript
+                    <span class="text-primary-500">Interview Questions</span>
+                </h1>
+
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Practice with interactive flashcards covering essential JavaScript concepts.
+                    Reveal answers when ready and track your progress.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <UButton to="/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript"
+                        size="xl" icon="i-heroicons-play">
+                        Start Practicing
+                    </UButton>
+                    <UButton to="#questions" size="xl" color="neutral" variant="outline" icon="i-heroicons-queue-list">
+                        Browse Questions
+                    </UButton>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <UCard>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-500">{{ stats.total }}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Questions</div>
+                        </div>
+                    </UCard>
+                    <UCard>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-500">{{ stats.easy }}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Easy</div>
+                        </div>
+                    </UCard>
+                    <UCard>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-yellow-500">{{ stats.medium }}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Medium</div>
+                        </div>
+                    </UCard>
+                    <UCard>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-500">{{ stats.hard }}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hard</div>
+                        </div>
+                    </UCard>
+                </div>
+            </div>
+        </section>
+
+        <!-- Questions List -->
+        <section id="questions" class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        All Questions
+                    </h2>
+                    <UColorModeButton />
+                </div>
+
+                <div v-if="questions" class="space-y-3">
+                    <NuxtLink v-for="question in questions" :key="question.id"
+                        :to="`/${question.meta.category}/${question.meta.slug}`" class="block group">
+                        <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
+                            <div class="flex items-start gap-4">
+
+
+                                <div class="flex-1 min-w-0">
+                                    <h3
+                                        class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors mb-2">
+                                        {{ question.title }}
+                                    </h3>
+
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <UBadge :color="difficultyColors[question.meta.difficulty || 'easy']"
+                                            variant="subtle" size="xs">
+                                            {{ question.meta.difficulty || 'easy' }}
+                                        </UBadge>
+                                        <UBadge v-for="tag in question.meta.tags?.slice(0, 3)" :key="tag"
+                                            color="neutral" variant="subtle" size="xs">
+                                            {{ tag }}
+                                        </UBadge>
+                                    </div>
+                                </div>
+
+                                <UIcon name="i-heroicons-chevron-right"
+                                    class="text-gray-400 group-hover:text-primary-500 transition-colors shrink-0" />
+                            </div>
+                        </UCard>
+                    </NuxtLink>
+                </div>
+
+                <div v-else class="text-center py-12">
+                    <p class="text-gray-600 dark:text-gray-400">Loading questions...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t mt-12 bg-white dark:bg-gray-950 dark:border-gray-800">
+            <div class="container mx-auto px-4 py-8">
+                <div class="max-w-4xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
+                    <p>
+                        Built with
+                        <UIcon name="i-heroicons-heart-solid" class="text-red-500 inline" />
+                        using Nuxt 4, Nuxt Content & Nuxt UI
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</template>
