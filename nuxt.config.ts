@@ -40,5 +40,10 @@ export default defineNuxtConfig({
       routes: ['/'],
       crawlLinks: true, // Auto-discover all routes
     }
+  },
+  content: {
+    preview: {
+      api: 'https://api.nuxt.studio'
+    }
   }
 });
