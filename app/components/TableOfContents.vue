@@ -2,9 +2,12 @@
 interface Question {
   id: number
   title: string
-  slug: string
-  category: string
-  difficulty?: 'easy' | 'medium' | 'hard'
+  meta: {
+
+    slug: string
+    category: string
+    difficulty?: 'easy' | 'medium' | 'hard'
+  }
   _path: string
 }
 
@@ -18,14 +21,14 @@ const route = useRoute()
 
 // Determine active question
 const isActive = (question: Question) => {
-  return props.currentSlug === question.slug || route.params.slug === question.slug
+  return props.currentSlug === question.meta.slug || route.params.slug === question.meta.slug
 }
 
 // Difficulty colors
 const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
   easy: 'success',
   medium: 'warning',
-  hard: 'error'
+  hard: 'error',
 }
 </script>
 
@@ -47,7 +50,7 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
       <!-- Scrollable List -->
       <div class="flex-1 overflow-y-auto -mx-4 px-4">
         <nav class="space-y-1">
-          <NuxtLink v-for="question in questions" :key="question.id" :to="`/${question.category}/${question.slug}`"
+          <NuxtLink v-for="question in questions" :key="question.id" :to="`/${question.meta.category}/${question.meta.slug}`"
             class="block group">
             <div :class="[
               'p-3 rounded-lg transition-all duration-200',
@@ -56,10 +59,6 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
                 : 'hover:bg-gray-50 dark:hover:bg-gray-800 border-l-2 border-transparent'
             ]">
               <div class="flex items-start gap-2">
-                <UBadge :color="isActive(question) ? 'primary' : 'neutral'" variant="subtle" size="xs"
-                  class="mt-0.5 shrink-0">
-                  {{ question.id }}
-                </UBadge>
                 <div class="flex-1 min-w-0">
                   <p :class="[
                     'text-sm font-medium line-clamp-2',
@@ -70,9 +69,9 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
                     {{ question.title }}
                   </p>
                   <div class="flex items-center gap-1 mt-1">
-                    <UBadge v-if="question.difficulty" :color="difficultyColors[question.difficulty]" variant="subtle"
+                    <UBadge v-if="question.meta.difficulty" :color="difficultyColors[question.meta.difficulty]" variant="subtle"
                       size="xs">
-                      {{ question.difficulty }}
+                      {{ question.meta.difficulty }}
                     </UBadge>
                   </div>
                 </div>

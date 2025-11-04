@@ -1,2 +1,26 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+.prose p, .prose pre, .prose li, .prose blockquote {
+  @apply mb-4 leading-7;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply mt-8 mb-4 font-bold;
+}
+
+.prose code {
+  @apply bg-gray-100 dark:bg-gray-800 px-1 rounded;
+}
+
+.prose ul {
+  @apply list-disc pl-5;
+}
+
+.prose ol {
+  @apply list-decimal pl-5;
+}
+
+.prose li {
+  @apply mb-2;
+}

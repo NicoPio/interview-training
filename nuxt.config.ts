@@ -15,5 +15,14 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@vueuse/nuxt",
     "motion-v/nuxt",
+    "@nuxtjs/i18n",
   ],
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English', language: 'en-US', dir: 'ltr' },
+      { code: 'fr', name: 'French', language: 'fr-FR' },
+    ],
+    strategy: 'prefix_except_default',
+    defaultLocale: 'fr',
+  }
 });

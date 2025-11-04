@@ -1,8 +1,8 @@
-<!-- # Interview Questions
+<!-- #  Interview Questions
 
 This is a collection of interview questions across various technologies. Visit the [home page](/) to browse all questions interactively.
 
-## Table of Contents
+##  Table of Contents
 
 All questions are dynamically loaded and displayed on the main page. The questions are organized by category:
 
@@ -16,7 +16,7 @@ Navigate to any question card on the home page to view the full question and ans
 
 ---
 
-### Q.1 How do you detect primitive or non-primitive value types in JavaScript?
+###  Q.1 How do you detect primitive or non-primitive value types in JavaScript?
 
 In JavaScript, values are generally categorized as either primitive or non-primitive (also known as reference types). Primitive values include:
 
@@ -55,7 +55,7 @@ console.log(typeof func); // Output: "function"
 
 **Important note:** `typeof null` returns "object" even though it's a primitive value.
 
-### 2. Using the Object() constructor:
+###  2. Using the Object() constructor:
 
 - This constructor creates a new object wrapper for a value.
 - If a value is primitive, it will be equal to its object-wrapped version.
@@ -68,11 +68,11 @@ console.log(num === Object(num)); // Output: true (primitive)
 console.log(obj === Object(obj)); // Output: false (non-primitive)
 ```
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.2 Explain the key features introduced in JavaScript ES6
+###  Q.2 Explain the key features introduced in JavaScript ES6
 
 In ES6, JavaScript introduced these key features:
 
@@ -82,11 +82,11 @@ In ES6, JavaScript introduced these key features:
 4. **Enhanced Object Literals**: Introduces shorthand notation for defining object methods and dynamic property names.
 5. **Promises**: Streamlines asynchronous programming with a cleaner, structured approach.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.3 What are the differences between var, const & let in JavaScript?
+###  Q.3 What are the differences between var, const & let in JavaScript?
 
 | Attribute                          | var                                                    | let                                                                               | const                                                                             |
 | ---------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -96,11 +96,11 @@ In ES6, JavaScript introduced these key features:
 | Access without Initialization      | Accessible without initialization (default: undefined) | Inaccessible without initialization (throws 'ReferenceError')                     | Inaccessible without initialization (throws 'ReferenceError')                     |
 | Hoisting                           | Hoisted and initialized with a 'default' value         | Hoisted but not initialized (error if accessed before declaration/initialization) | Hoisted but not initialized (error if accessed before declaration/initialization) |
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.4 What are arrow functions in JavaScript?
+###  Q.4 What are arrow functions in JavaScript?
 
 Arrow functions are a concise way to write anonymous function expressions in JavaScript. They were introduced in ECMAScript 6 (ES6) and are especially useful for short, single-expression functions.
 
@@ -122,7 +122,7 @@ const add = (a, b) => a + b;
 
 ---
 
-### Traditional Function Expression:
+###  Traditional Function Expression:
 
 ```javascript
 // Define an object
@@ -141,7 +141,7 @@ In this example, `obj1.valueOfThis()` returns the `value` property of `obj1`, as
 
 ---
 
-### Arrow Function:
+###  Arrow Function:
 
 ```javascript
 // Define another object
@@ -158,11 +158,11 @@ console.log(obj2.valueOfThis()); // Output: undefined or an error (depending on 
 
 In the arrow function within `obj2`, `this` does not refer to `obj2`. Instead, it inherits its value from the parent scope, which is the global object (window in a browser environment). Consequently, `obj2.valueOfThis()` returns undefined or may even throw an error, as `this.value` is not defined in the global scope.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.5 What is hoisting in JavaScript?
+###  Q.5 What is hoisting in JavaScript?
 
 In JavaScript, hoisting is a phenomenon where variable and function declarations are conceptually moved to the top of their respective scopes, even if they're written later in the code. This behaviour applies to both global and local scopes.
 
@@ -206,11 +206,11 @@ Hoisting also occurs within local scopes, like functions. Here, `result` is hois
 - Only declarations are hoisted, not initializations. The example with `console.log(x);` demonstrates this, as `x` is declared but not initialized before its use, resulting in `undefined`.
 - Strict mode enforces declaration: Using "use strict"; at the beginning of your code prevents using variables before they're declared, helping avoid potential hoisting-related issues.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.6 What is Strict Mode in JavaScript?
+###  Q.6 What is Strict Mode in JavaScript?
 
 Strict Mode is a feature that allows you to place a program, or a function, in a "strict" operating context. This way it prevents certain actions from being taken and throws more exceptions. The literal expression "use strict" instructs the browser to use the JavaScript code in the Strict mode.
 
@@ -231,11 +231,11 @@ function strict_function() {
 strict_function();
 ```
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.7 What is NaN?
+###  Q.7 What is NaN?
 
 The `NaN` property in JavaScript represents a value that is "Not-a-Number," indicating an illegal or undefined numeric value. When checking the type of `NaN` using the `typeof` operator, it returns "Number."
 
@@ -253,21 +253,21 @@ isNaN(true); // Returns false, as true is converted to 1, a valid number
 isNaN(null); // Returns false, as null is converted to 0, a valid number
 ```
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.8 Is JavaScript a statically typed or a dynamically typed language?
+###  Q.8 Is JavaScript a statically typed or a dynamically typed language?
 
 JavaScript is a dynamically typed language. In a dynamically typed language, variable types are determined at runtime, allowing a variable to hold values of any type without explicit type declarations. This flexibility can make coding more convenient but may also lead to runtime errors if types are not handled appropriately.
 
 JavaScript, being dynamically typed, allows variables to change types during execution and accommodates a wide range of data types without explicit type annotations.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.9 What are Higher-Order Functions in JavaScript?
+###  Q.9 What are Higher-Order Functions in JavaScript?
 
 Functions that treat other functions as values, either by:
 
@@ -316,11 +316,11 @@ const triple = createMultiplier(3);
 const tripledNumbers = numbers.map(triple); // [3, 6, 9, 12, 15]
 ```
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.10 What is the difference between Null and Undefined
+###  Q.10 What is the difference between Null and Undefined
 
 | Feature                  | Null                                    | Undefined                                          |
 | ------------------------ | --------------------------------------- | -------------------------------------------------- |
@@ -330,11 +330,11 @@ const tripledNumbers = numbers.map(triple); // [3, 6, 9, 12, 15]
 | Representation           | Absence of a value for a variable       | Indicates the absence of the variable itself       |
 | Conversion in Operations | Converted to zero (0)                   | Converted to NaN during primitive operations       |
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.11 What is DOM?
+###  Q.11 What is DOM?
 
 DOM stands for Document Object Model, serving as a programming interface for web documents.
 
@@ -345,11 +345,11 @@ DOM stands for Document Object Model, serving as a programming interface for web
 5. **Cross-platform and Language-Agnostic:** Not bound to a specific language and works across various web browsers, ensuring a consistent approach to document manipulation.
 6. **Browser Implementation:** While browsers have their own DOM implementations, they follow standards set by the World Wide Web Consortium (W3C), ensuring uniformity in document representation and manipulation.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.12 What is BOM?
+###  Q.12 What is BOM?
 
 BOM (Browser Object Model) is a programming interface extending beyond DOM, providing control over browser-related features.
 
@@ -360,11 +360,11 @@ BOM (Browser Object Model) is a programming interface extending beyond DOM, prov
 5. **Client Object:** Represents user device information, aiding in responsive web design.
 6. **Event Object:** Manages events triggered by user actions or browser events.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.13 Explain about this keyword in JavaScript with an example.
+###  Q.13 Explain about this keyword in JavaScript with an example.
 
 In JavaScript, the `this` keyword is a special variable that is automatically defined in the scope of every function. Its value depends on how the function is invoked. The `this` keyword is used to refer to the object that is the current context of the function or, more simply, the object that the function is a method of.
 
@@ -400,11 +400,11 @@ const myInstance = new MyClass();
 console.log(myInstance.property); // 'some value'
 ```
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.14 What is scope in JavaScript?
+###  Q.14 What is scope in JavaScript?
 
 In JavaScript, the term "scope" refers to the context in which variables and functions are declared and accessed. It defines the visibility and accessibility of these variables and functions within the code. Understanding scope is crucial for managing the lifecycle and behavior of variables and functions in a program.
 
@@ -442,11 +442,11 @@ exampleFunction();
 **Scope Chain:**
 The scope chain refers to the hierarchy of scopes in a program. When a variable or function is referenced, JavaScript looks for it in the current scope and then traverses up the scope chain until it finds the variable or reaches the global scope.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.15 What is closure in JavaScript?
+###  Q.15 What is closure in JavaScript?
 
 In JavaScript, a closure is a function along with its lexical scope, which allows it to access variables from its outer (enclosing) scope even after that scope has finished executing. A closure allows a function to remember and access variables from the environment in which it was created, even if the function is executed in a different scope.
 
@@ -484,11 +484,11 @@ closureFunction();
 - The returned `closureFunction` retains access to the `outerVariable` even after `outerFunction` has finished executing.
 - Calling `closureFunction()` logs both the inner and outer variables to the console.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.16 Explain call(), apply() and bind() methods in JavaScript.
+###  Q.16 Explain call(), apply() and bind() methods in JavaScript.
 
 In JavaScript, the `call`, `apply`, and `bind` methods are used to manipulate how a function is invoked and set the value of `this` within the function.
 
@@ -547,11 +547,11 @@ Here, `bind` is used to create a new function (`sayHelloToJohn`) where `this` is
 
 These methods are especially useful when dealing with functions that are part of objects or classes, and you want to explicitly set the context (`this`) for their execution.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.17 Explain pure and impure functions in JavaScript.
+###  Q.17 Explain pure and impure functions in JavaScript.
 
 #### Pure Function:
 
@@ -585,11 +585,11 @@ console.log(total); // Output: 5
 
 In this case, `addToTotal` is impure because it modifies the external variable `total` and has a side effect that can affect other parts of the program.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.18 What are prototypes in JavaScript?
+###  Q.18 What are prototypes in JavaScript?
 
 - Every object in JavaScript has a prototype, which acts as a blueprint for shared properties and methods.
 - When you try to access a property or method on an object, JavaScript first checks the object itself.
@@ -622,11 +622,11 @@ The `greet` method is added to the `Person.prototype`, meaning it's shared by al
 
 When `person1.greet()` is called, JavaScript finds the `greet` method on the prototype, so it can be used even though it wasn't defined directly on `person1`.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.19 What are callback functions in JavaScript and what is callback hell?
+###  Q.19 What are callback functions in JavaScript and what is callback hell?
 
 In JavaScript, a callback is a function that is passed as an argument to another function and is executed after the completion of some asynchronous operation or at a specified time. Callbacks are commonly used in scenarios like handling asynchronous tasks, event handling, and other situations where the order of execution is not guaranteed.
 
@@ -668,11 +668,11 @@ In this example, we have nested callbacks for getting a user, fetching their pro
 
 To address callback hell, developers often use techniques like Promises or `async/await` in modern JavaScript to make code more readable and manageable.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.20 What is Temporal Dead Zone in JavaScript?
+###  Q.20 What is Temporal Dead Zone in JavaScript?
 
 The Temporal Dead Zone is a phenomenon in JavaScript associated with the use of the `let` and `const` keywords, unlike the `var` keyword. In ECMAScript 6, attempting to access a `let` or `const` variable before it is declared within its scope results in a `ReferenceError`. The term "temporal dead zone" refers to the timeframe during which this occurs, spanning from the creation of the variable's binding to its actual declaration.
 
@@ -689,11 +689,11 @@ function exampleMethod() {
 
 In this example, attempting to access `value2` before its declaration causes a `ReferenceError` due to the temporal dead zone, while accessing `value1` results in an output of `undefined`.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.21 What are promises in JavaScript?
+###  Q.21 What are promises in JavaScript?
 
 JavaScript Promises offer a streamlined approach to managing asynchronous operations, mitigating the callback hell problem encountered with events and traditional callback functions. Before Promises, working with callbacks often led to code that was hard to manage due to nested structures. Promises serve as a cleaner solution for handling asynchronous tasks in JavaScript.
 
@@ -714,11 +714,11 @@ A Promise can exist in one of four states:
 - **pending:** The promise is still awaiting fulfillment or rejection.
 - **settled:** The promise has been either fulfilled or rejected.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.22 Explain rest parameter in JavaScript
+###  Q.22 Explain rest parameter in JavaScript
 
 In JavaScript, the rest parameter is a feature that allows you to represent an indefinite number of arguments as an array. It is denoted by three dots (`...`) followed by the parameter name. The rest parameter collects all the remaining arguments passed to a function into a single array.
 
@@ -736,11 +736,11 @@ In this example, the `sum` function accepts any number of arguments. The rest pa
 
 It's important to note that the rest parameter must be the last parameter in the function declaration.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.23 What is the correct way to use the rest parameter in JavaScript?
+###  Q.23 What is the correct way to use the rest parameter in JavaScript?
 
 The correct way to use the rest parameter in JavaScript is to ensure it is the last parameter in the function declaration.
 
@@ -762,11 +762,11 @@ function invalidExample(...restParams, lastParam) {
 
 In the invalid example, the rest parameter is not the last parameter, which is incorrect syntax.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.24 What are generator functions in JavaScript?
+###  Q.24 What are generator functions in JavaScript?
 
 In JavaScript, generator functions are a special kind of function that allows you to control the execution flow and pause/resume it at certain points. Generator functions are defined using the `function*` syntax and use the `yield` keyword to produce a sequence of values. When a generator function is called, it returns an iterator called a generator.
 
@@ -795,11 +795,11 @@ In this example:
 
 Generators are useful for lazy evaluation, asynchronous programming, and creating iterable sequences.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.25 What is the difference between function declarations and function expressions?
+###  Q.25 What is the difference between function declarations and function expressions?
 
 **Function Declaration:**
 
@@ -831,11 +831,11 @@ var add = function (a, b) {
 
 In this example, `add` is a variable that holds an anonymous function. Function declarations are hoisted, while function expressions are not hoisted in the same way. If you try to call a function expression before its definition, you'll get an error.
 
-[↑ Back to top](#table-of-contents)
+[↑ Back to top](# table-of-contents)
 
 ---
 
-### Q.26 What is the difference between setTimeout, setImmediate and process.nextTick?
+###  Q.26 What is the difference between setTimeout, setImmediate and process.nextTick?
 
 **1. setTimeout:**
 
@@ -878,4 +878,4 @@ process.nextTick(() => {
 
 These functions are all used in Node.js to schedule the execution of callbacks, but they differ in terms of when the callback will be executed.
 
-[↑ Back to top](#table-of-contents) -->
+[↑ Back to top](# table-of-contents) -->

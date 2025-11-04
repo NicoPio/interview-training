@@ -13,14 +13,22 @@ interface Question {
 const route = useRoute()
 const category = route.params.category as string
 
-// Fetch questions for this category
-const { data: questions } = await useAsyncData(`category-${category}`, async () => {
-    const allContent = await queryCollection('content').all()
+// Get current locale from i18n
+const { locale } = useI18n()
+
+// Fetch questions for this category with i18n support
+const { data: questions } = await useAsyncData(`category-${category}-${locale.value}`, async () => {
+    // Use the correct collection based on locale
+    const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+    // @ts-ignore - queryCollection type doesn't recognize our custom collection names
+    const allContent = await queryCollection(collectionName).all()
     const filtered = allContent.filter((item) => {
         const q = item as unknown as Question
         return q.meta.category === category
     })
     return filtered.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
+}, {
+    watch: [locale] // Refetch when locale changes
 })
 
 // Handle 404 if category has no questions

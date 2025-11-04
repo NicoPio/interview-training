@@ -1,11 +1,17 @@
 <script setup lang="ts">
-// Fetch all questions for the TOC
-const { data: questions } = await useAsyncData('all-questions', () =>
-  queryContent('javascript')
-    .only(['id', 'title', 'slug', 'category', 'difficulty', '_path'])
-    .sort({ id: 1 })
-    .find()
-)
+// Get current locale from i18n
+const { locale } = useI18n()
+
+// Fetch all questions for the TOC with i18n support
+const { data: questions } = await useAsyncData(`all-questions-${locale.value}`, async () => {
+  // Use the correct collection based on locale
+  const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+  // @ts-ignore - queryCollection type doesn't recognize our custom collection names
+  const allContent = await queryCollection(collectionName).all()
+  return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0))
+}, {
+  watch: [locale] // Refetch when locale changes
+})
 
 // Mobile sidebar state
 const isSidebarOpen = ref(false)
@@ -33,7 +39,7 @@ watch(() => route.path, () => {
             <div class="flex items-center gap-4">
               <UButton
                 icon="i-heroicons-bars-3"
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 class="lg:hidden"
                 @click="toggleSidebar"
@@ -48,12 +54,13 @@ watch(() => route.path, () => {
             <div class="flex items-center gap-2">
               <UButton
                 icon="i-heroicons-magnifying-glass"
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 size="sm"
               >
                 <span class="hidden sm:inline">Search</span>
               </UButton>
+              <LanguageSwitcher />
               <UColorModeButton />
             </div>
           </div>
@@ -64,7 +71,7 @@ watch(() => route.path, () => {
       <div class="container mx-auto px-4 py-6">
         <div class="flex gap-6">
           <!-- Sidebar (Desktop) -->
-          <aside class="hidden lg:block w-80 flex-shrink-0">
+          <aside class="hidden lg:block w-80 shrink overflow-y-auto max-h-lvh h-svh">
             <TableOfContents v-if="questions" :questions="questions" />
           </aside>
 
@@ -100,7 +107,7 @@ watch(() => route.path, () => {
                 <h2 class="font-bold text-lg">Questions</h2>
                 <UButton
                   icon="i-heroicons-x-mark"
-                  color="gray"
+                  color="neutral"
                   variant="ghost"
                   size="sm"
                   @click="toggleSidebar"
@@ -137,7 +144,7 @@ watch(() => route.path, () => {
                 to="https://github.com"
                 target="_blank"
                 icon="i-heroicons-code-bracket"
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 size="xs"
               >

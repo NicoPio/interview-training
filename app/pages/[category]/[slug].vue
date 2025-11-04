@@ -18,14 +18,22 @@ const route = useRoute()
 const category = route.params.category as string
 const slug = route.params.slug as string
 
-// Fetch the current question
-const { data: question } = await useAsyncData(`question-${slug}`, async () => {
-  const allContent = await queryCollection('content').all()
+// Get current locale from i18n
+const { locale } = useI18n()
+
+// Fetch the current question with i18n support
+const { data: question } = await useAsyncData(`question-${slug}-${locale.value}`, async () => {
+  // Use the correct collection based on locale
+  const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+  // @ts-ignore - queryCollection type doesn't recognize our custom collection names
+  const allContent = await queryCollection(collectionName).all()
   const result = allContent.find((item) => {
     const q = item as unknown as Question
     return q.meta.slug === slug && q.meta.category === category
   })
   return result as unknown as Question
+}, {
+  watch: [locale] // Refetch when locale changes
 })
 
 // Handle 404
@@ -100,19 +108,11 @@ useHead({
     <QuestionCard :title="question.title" :id="Number(question.id)" :difficulty="question.meta.difficulty"
       :category="question.meta.category" :slug="question.meta.slug">
       <template #question>
-        <ContentRenderer :value="question" :excerpt="false">
-          <template #default="{ data }">
-            <ContentRendererMarkdown :value="data" />
-          </template>
-        </ContentRenderer>
+        <ContentRenderer :value="question" />
       </template>
 
       <template #answer>
-        <ContentRenderer :value="question" :excerpt="false">
-          <template #default="{ data }">
-            <ContentRendererMarkdown :value="data" />
-          </template>
-        </ContentRenderer>
+        <ContentRenderer :value="question" />
       </template>
     </QuestionCard>
 

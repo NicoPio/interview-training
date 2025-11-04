@@ -546,7 +546,36 @@ interface Props {
 
 ## PHASE 10 : Déploiement & Monitoring 🌐
 
-### Tâche 10.1 : Déploiement
+### Tâche 10.1 : Intégration Nuxt Studio & Nuxt Hub
+
+**Objectif :** Connecter le projet avec Nuxt Studio pour la gestion de contenu et Nuxt Hub pour le déploiement
+
+**Actions :**
+- **Nuxt Studio :**
+  - Configurer le branchement avec Nuxt Studio
+  - Activer l'édition de contenu en ligne via l'interface Studio
+  - Configurer les permissions et les workflows de collaboration
+  - Intégrer le live preview pour l'édition de contenu
+  - Configurer le système de branches pour les contributions
+
+- **Nuxt Hub :**
+  - Configurer le déploiement sur Nuxt Hub
+  - Connecter le repository GitHub avec Nuxt Hub
+  - Mettre en place les déploiements automatiques (CI/CD)
+  - Configurer les preview deployments pour chaque PR
+  - Optimiser la configuration pour le edge computing
+  - Configurer le système de cache et les assets CDN
+
+**Critères de succès :**
+- Édition de contenu en temps réel depuis Nuxt Studio
+- Déploiement automatique sur commit/merge
+- Preview URLs fonctionnels pour chaque branche
+- Performance optimale avec edge deployment
+- Workflow collaboratif fluide
+
+---
+
+### Tâche 10.2 : Déploiement alternatif (backup)
 
 **Options :** Vercel / Netlify / Cloudflare Pages
 
@@ -557,7 +586,7 @@ interface Props {
 
 ---
 
-### Tâche 10.2 : Analytics
+### Tâche 10.3 : Analytics
 
 **Actions :**
 - Plausible ou Umami (privacy-friendly)
@@ -566,7 +595,7 @@ interface Props {
 
 ---
 
-### Tâche 10.3 : Feedback utilisateur
+### Tâche 10.4 : Feedback utilisateur
 
 **Actions :**
 - Bouton "Was this helpful?" sur chaque question

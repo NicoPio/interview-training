@@ -10,10 +10,18 @@ interface Question {
     }
 }
 
-// Fetch all JavaScript questions using queryCollection (Nuxt Content v3 API)
-const { data: questions } = await useAsyncData('questions', async () => {
-    const allContent = await queryCollection('content').all()
+// Get current locale from i18n
+const { locale } = useI18n()
+
+// Fetch all JavaScript questions using queryCollection (Nuxt Content v3 API) with i18n
+const { data: questions } = await useAsyncData(`questions-${locale.value}`, async () => {
+    // Use the correct collection based on locale
+    const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+    // @ts-ignore - queryCollection type doesn't recognize our custom collection names
+    const allContent = await queryCollection(collectionName).all()
     return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
+}, {
+    watch: [locale] // Refetch when locale changes
 })
 
 // Count questions by difficulty
@@ -44,6 +52,22 @@ useSeoMeta({
 
 <template>
     <div class="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
+        <!-- Header -->
+        <header class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur dark:bg-gray-950/80 dark:border-gray-800">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <NuxtLink to="/" class="flex items-center gap-2">
+                        <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" />
+                        <span class="font-bold text-lg">JS Interview Prep</span>
+                    </NuxtLink>
+                    <div class="flex items-center gap-2">
+                        <LanguageSwitcher />
+                        <UColorModeButton />
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <!-- Hero Section -->
         <section class="container mx-auto px-4 py-16 md:py-24">
             <div class="max-w-4xl mx-auto text-center">
@@ -52,7 +76,7 @@ useSeoMeta({
                 </div>
 
                 <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                    Master JavaScript
+                    Master Frontend
                     <span class="text-primary-500">Interview Questions</span>
                 </h1>
 
