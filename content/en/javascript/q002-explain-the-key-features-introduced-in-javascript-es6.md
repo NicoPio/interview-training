@@ -1,15 +1,18 @@
 ---
 id: 2
 slug: explain-the-key-features-introduced-in-javascript-es6
-title: "Explain the key features introduced in JavaScript ES6"
+title: Explain the key features introduced in JavaScript ES6
 category: javascript
 difficulty: easy
-tags: ["es6", "ecmascript", "variables", "var", "let"]
+tags:
+  - es6
+  - ecmascript
+  - variables
+  - var
+  - let
 ---
 
 # Explain the key features introduced in JavaScript ES6
-
-
 
 In ES6, JavaScript introduced these key features:
 
