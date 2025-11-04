@@ -4,6 +4,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+
+  // Enable SSR for proper content rendering
+  ssr: true,
+
   vite: { plugins: [tailwindcss()] },
   css: ["./app/assets/css/main.css"],
   modules: [
@@ -16,6 +20,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "motion-v/nuxt",
     "@nuxtjs/i18n",
+    "@nuxthub/core"
   ],
   i18n: {
     locales: [
@@ -24,5 +29,16 @@ export default defineNuxtConfig({
     ],
     strategy: 'prefix_except_default',
     defaultLocale: 'fr',
+  },
+  hub: {
+    // NuxtHub options
+  },
+
+  // Prerender routes for static generation
+  nitro: {
+    prerender: {
+      routes: ['/'],
+      crawlLinks: true, // Auto-discover all routes
+    }
   }
 });

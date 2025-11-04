@@ -21,7 +21,9 @@ const { data: questions } = await useAsyncData(`questions-${locale.value}`, asyn
     const allContent = await queryCollection(collectionName).all()
     return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
 }, {
-    watch: [locale] // Refetch when locale changes
+    watch: [locale], // Refetch when locale changes
+    server: true, // Enable server-side fetching
+    lazy: false // Wait for data before rendering
 })
 
 // Count questions by difficulty
