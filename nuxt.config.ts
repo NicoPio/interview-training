@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "motion-v/nuxt",
     "@nuxtjs/i18n",
-    "@nuxthub/core"
   ],
   i18n: {
     locales: [
