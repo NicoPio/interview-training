@@ -137,9 +137,6 @@ watch(() => route.path, () => {
               <NuxtLink to="/" class="hover:text-primary-500 transition-colors">
                 Home
               </NuxtLink>
-              <NuxtLink to="/about" class="hover:text-primary-500 transition-colors">
-                About
-              </NuxtLink>
               <UButton
                 to="https://github.com"
                 target="_blank"
