@@ -29,9 +29,6 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
     defaultLocale: 'fr',
   },
-  hub: {
-    // NuxtHub options
-  },
 
   // GitHub Pages configuration
   nitro: {
