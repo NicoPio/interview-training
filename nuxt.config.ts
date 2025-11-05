@@ -41,9 +41,7 @@ export default defineNuxtConfig({
   },
 
   // GitHub Pages base URL (uncomment and update if deploying to a repo page)
-  // app: {
-  //   baseURL: '/interview-training/'
-  // },
+  
   content: {
     preview: {
       api: 'https://api.nuxt.studio'
@@ -60,6 +58,14 @@ export default defineNuxtConfig({
       repo: 'https://github.com/NicoPio/interview-training', // your repository name
       branch: 'main', // the branch to commit to (default: main)
       rootDir: '' // optional: if your Nuxt app is in a subdirectory (default: '')
+    }
+  },
+  runtimeConfig: {
+    // Variables publiques (accessibles côté client)
+    public: {
+      app: {
+        baseURL: '/interview-training/'
+      },
     }
   }
 });
