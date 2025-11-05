@@ -20,6 +20,7 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,11 +36,19 @@ jobs:
       - name: Clean previous installs
         run: rm -rf node_modules package-lock.json
 
-      - name: Install dependencies
+      - name: Install system packages for native modules
         run: |
-          npm install --ignore-scripts
-          npm rebuild oxc-parser
-          npm run postinstall
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3 pkg-config libsqlite3-dev
+
+      - name: Install dependencies and build native modules
+        run: |
+          # install normally so native install scripts run
+          npm install
+
+          # ensure specific native modules are rebuilt if needed
+          npm rebuild better-sqlite3 || true
+          npm rebuild oxc-parser || true
 
       - name: Static HTML export with Nuxt
         run: npm run generate
