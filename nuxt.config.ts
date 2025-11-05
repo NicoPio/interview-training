@@ -41,9 +41,9 @@ export default defineNuxtConfig({
   },
 
   // GitHub Pages base URL (uncomment and update if deploying to a repo page)
-  app: {
-    baseURL: '/interview-training/'
-  },
+  // app: {
+  //   baseURL: '/interview-training/'
+  // },
   content: {
     preview: {
       api: 'https://api.nuxt.studio'
