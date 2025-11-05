@@ -1,15 +1,16 @@
 ---
 id: 27
 slug: what-is-semantic-html
-title: "Qu'est-ce que le HTML sémantique ?"
+title: Qu'est-ce que le HTML sémantique ?
 category: html
 difficulty: easy
-tags: ["html","semantics","accessibility"]
+tags:
+  - html
+  - semantics
+  - accessibility
 ---
 
 # Qu'est-ce que le HTML sémantique ?
-
-
 
 Le HTML sémantique fait référence à l'utilisation du balisage HTML pour renforcer la signification du contenu sur les pages web, plutôt que de simplement définir son apparence. Le HTML sémantique utilise des balises HTML qui portent un sens sur le contenu qu'elles contiennent.
 
@@ -34,6 +35,8 @@ Le HTML sémantique fait référence à l'utilisation du balisage HTML pour renf
 <article>...</article>
 <section>...</section>
 <footer>...</footer>
+
+lala
 ```
 
 Les éléments HTML5 sémantiques courants incluent:
