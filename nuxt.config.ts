@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "motion-v/nuxt",
     "@nuxtjs/i18n",
+    'nuxt-studio'
   ],
   i18n: {
     locales: [
@@ -46,6 +47,19 @@ export default defineNuxtConfig({
   content: {
     preview: {
       api: 'https://api.nuxt.studio'
+    }
+  },
+  studio: {
+    // Studio admin route (default: '/_studio')
+    route: '/_studio',
+    
+    // GitHub repository configuration (owner and repo are required)
+    repository: {
+      provider: 'github', // only GitHub is currently supported
+      owner: 'NicoPio', // your GitHub username or organization
+      repo: 'https://github.com/NicoPio/interview-training', // your repository name
+      branch: 'main', // the branch to commit to (default: main)
+      rootDir: '' // optional: if your Nuxt app is in a subdirectory (default: '')
     }
   }
 });
