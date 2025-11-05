@@ -33,13 +33,19 @@ export default defineNuxtConfig({
     // NuxtHub options
   },
 
-  // Prerender routes for static generation
+  // GitHub Pages configuration
   nitro: {
+    preset: 'github-pages',
     prerender: {
       routes: ['/'],
       crawlLinks: true, // Auto-discover all routes
     }
   },
+
+  // GitHub Pages base URL (uncomment and update if deploying to a repo page)
+  // app: {
+  //   baseURL: '/your-repo-name/',
+  // },
   content: {
     preview: {
       api: 'https://api.nuxt.studio'
