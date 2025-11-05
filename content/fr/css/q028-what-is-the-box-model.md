@@ -1,15 +1,16 @@
 ---
 id: 28
 slug: what-is-the-box-model
-title: "Qu'est-ce que le modèle de boîte CSS ?"
+title: Qu'est-ce que le modèle de boîte CSS ?
 category: css
 difficulty: medium
-tags: ["css","box-model","layout"]
+tags:
+  - css
+  - box-model
+  - layout
 ---
 
 # Qu'est-ce que le modèle de boîte CSS ?
-
-
 
 Le modèle de boîte CSS est un concept fondamental qui décrit comment les éléments sont structurés et affichés sur une page web. Chaque élément en CSS est représenté comme une boîte rectangulaire, et le modèle de boîte définit comment les différentes parties de cette boîte se comportent.
 

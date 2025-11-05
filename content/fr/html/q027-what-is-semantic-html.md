@@ -35,8 +35,6 @@ Le HTML sémantique fait référence à l'utilisation du balisage HTML pour renf
 <article>...</article>
 <section>...</section>
 <footer>...</footer>
-
-lala
 ```
 
 Les éléments HTML5 sémantiques courants incluent:
