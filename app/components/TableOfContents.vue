@@ -63,7 +63,7 @@ const getStatusColor = (status: string) => {
 }
 
 // Difficulty colors
-const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
+const difficultyColors: Record<'easy' | 'medium' | 'hard', 'success' | 'warning' | 'error'> = {
   easy: 'success',
   medium: 'warning',
   hard: 'error',
