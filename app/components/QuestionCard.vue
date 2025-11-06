@@ -9,6 +9,32 @@ interface Props {
 
 const props = defineProps<Props>()
 
+// Composables
+const { isFavorite, toggleFavorite } = useFavorites()
+const { getProgress, markAsMastered, markAsNotMastered } = useQuestionProgress()
+
+// Question ID as string for storage
+const questionId = computed(() => String(props.id))
+
+// Favorite state
+const favorited = computed(() => isFavorite(questionId.value))
+
+// Progress state
+const progress = computed(() => getProgress(questionId.value))
+const isMastered = computed(() => progress.value.status === 'mastered')
+
+// Handlers
+const handleFavoriteClick = () => {
+  toggleFavorite(questionId.value)
+}
+
+const handleMasteredToggle = () => {
+  if (isMastered.value) {
+    markAsNotMastered(questionId.value)
+  } else {
+    markAsMastered(questionId.value)
+  }
+}
 
 // Difficulty colors
 const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
@@ -52,13 +78,25 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
     </div>
     <!-- Card Footer -->
     <template #footer>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between flex-wrap gap-2">
         <div class="flex gap-2">
-          <UButton icon="i-heroicons-heart" color="neutral" variant="ghost" size="sm">
-            Favorite
+          <UButton
+            :icon="favorited ? 'i-heroicons-heart-solid' : 'i-heroicons-heart'"
+            :color="favorited ? 'error' : 'neutral'"
+            variant="ghost"
+            size="sm"
+            @click="handleFavoriteClick"
+          >
+            {{ favorited ? 'Favorited' : 'Favorite' }}
           </UButton>
-          <UButton icon="i-heroicons-share" color="neutral" variant="ghost" size="sm">
-            Share
+          <UButton
+            :icon="isMastered ? 'i-heroicons-check-circle-solid' : 'i-heroicons-check-circle'"
+            :color="isMastered ? 'success' : 'neutral'"
+            variant="ghost"
+            size="sm"
+            @click="handleMasteredToggle"
+          >
+            {{ isMastered ? 'Mastered' : 'Mark as Mastered' }}
           </UButton>
         </div>
         <div class="text-xs text-gray-500">

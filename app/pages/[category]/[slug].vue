@@ -21,6 +21,9 @@ const slug = route.params.slug as string
 // Get current locale from i18n
 const { locale } = useI18n()
 
+// Composables for tracking
+const { markAsSeen } = useQuestionProgress()
+
 // Fetch the current question with i18n support
 const { data: question } = await useAsyncData(`question-${slug}-${locale.value}`, async () => {
   // Use the correct collection based on locale
@@ -44,6 +47,39 @@ if (!question.value) {
     fatal: true
   })
 }
+
+// Mark as seen when question is viewed
+onMounted(() => {
+  if (question.value) {
+    markAsSeen(question.value.id)
+  }
+})
+
+// Fetch all questions for navigation
+const { data: allQuestions } = await useAsyncData(`all-questions-${locale.value}`, async () => {
+  const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+  // @ts-ignore
+  const allContent = await queryCollection(collectionName).all()
+  return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
+}, {
+  watch: [locale]
+})
+
+// Find current question index and prev/next
+const currentIndex = computed(() => {
+  if (!allQuestions.value || !question.value) return -1
+  return allQuestions.value.findIndex(q => q.id === question.value.id)
+})
+
+const previousQuestion = computed(() => {
+  if (!allQuestions.value || currentIndex.value <= 0) return null
+  return allQuestions.value[currentIndex.value - 1]
+})
+
+const nextQuestion = computed(() => {
+  if (!allQuestions.value || currentIndex.value === -1 || currentIndex.value >= allQuestions.value.length - 1) return null
+  return allQuestions.value[currentIndex.value + 1]
+})
 
 // SEO Meta tags
 useSeoMeta({
@@ -118,7 +154,16 @@ useHead({
 
     <!-- Navigation Between Questions -->
     <div class="mt-6 flex items-center justify-between gap-4">
-      <UButton color="neutral" variant="outline" disabled>
+      <UButton
+        v-if="previousQuestion"
+        :to="`/${previousQuestion.meta.category}/${previousQuestion.meta.slug}`"
+        color="neutral"
+        variant="outline"
+      >
+        <UIcon name="i-heroicons-arrow-left" />
+        Previous
+      </UButton>
+      <UButton v-else color="neutral" variant="outline" disabled>
         <UIcon name="i-heroicons-arrow-left" />
         Previous
       </UButton>
@@ -128,7 +173,16 @@ useHead({
         All Questions
       </UButton>
 
-      <UButton color="neutral" variant="outline" disabled>
+      <UButton
+        v-if="nextQuestion"
+        :to="`/${nextQuestion.meta.category}/${nextQuestion.meta.slug}`"
+        color="neutral"
+        variant="outline"
+      >
+        Next
+        <UIcon name="i-heroicons-arrow-right" />
+      </UButton>
+      <UButton v-else color="neutral" variant="outline" disabled>
         Next
         <UIcon name="i-heroicons-arrow-right" />
       </UButton>

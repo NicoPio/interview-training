@@ -70,3 +70,4 @@ Follow the 4-step EPCT workflow to complete the task:
 - Original task requirements fully met
 
 Execute this workflow autonomously. Update todos in real-time as you progress through each phase.
+reply in french

@@ -19,9 +19,47 @@ interface Props {
 const props = defineProps<Props>()
 const route = useRoute()
 
+// Composables
+const { getProgress } = useQuestionProgress()
+const { isFavorite } = useFavorites()
+
 // Determine active question
 const isActive = (question: Question) => {
   return props.currentSlug === question.meta.slug || route.params.slug === question.meta.slug
+}
+
+// Get question status
+const getQuestionStatus = (question: Question) => {
+  const questionId = String(question.id)
+  const progress = getProgress(questionId)
+  return {
+    ...progress,
+    isFavorite: isFavorite(questionId)
+  }
+}
+
+// Status icon
+const getStatusIcon = (status: string) => {
+  switch (status) {
+    case 'mastered':
+      return 'i-heroicons-check-circle-solid'
+    case 'seen':
+      return 'i-heroicons-eye-solid'
+    default:
+      return null
+  }
+}
+
+// Status color
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'mastered':
+      return 'text-green-500'
+    case 'seen':
+      return 'text-blue-500'
+    default:
+      return 'text-gray-400'
+  }
 }
 
 // Difficulty colors
@@ -60,19 +98,31 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
             ]">
               <div class="flex items-start gap-2">
                 <div class="flex-1 min-w-0">
-                  <p :class="[
-                    'text-sm font-medium line-clamp-2',
-                    isActive(question)
-                      ? 'text-primary-700 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
-                  ]">
-                    {{ question.title }}
-                  </p>
+                  <div class="flex items-center gap-1 mb-1">
+                    <p :class="[
+                      'text-sm font-medium line-clamp-2 flex-1',
+                      isActive(question)
+                        ? 'text-primary-700 dark:text-primary-400'
+                        : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
+                    ]">
+                      {{ question.title }}
+                    </p>
+                    <UIcon
+                      v-if="getQuestionStatus(question).isFavorite"
+                      name="i-heroicons-heart-solid"
+                      class="text-red-500 text-sm shrink-0"
+                    />
+                  </div>
                   <div class="flex items-center gap-1 mt-1">
                     <UBadge v-if="question.meta.difficulty" :color="difficultyColors[question.meta.difficulty]" variant="subtle"
                       size="xs">
                       {{ question.meta.difficulty }}
                     </UBadge>
+                    <UIcon
+                      v-if="getStatusIcon(getQuestionStatus(question).status)"
+                      :name="getStatusIcon(getQuestionStatus(question).status)!"
+                      :class="['text-xs', getStatusColor(getQuestionStatus(question).status)]"
+                    />
                   </div>
                 </div>
               </div>

@@ -26,6 +26,21 @@ const { data: questions } = await useAsyncData(`questions-${locale.value}`, asyn
     lazy: false // Wait for data before rendering
 })
 
+// Composables
+const { getFavoriteIds, getFavoriteCount } = useFavorites()
+
+// Filter state
+const showOnlyFavorites = ref(false)
+
+// Filtered questions
+const filteredQuestions = computed(() => {
+    if (!questions.value) return []
+    if (!showOnlyFavorites.value) return questions.value
+
+    const favoriteIds = getFavoriteIds.value
+    return questions.value.filter(q => favoriteIds.includes(String(q.id)))
+})
+
 // Count questions by difficulty
 const stats = computed(() => {
     if (!questions.value) return { easy: 0, medium: 0, hard: 0, total: 0 }
@@ -99,6 +114,13 @@ useSeoMeta({
             </div>
         </section>
 
+        <!-- Progress Section -->
+        <section v-if="questions && questions.length > 0" class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto">
+                <ProgressBar :total-questions="stats.total" />
+            </div>
+        </section>
+
         <!-- Stats Section -->
         <section class="container mx-auto px-4 py-12">
             <div class="max-w-4xl mx-auto">
@@ -134,15 +156,25 @@ useSeoMeta({
         <!-- Questions List -->
         <section id="questions" class="container mx-auto px-4 py-12">
             <div class="max-w-4xl mx-auto">
-                <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
                         All Questions
                     </h2>
-                    <UColorModeButton />
+                    <div class="flex items-center gap-2">
+                        <UButton
+                            :icon="showOnlyFavorites ? 'i-heroicons-heart-solid' : 'i-heroicons-heart'"
+                            :color="showOnlyFavorites ? 'error' : 'neutral'"
+                            :variant="showOnlyFavorites ? 'solid' : 'outline'"
+                            size="sm"
+                            @click="showOnlyFavorites = !showOnlyFavorites"
+                        >
+                            Favorites {{ getFavoriteCount > 0 ? `(${getFavoriteCount})` : '' }}
+                        </UButton>
+                    </div>
                 </div>
 
-                <div v-if="questions" class="space-y-3">
-                    <NuxtLink v-for="question in questions" :key="question.id"
+                <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
+                    <NuxtLink v-for="question in filteredQuestions" :key="question.id"
                         :to="`/${question.meta.category}/${question.meta.slug}`" class="block group">
                         <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
                             <div class="flex items-start gap-4">
@@ -173,8 +205,14 @@ useSeoMeta({
                     </NuxtLink>
                 </div>
 
-                <div v-else class="text-center py-12">
+                <div v-else-if="!questions" class="text-center py-12">
                     <p class="text-gray-600 dark:text-gray-400">Loading questions...</p>
+                </div>
+
+                <div v-else class="text-center py-12">
+                    <UIcon name="i-heroicons-heart" class="text-6xl text-gray-300 dark:text-gray-700 mb-4" />
+                    <p class="text-gray-600 dark:text-gray-400">No favorite questions yet.</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">Click the heart icon on questions to add them to favorites.</p>
                 </div>
             </div>
         </section>
