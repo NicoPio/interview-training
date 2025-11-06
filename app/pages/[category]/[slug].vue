@@ -67,8 +67,8 @@ const { data: allQuestions } = await useAsyncData(`all-questions-${locale.value}
 
 // Find current question index and prev/next
 const currentIndex = computed(() => {
-  if (!allQuestions.value || !question.value) return -1
-  return allQuestions.value.findIndex(q => q.id === question.value.id)
+  if (!allQuestions.value || !question.value?.id) return -1
+  return allQuestions.value.findIndex(q => q.id === question.value?.id)
 })
 
 const previousQuestion = computed(() => {

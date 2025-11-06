@@ -43,20 +43,15 @@ const progress = computed(() => getProgress(questionId.value))
 const isMastered = computed(() => progress.value.status === 'mastered')
 
 // Keyboard shortcuts
-const { space, enter } = useMagicKeys()
+const { space } = useMagicKeys()
 
 // Handle keyboard shortcuts
-whenever(space, () => {
+whenever(space!, () => {
   if (process.client && !isQuizMode.value) {
     toggleAnswer()
   }
 })
 
-whenever(enter, () => {
-  if (process.client && !isQuizMode.value) {
-    toggleAnswer()
-  }
-})
 
 // Quiz mode timer logic
 const startQuizTimer = () => {
@@ -181,7 +176,7 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
 
         <!-- Keyboard shortcut hint -->
         <p v-if="!isQuizMode" class="text-xs text-gray-500 dark:text-gray-400">
-          Raccourci: <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">Espace</kbd> ou <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">Entrée</kbd>
+          Raccourci: <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">Espace</kbd> 
         </p>
 
         <!-- Reveal statistics -->
