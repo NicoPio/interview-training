@@ -144,10 +144,14 @@ useHead({
     <QuestionCard :title="question.title" :id="Number(question.id)" :difficulty="question.meta.difficulty"
       :category="question.meta.category" :slug="question.meta.slug">
       <template #question>
-        <ContentRenderer :value="question" />
+        <!-- Question is already in the title, so we show a brief intro or nothing -->
+        <p class="text-gray-600 dark:text-gray-400">
+          Cliquez sur "Voir la réponse" ci-dessous pour afficher la réponse détaillée.
+        </p>
       </template>
 
       <template #answer>
+        <!-- Full content with answer -->
         <ContentRenderer :value="question" />
       </template>
     </QuestionCard>

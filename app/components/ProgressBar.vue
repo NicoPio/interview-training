@@ -6,10 +6,12 @@ interface Props {
 const props = defineProps<Props>()
 
 const { getStats, getProgressPercentage, getMasteryPercentage } = useQuestionProgress()
+const { getGlobalStats } = useAnswerRevealState()
 
 const stats = computed(() => getStats())
 const progressPercentage = computed(() => getProgressPercentage(props.totalQuestions))
 const masteryPercentage = computed(() => getMasteryPercentage(props.totalQuestions))
+const revealStats = computed(() => getGlobalStats())
 
 const notSeenCount = computed(() => props.totalQuestions - stats.value.total)
 </script>
@@ -73,6 +75,33 @@ const notSeenCount = computed(() => props.totalQuestions - stats.value.total)
             {{ stats.mastered }}
           </div>
           <div class="text-xs text-gray-600 dark:text-gray-400">Mastered</div>
+        </div>
+      </div>
+
+      <!-- Reveal Statistics -->
+      <div v-if="revealStats.totalReveals > 0" class="border-t pt-4">
+        <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          Statistiques de révélation
+        </h4>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="text-center p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+            <div class="text-xl font-bold text-purple-600 dark:text-purple-400">
+              {{ revealStats.totalReveals }}
+            </div>
+            <div class="text-xs text-gray-600 dark:text-gray-400">Total Révélations</div>
+          </div>
+          <div class="text-center p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+            <div class="text-xl font-bold text-orange-600 dark:text-orange-400">
+              {{ revealStats.questionsRevealed }}
+            </div>
+            <div class="text-xs text-gray-600 dark:text-gray-400">Questions Vues</div>
+          </div>
+          <div class="text-center p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+            <div class="text-xl font-bold text-indigo-600 dark:text-indigo-400">
+              {{ revealStats.avgTimeToReveal }}s
+            </div>
+            <div class="text-xs text-gray-600 dark:text-gray-400">Temps Moyen</div>
+          </div>
         </div>
       </div>
     </div>
