@@ -27,7 +27,7 @@ export default defineNuxtConfig({
       { code: 'en', name: 'English', language: 'en-US', dir: 'ltr' },
       { code: 'fr', name: 'French', language: 'fr-FR' },
     ],
-    strategy: 'prefix_except_default',
+    strategy: 'prefix',
     defaultLocale: 'fr',
   },
 
@@ -59,8 +59,7 @@ export default defineNuxtConfig({
       owner: 'NicoPio', // your GitHub username or organization
       repo: 'https://github.com/NicoPio/interview-training', // your repository name
       branch: 'main', // the branch to commit to (default: main)
-      rootDir: '/interview-training/' // optional: if your Nuxt app is in a subdirectory (default: '')
+      rootDir: '' // optional: if your Nuxt app is in a subdirectory (default: '')
     }
   },
-
 });
