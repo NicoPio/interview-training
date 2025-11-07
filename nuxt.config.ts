@@ -59,7 +59,7 @@ export default defineNuxtConfig({
       owner: 'NicoPio', // your GitHub username or organization
       repo: 'https://github.com/NicoPio/interview-training', // your repository name
       branch: 'main', // the branch to commit to (default: main)
-      rootDir: '' // optional: if your Nuxt app is in a subdirectory (default: '')
+      rootDir: '/interview-training/' // optional: if your Nuxt app is in a subdirectory (default: '')
     }
   },
 });
