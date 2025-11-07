@@ -20,6 +20,7 @@ const slug = route.params.slug as string
 
 // Get current locale from i18n
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // Composables for tracking
 const { markAsSeen } = useQuestionProgress()
@@ -119,7 +120,7 @@ useHead({
     <nav class="mb-6">
       <ol class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
         <li>
-          <NuxtLink to="/" class="hover:text-primary-500 transition-colors">
+          <NuxtLink :to="localePath('/')" class="hover:text-primary-500 transition-colors">
             Home
           </NuxtLink>
         </li>
@@ -127,7 +128,7 @@ useHead({
           <UIcon name="i-heroicons-chevron-right" class="text-xs" />
         </li>
         <li>
-          <NuxtLink :to="`/${category}`" class="hover:text-primary-500 transition-colors capitalize">
+          <NuxtLink :to="localePath(`/${category}`)" class="hover:text-primary-500 transition-colors capitalize">
             {{ category }}
           </NuxtLink>
         </li>
@@ -160,7 +161,7 @@ useHead({
     <div class="mt-6 flex items-center justify-between gap-4">
       <UButton
         v-if="previousQuestion"
-        :to="`/${previousQuestion.meta.category}/${previousQuestion.meta.slug}`"
+        :to="localePath(`/${previousQuestion.meta.category}/${previousQuestion.meta.slug}`)"
         color="neutral"
         variant="outline"
       >
@@ -172,14 +173,14 @@ useHead({
         Previous
       </UButton>
 
-      <UButton to="/" color="neutral" variant="ghost" size="sm">
+      <UButton :to="localePath('/')" color="neutral" variant="ghost" size="sm">
         <UIcon name="i-heroicons-squares-2x2" />
         All Questions
       </UButton>
 
       <UButton
         v-if="nextQuestion"
-        :to="`/${nextQuestion.meta.category}/${nextQuestion.meta.slug}`"
+        :to="localePath(`/${nextQuestion.meta.category}/${nextQuestion.meta.slug}`)"
         color="neutral"
         variant="outline"
       >

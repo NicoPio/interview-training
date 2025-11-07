@@ -15,6 +15,7 @@ const category = route.params.category as string
 
 // Get current locale from i18n
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // Fetch questions for this category with i18n support
 const { data: questions } = await useAsyncData(`category-${category}-${locale.value}`, async () => {
@@ -145,7 +146,7 @@ useSeoMeta({
 
                 <div v-if="questions" class="space-y-3">
                     <NuxtLink v-for="question in questions" :key="question.id"
-                        :to="`/${question.meta.category}/${question.meta.slug}`" class="block group">
+                        :to="localePath(`/${question.meta.category}/${question.meta.slug}`)" class="block group">
                         <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
                             <div class="flex items-start gap-4">
                                 <div class="flex-1 min-w-0">

@@ -18,6 +18,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const route = useRoute()
+const localePath = useLocalePath()
 
 // Composables
 const { getProgress } = useQuestionProgress()
@@ -88,7 +89,7 @@ const difficultyColors: Record<'easy' | 'medium' | 'hard', 'success' | 'warning'
       <!-- Scrollable List -->
       <div class="flex-1 overflow-y-auto -mx-4 px-4">
         <nav class="space-y-1">
-          <NuxtLink v-for="question in questions" :key="question.id" :to="`/${question.meta.category}/${question.meta.slug}`"
+          <NuxtLink v-for="question in questions" :key="question.id" :to="localePath(`/${question.meta.category}/${question.meta.slug}`)"
             class="block group">
             <div :class="[
               'p-3 rounded-lg transition-all duration-200',

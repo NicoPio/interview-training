@@ -10,6 +10,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const localePath = useLocalePath()
 
 // Composables
 const { isFavorite, toggleFavorite } = useFavorites()
@@ -227,7 +228,7 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
           </UButton>
         </div>
         <div class="text-xs text-gray-500">
-          <NuxtLink :to="`/${category}/${slug}`" class="hover:text-primary-500 transition-colors">
+          <NuxtLink :to="localePath(`/${category}/${slug}`)" class="hover:text-primary-500 transition-colors">
             Permalink
           </NuxtLink>
         </div>

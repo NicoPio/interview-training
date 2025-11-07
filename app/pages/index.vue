@@ -12,6 +12,7 @@ interface Question {
 
 // Get current locale from i18n
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // Fetch all JavaScript questions using queryCollection (Nuxt Content v3 API) with i18n
 const { data: questions } = await useAsyncData(`questions-${locale.value}`, async () => {
@@ -103,7 +104,7 @@ useSeoMeta({
                 </p>
 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <UButton to="/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript"
+                    <UButton :to="localePath('/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript')"
                         size="xl" icon="i-heroicons-play">
                         Start Practicing
                     </UButton>
@@ -175,7 +176,7 @@ useSeoMeta({
 
                 <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
                     <NuxtLink v-for="question in filteredQuestions" :key="question.id"
-                        :to="`/${question.meta.category}/${question.meta.slug}`" class="block group">
+                        :to="localePath(`/${question.meta.category}/${question.meta.slug}`)" class="block group">
                         <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
                             <div class="flex items-start gap-4">
 
