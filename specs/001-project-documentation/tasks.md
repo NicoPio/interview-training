@@ -73,21 +73,21 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Content Infrastructure
 
-- [ ] T011 Verify Nuxt Content configuration for both locales in nuxt.config.ts
-- [ ] T012 Audit all 26+ questions for consistent frontmatter schema across content/{locale}/{category}/
-- [ ] T013 Validate markdown rendering and code syntax highlighting across all questions
+- [x] T011 Verify Nuxt Content configuration for both locales in nuxt.config.ts
+- [x] T012 Audit all 26+ questions for consistent frontmatter schema across content/{locale}/{category}/
+- [x] T013 Validate markdown rendering and code syntax highlighting across all questions
 
 ### State Management Foundation
 
-- [ ] T014 Review and document useState composable patterns in specs/001-project-documentation/patterns.md
-- [ ] T015 Verify localStorage sync patterns across all composables (useFavorites, useQuestionProgress, useAnswerRevealState)
-- [ ] T016 Add error handling for localStorage unavailability in all composables
+- [x] T014 Review and document useState composable patterns in specs/001-project-documentation/patterns.md
+- [x] T015 Verify localStorage sync patterns across all composables (useFavorites, useQuestionProgress, useAnswerRevealState)
+- [x] T016 Add error handling for localStorage unavailability in all composables
 
 ### Routing Foundation
 
-- [ ] T017 Verify file-based routing structure for all pages in app/pages/
-- [ ] T018 Test i18n route generation for both French and English locales
-- [ ] T019 Verify dynamic route params for [category] and [slug] pages
+- [x] T017 Verify file-based routing structure for all pages in app/pages/
+- [x] T018 Test i18n route generation for both French and English locales
+- [x] T019 Verify dynamic route params for [category] and [slug] pages
 
 ---
 
