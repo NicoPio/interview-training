@@ -25,3 +25,20 @@ logs
 
 # claude
 .claude
+
+# Test coverage
+coverage
+*.lcov
+.nyc_output
+
+# Build artifacts
+build/
+*.tsbuildinfo
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# OS-specific
+Thumbs.db
