@@ -41,11 +41,37 @@ if (!questions.value || questions.value.length === 0) {
     })
 }
 
-// Count questions by difficulty for this category
-const stats = computed(() => {
-    if (!questions.value) return { easy: 0, medium: 0, hard: 0, total: 0 }
+// Composables
+const {
+    searchQuery,
+    selectedDifficulties,
+    selectedTags,
+    selectedStatus,
+    showOnlyFavorites,
+    filterQuestions,
+    getAllUniqueTags,
+    getActiveFiltersCount,
+    resetFilters,
+    toggleDifficultyFilter,
+} = useQuestionFilters()
 
-    const items = questions.value
+// Filtered questions
+const filteredQuestions = computed(() => {
+    if (!questions.value) return []
+    return filterQuestions(questions.value)
+})
+
+// Available tags for filter
+const availableTags = computed(() => {
+    if (!questions.value) return []
+    return getAllUniqueTags(questions.value)
+})
+
+// Count questions by difficulty for this category (based on filtered results)
+const stats = computed(() => {
+    if (!filteredQuestions.value) return { easy: 0, medium: 0, hard: 0, total: 0 }
+
+    const items = filteredQuestions.value
     return {
         easy: items.filter((q) => q.meta.difficulty === 'easy').length,
         medium: items.filter((q) => q.meta.difficulty === 'medium').length,
@@ -53,6 +79,8 @@ const stats = computed(() => {
         total: items.length
     }
 })
+
+const activeFiltersCount = computed(() => getActiveFiltersCount())
 
 // Difficulty colors
 const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
@@ -112,19 +140,31 @@ useSeoMeta({
                             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Total</div>
                         </div>
                     </UCard>
-                    <UCard>
+                    <UCard
+                        class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+                        :class="{ 'ring-2 ring-green-500': selectedDifficulties.includes('easy') }"
+                        @click="toggleDifficultyFilter('easy')"
+                    >
                         <div class="text-center">
                             <div class="text-2xl font-bold text-green-500">{{ stats.easy }}</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Easy</div>
                         </div>
                     </UCard>
-                    <UCard>
+                    <UCard
+                        class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+                        :class="{ 'ring-2 ring-yellow-500': selectedDifficulties.includes('medium') }"
+                        @click="toggleDifficultyFilter('medium')"
+                    >
                         <div class="text-center">
                             <div class="text-2xl font-bold text-yellow-500">{{ stats.medium }}</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Medium</div>
                         </div>
                     </UCard>
-                    <UCard>
+                    <UCard
+                        class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+                        :class="{ 'ring-2 ring-red-500': selectedDifficulties.includes('hard') }"
+                        @click="toggleDifficultyFilter('hard')"
+                    >
                         <div class="text-center">
                             <div class="text-2xl font-bold text-red-500">{{ stats.hard }}</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hard</div>
@@ -141,11 +181,28 @@ useSeoMeta({
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
                         All Questions
                     </h2>
-                    <UColorModeButton />
                 </div>
 
-                <div v-if="questions" class="space-y-3">
-                    <NuxtLink v-for="question in questions" :key="question.id"
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
+                </div>
+
+                <!-- Filters Section -->
+                <UCard class="mb-8">
+                    <template #header>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold">Filtres</h3>
+                            <UBadge v-if="activeFiltersCount > 0" color="primary">
+                                {{ activeFiltersCount }}
+                            </UBadge>
+                        </div>
+                    </template>
+                    <QuestionFilters :available-tags="availableTags" />
+                </UCard>
+
+                <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
+                    <NuxtLink v-for="question in filteredQuestions" :key="question.id"
                         :to="localePath(`/${question.meta.category}/${question.meta.slug}`)" class="block group">
                         <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
                             <div class="flex items-start gap-4">
@@ -172,6 +229,17 @@ useSeoMeta({
                             </div>
                         </UCard>
                     </NuxtLink>
+                </div>
+
+                <div v-else class="text-center py-12">
+                    <UIcon name="i-heroicons-magnifying-glass" class="text-6xl text-gray-300 dark:text-gray-700 mb-4" />
+                    <p class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Aucun résultat trouvé</p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Aucune question ne correspond aux filtres sélectionnés.
+                    </p>
+                    <UButton @click="resetFilters" color="primary" variant="outline">
+                        Réinitialiser les filtres
+                    </UButton>
                 </div>
             </div>
         </section>

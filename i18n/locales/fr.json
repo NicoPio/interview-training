@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "difficulty": {
+      "label": "Difficulté",
+      "easy": "Facile",
+      "medium": "Moyen",
+      "hard": "Difficile"
+    },
+    "tags": {
+      "label": "Tags",
+      "placeholder": "Sélectionner des tags",
+      "selected": "sélectionné(s)"
+    },
+    "status": {
+      "label": "Progression",
+      "all": "Toutes",
+      "notSeen": "Non vues",
+      "seen": "Vues",
+      "mastered": "Maîtrisées"
+    },
+    "favorites": "Favoris uniquement",
+    "reset": "Réinitialiser",
+    "active": "actif(s)"
+  }
+}

@@ -57,6 +57,7 @@ watch(() => route.path, () => {
                 color="neutral"
                 variant="ghost"
                 size="sm"
+                to="/"
               >
                 <span class="hidden sm:inline">Search</span>
               </UButton>
