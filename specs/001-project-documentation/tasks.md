@@ -46,16 +46,16 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Documentation Setup
 
-- [ ] T001 Review and update CLAUDE.md with complete project conventions from specs/001-project-documentation/
-- [ ] T002 [P] Review and update README.md with quick start guide and deployment instructions
-- [ ] T003 [P] Create CONTRIBUTING.md with development workflow and code conventions
-- [ ] T004 [P] Create architecture diagram showing components, composables, and data flow in documentation/diagrams/
+- [x] T001 Review and update CLAUDE.md with complete project conventions from specs/001-project-documentation/
+- [x] T002 [P] Review and update README.md with quick start guide and deployment instructions
+- [x] T003 [P] Create CONTRIBUTING.md with development workflow and code conventions
+- [ ] T004 [P] Create architecture diagram showing components, composables, and data flow in documentation/diagrams/ (SKIPPED - can be done later)
 
 ### Testing Infrastructure
 
-- [ ] T005 Configure Vitest for unit testing with Nuxt Test Utils in vitest.config.ts
-- [ ] T006 [P] Set up test utilities and mocks for composables in tests/utils/
-- [ ] T007 [P] Configure test coverage reporting in vitest.config.ts (target: 80% coverage)
+- [x] T005 Configure Vitest for unit testing with Nuxt Test Utils in vitest.config.ts
+- [x] T006 [P] Set up test utilities and mocks for composables in tests/utils/
+- [x] T007 [P] Configure test coverage reporting in vitest.config.ts (target: 80% coverage)
 
 ### Quality Tooling
 

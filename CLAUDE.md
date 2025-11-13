@@ -179,6 +179,15 @@ Nuxt Studio integration active for online content editing:
 - [TailwindCSS 4](https://tailwindcss.com)
 - Detailed roadmap: `documentation/ROADMAP.md`
 
+## Complete Documentation
+
+Comprehensive project documentation available in `specs/001-project-documentation/`:
+- **spec.md**: Complete specification with 8 user stories, 71 functional requirements
+- **plan.md**: Implementation plan with technical stack analysis
+- **research.md**: Technology decisions and architectural patterns
+- **data-model.md**: Data structures, composables, and state management
+- **tasks.md**: 143 implementation tasks organized by user story
+
 ## Project Philosophy
 
 - **DX First**: optimal developer experience

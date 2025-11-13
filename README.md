@@ -9,12 +9,17 @@ An interactive JavaScript interview preparation application built with Nuxt 4, f
 ## ✨ Features
 
 - 📚 **26+ JavaScript Questions** - Curated interview questions covering essential JS concepts
-- 🎴 **Flashcard Mode** - Interactive cards with reveal answer functionality
+- 🎴 **Flashcard Mode** - Interactive cards with reveal answer functionality and timing analytics
+- 📊 **Progress Tracking** - Automatic tracking of viewed and mastered questions with localStorage persistence
+- ⭐ **Favorites System** - Mark questions as favorites for quick access
+- 🔍 **Advanced Search & Filters** - Search by title/tags, filter by difficulty, tags, progress status
+- ⏱️ **Quiz Mode** - Timed mode with 30-second countdown and auto-reveal
+- 🌍 **Bilingual Support** - Full French and English translations with i18n routing
 - 🗂️ **Organized by Difficulty** - Easy, Medium, and Hard levels
 - 🏷️ **Smart Tagging** - Questions tagged by topic (closures, promises, ES6, etc.)
 - 🎨 **Beautiful UI** - Built with Nuxt UI components
-- 🌓 **Dark Mode** - Automatic dark/light theme switching
-- 📱 **Fully Responsive** - Works perfectly on mobile, tablet, and desktop
+- 🌓 **Dark Mode** - Automatic dark/light theme switching with persistence
+- 📱 **Fully Responsive** - Works perfectly on mobile, tablet, and desktop (320px minimum)
 - 🔍 **SEO Optimized** - Each question has its own URL and meta tags
 - ⚡ **Lightning Fast** - Static generation with Nuxt Content
 
@@ -189,28 +194,33 @@ node scripts/split-content.js
 
 See [documentation/ROADMAP.md](documentation/ROADMAP.md) for the complete development roadmap.
 
-### ✅ Completed (Phase 1-3)
-- ✅ Content restructuring with individual files
-- ✅ QuestionCard component with reveal functionality
+### ✅ Completed
+- ✅ Content restructuring with individual files (26+ questions)
+- ✅ QuestionCard component with reveal functionality and animations
+- ✅ Answer reveal tracking with time-to-reveal metrics
+- ✅ Progress tracking system (seen/mastered status with localStorage)
+- ✅ Favorites management with localStorage persistence
+- ✅ Advanced search (title and tags, accent-insensitive)
+- ✅ Multi-criteria filters (difficulty, tags, status, favorites)
+- ✅ Quiz mode with countdown timer and auto-reveal
+- ✅ Bilingual support (French default, English via `/en`)
+- ✅ Dark mode with automatic persistence
+- ✅ Keyboard shortcuts (Spacebar to reveal)
 - ✅ TableOfContents navigation
-- ✅ Interview layout with responsive sidebar
-- ✅ Dynamic routing for questions
-- ✅ Homepage with question list
+- ✅ Dynamic routing for categories and questions
+- ✅ Homepage with stats and question list
+- ✅ URL synchronization for filters
+- ✅ Responsive design (320px+)
+- ✅ Static site generation for GitHub Pages
 
-### 🚧 Coming Soon (Phase 4-5)
-- ⏳ Progress tracking (localStorage)
-- ⏳ Quiz mode
-- ⏳ Favorites system
-- ⏳ Search functionality
-- ⏳ Advanced filters (category, difficulty, tags)
-
-### 🔮 Future (Phase 6+)
-- Dark mode enhancements
-- Keyboard shortcuts
-- Social sharing
-- Performance optimizations
-- PWA support
-- Multi-category support (HTML, CSS, Vue, React)
+### 🔮 Future Enhancements
+- PWA support with offline capability
+- Visual regression testing
+- E2E testing with Playwright
+- Content validation scripts
+- Privacy-friendly analytics
+- Additional question categories (HTML, CSS, Vue, React)
+- Social sharing functionality
 
 ## 🤝 Contributing
 
