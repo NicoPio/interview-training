@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Nuxt build outputs
+.nuxt/
+.output/
+.nitro/
+.cache/
+dist/
+build/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Build artifacts
+*.tsbuildinfo
+
+# Minified files
+*.min.js
+*.min.mjs
+*.min.css
+
+# Generated files
+.data/
+
+# Lock files (already formatted)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Markdown files (preserve original formatting)
+CHANGELOG.md
+*.gen.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Environment files
+.env
+.env.*

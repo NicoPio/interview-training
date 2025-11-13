@@ -48,7 +48,7 @@ const { space } = useMagicKeys()
 
 // Handle keyboard shortcuts
 whenever(space!, () => {
-  if (process.client && !isQuizMode.value) {
+  if (import.meta.client && !isQuizMode.value) {
     toggleAnswer()
   }
 })

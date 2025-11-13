@@ -142,7 +142,8 @@ useHead({
     </nav>
 
     <!-- Question Card -->
-    <QuestionCard :title="question.title" :id="Number(question.id)" :difficulty="question.meta.difficulty"
+    <QuestionCard
+      :id="Number(question.id)" :title="question.title" :difficulty="question.meta.difficulty"
       :category="question.meta.category" :slug="question.meta.slug">
       <template #question>
         <!-- Question is already in the title, so we show a brief intro or nothing -->

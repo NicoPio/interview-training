@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { useQuestionProgress } from '~/app/composables/useQuestionProgress'
 import { setupLocalStorageMock, clearLocalStorageMock } from '../utils/mockLocalStorage'
 
@@ -97,9 +97,12 @@ describe('useQuestionProgress', () => {
     expect(getStats().total).toBe(0)
   })
 
-  it('should persist to localStorage', () => {
+  it('should persist to localStorage', async () => {
     const { markAsSeen } = useQuestionProgress()
     markAsSeen('1')
+
+    // Wait for watch to execute
+    await nextTick()
 
     const stored = localStorage.getItem('question-progress')
     expect(stored).toBeTruthy()

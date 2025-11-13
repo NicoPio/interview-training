@@ -59,9 +59,9 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Quality Tooling
 
-- [ ] T008 [P] Configure ESLint rules for TypeScript strict mode in .eslintrc.js
-- [ ] T009 [P] Add Prettier configuration for consistent code formatting in .prettierrc
-- [ ] T010 [P] Set up GitHub Actions workflow for CI/CD in .github/workflows/ci.yml
+- [x] T008 [P] Configure ESLint rules for TypeScript strict mode in eslint.config.mjs
+- [x] T009 [P] Add Prettier configuration for consistent code formatting in .prettierrc
+- [x] T010 [P] Set up GitHub Actions workflow for CI/CD in .github/workflows/ci.yml
 
 ---
 
@@ -202,16 +202,16 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T058 [US5] Verify search query filters by title and tags (case-insensitive, accent-insensitive) in app/composables/useQuestionFilters.ts
-- [ ] T059 [US5] Verify difficulty filter with multi-select support in app/components/QuestionFilters.vue
-- [ ] T060 [US5] Verify tag filter with multi-select support in app/components/QuestionFilters.vue
-- [ ] T061 [US5] Verify progress status filter (all, not-seen, seen, mastered) in app/components/QuestionFilters.vue
-- [ ] T062 [US5] Verify combined filters use AND logic in app/composables/useQuestionFilters.ts
-- [ ] T063 [US5] Verify URL query parameters sync with active filters in app/composables/useQuestionFilters.ts
-- [ ] T064 [US5] Verify filter initialization from URL on page load in app/composables/useQuestionFilters.ts
-- [ ] T065 [US5] Verify active filters count badge display in app/pages/index.vue
-- [ ] T066 [US5] Verify reset filters button clears all filters in app/components/QuestionFilters.vue
-- [ ] T067 [US5] Verify "no results" message displays when no matches in app/pages/index.vue
+- [x] T058 [US5] Verify search query filters by title and tags (case-insensitive, accent-insensitive) in app/composables/useQuestionFilters.ts
+- [x] T059 [US5] Verify difficulty filter with multi-select support in app/components/QuestionFilters.vue
+- [x] T060 [US5] Verify tag filter with multi-select support in app/components/QuestionFilters.vue
+- [x] T061 [US5] Verify progress status filter (all, not-seen, seen, mastered) in app/components/QuestionFilters.vue
+- [x] T062 [US5] Verify combined filters use AND logic in app/composables/useQuestionFilters.ts
+- [x] T063 [US5] Verify URL query parameters sync with active filters in app/composables/useQuestionFilters.ts
+- [x] T064 [US5] Verify filter initialization from URL on page load in app/composables/useQuestionFilters.ts
+- [x] T065 [US5] Verify active filters count badge display in app/pages/index.vue
+- [x] T066 [US5] Verify reset filters button clears all filters in app/components/QuestionFilters.vue
+- [x] T067 [US5] Verify "no results" message displays when no matches in app/pages/index.vue
 
 ### Component Testing
 
@@ -235,11 +235,11 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T074 [US6] Verify quiz mode toggle in app/composables/useQuizMode.ts
-- [ ] T075 [US6] Verify 30-second countdown timer display in app/components/QuestionCard.vue
-- [ ] T076 [US6] Verify auto-reveal when timer reaches zero in app/components/QuestionCard.vue
-- [ ] T077 [US6] Verify spacebar keyboard shortcut is disabled in quiz mode in app/components/QuestionCard.vue
-- [ ] T078 [US6] Verify manual reveal stops timer in app/components/QuestionCard.vue
+- [x] T074 [US6] Verify quiz mode toggle in app/composables/useQuizMode.ts
+- [x] T075 [US6] Verify 30-second countdown timer display in app/components/QuestionCard.vue
+- [x] T076 [US6] Verify auto-reveal when timer reaches zero in app/components/QuestionCard.vue
+- [x] T077 [US6] Verify spacebar keyboard shortcut is disabled in quiz mode in app/components/QuestionCard.vue
+- [x] T078 [US6] Verify manual reveal stops timer in app/components/QuestionCard.vue
 
 ### Composable Testing
 
@@ -257,13 +257,13 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T082 [US7] Verify French as default locale (no URL prefix) in nuxt.config.ts
-- [ ] T083 [US7] Verify English locale with `/en` prefix in nuxt.config.ts
-- [ ] T084 [US7] Verify language switcher component functionality in app/components/LanguageSwitcher.vue
-- [ ] T085 [US7] Verify UI translations switch correctly in i18n/fr.json and i18n/en.json
-- [ ] T086 [US7] Verify content collection switches on locale change in app/pages/index.vue
-- [ ] T087 [US7] Verify locale persistence across sessions in app/components/LanguageSwitcher.vue
-- [ ] T088 [US7] Verify staying on equivalent page when switching locales in app/components/LanguageSwitcher.vue
+- [x] T082 [US7] Verify French as default locale (with prefix) in nuxt.config.ts
+- [x] T083 [US7] Verify English locale with `/en` prefix in nuxt.config.ts
+- [x] T084 [US7] Verify language switcher component functionality in app/components/LanguageSwitcher.vue
+- [x] T085 [US7] Verify UI translations switch correctly in i18n/fr.json and i18n/en.json
+- [x] T086 [US7] Verify content collection switches on locale change in app/pages/index.vue
+- [x] T087 [US7] Verify locale persistence across sessions in app/components/LanguageSwitcher.vue
+- [x] T088 [US7] Verify staying on equivalent page when switching locales in app/components/LanguageSwitcher.vue
 
 ### i18n Testing
 
@@ -286,10 +286,10 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T094 [US8] Verify color mode toggle button in app/layouts/default.vue
-- [ ] T095 [US8] Verify dark mode persistence in localStorage via Nuxt UI
-- [ ] T096 [US8] Verify WCAG 2.1 AA contrast ratios in dark mode across all components
-- [ ] T097 [US8] Test dark mode across all pages and components
+- [x] T094 [US8] Verify color mode toggle button in app/layouts/default.vue
+- [x] T095 [US8] Verify dark mode persistence in localStorage via Nuxt UI
+- [x] T096 [US8] Verify WCAG 2.1 AA contrast ratios in dark mode across all components
+- [x] T097 [US8] Test dark mode across all pages and components
 
 ### Accessibility Testing
 

@@ -89,23 +89,26 @@ const difficultyColors: Record<'easy' | 'medium' | 'hard', 'success' | 'warning'
       <!-- Scrollable List -->
       <div class="flex-1 overflow-y-auto -mx-4 px-4">
         <nav class="space-y-1">
-          <NuxtLink v-for="question in questions" :key="question.id" :to="localePath(`/${question.meta.category}/${question.meta.slug}`)"
+          <NuxtLink
+            v-for="question in questions" :key="question.id" :to="localePath(`/${question.meta.category}/${question.meta.slug}`)"
             class="block group">
-            <div :class="[
-              'p-3 rounded-lg transition-all duration-200',
-              isActive(question)
-                ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary-500'
-                : 'hover:bg-gray-50 dark:hover:bg-gray-800 border-l-2 border-transparent'
-            ]">
+            <div
+              :class="[
+                'p-3 rounded-lg transition-all duration-200',
+                isActive(question)
+                  ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary-500'
+                  : 'hover:bg-gray-50 dark:hover:bg-gray-800 border-l-2 border-transparent'
+              ]">
               <div class="flex items-start gap-2">
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-1 mb-1">
-                    <p :class="[
-                      'text-sm font-medium line-clamp-2 flex-1',
-                      isActive(question)
-                        ? 'text-primary-700 dark:text-primary-400'
-                        : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
-                    ]">
+                    <p
+                      :class="[
+                        'text-sm font-medium line-clamp-2 flex-1',
+                        isActive(question)
+                          ? 'text-primary-700 dark:text-primary-400'
+                          : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
+                      ]">
                       {{ question.title }}
                     </p>
                     <UIcon
@@ -115,7 +118,8 @@ const difficultyColors: Record<'easy' | 'medium' | 'hard', 'success' | 'warning'
                     />
                   </div>
                   <div class="flex items-center gap-1 mt-1">
-                    <UBadge v-if="question.meta.difficulty" :color="difficultyColors[question.meta.difficulty]" variant="subtle"
+                    <UBadge
+                      v-if="question.meta.difficulty" :color="difficultyColors[question.meta.difficulty]" variant="subtle"
                       size="xs">
                       {{ question.meta.difficulty }}
                     </UBadge>

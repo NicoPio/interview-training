@@ -58,6 +58,12 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    }
+    },
+
+    // Vitest extension configuration
+    "vitest.enable": true,
+    "vitest.configFile": "vitest.config.ts",
+    "vitest.include": ["tests/**/*.{test,spec}.ts"],
+    "vitest.exclude": ["**/node_modules/**", "**/dist/**", "**/.nuxt/**"]
 
 }

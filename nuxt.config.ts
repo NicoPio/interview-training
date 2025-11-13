@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/scripts",
-    "@nuxt/test-utils",
+    "@nuxt/test-utils/module",
     "@nuxt/ui",
     "@vueuse/nuxt",
     "motion-v/nuxt",

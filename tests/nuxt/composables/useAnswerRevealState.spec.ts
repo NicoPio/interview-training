@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { useAnswerRevealState } from '~/app/composables/useAnswerRevealState'
-import { setupLocalStorageMock, clearLocalStorageMock, mockDateNow } from '../utils/mockLocalStorage'
+import { setupLocalStorageMock, clearLocalStorageMock } from '../../utils/mockLocalStorage'
 
 describe('useAnswerRevealState', () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('useAnswerRevealState', () => {
     const { getRevealState } = useAnswerRevealState()
     const state = getRevealState('1')
     expect(state.revealed).toBe(false)
-    expect(state.timeToReveal).toBeNull()
+    expect(state.timeToReveal).toBeUndefined()
     expect(state.revealCount).toBe(0)
   })
 
@@ -69,11 +69,14 @@ describe('useAnswerRevealState', () => {
     expect(stats.avgTimeToReveal).toBe(0)
   })
 
-  it('should persist to localStorage', () => {
+  it('should persist to localStorage', async () => {
     const { markRevealed } = useAnswerRevealState()
     markRevealed('1', 5000)
 
-    const stored = localStorage.getItem('question-reveal-state')
+    // Wait for watch to execute
+    await nextTick()
+
+    const stored = localStorage.getItem('answer-reveal-state')
     expect(stored).toBeTruthy()
     const parsed = JSON.parse(stored!)
     expect(parsed['1'].revealed).toBe(true)

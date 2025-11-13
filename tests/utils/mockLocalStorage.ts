@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 /**
  * Mock localStorage for testing environments
  * Provides a simple in-memory implementation of Storage API
@@ -37,7 +39,7 @@ export class MockLocalStorage implements Storage {
  */
 export function setupLocalStorageMock(): MockLocalStorage {
   const mockLocalStorage = new MockLocalStorage()
-  global.localStorage = mockLocalStorage as any
+  global.localStorage = mockLocalStorage as Storage
   return mockLocalStorage
 }
 
@@ -47,4 +49,13 @@ export function setupLocalStorageMock(): MockLocalStorage {
  */
 export function clearLocalStorageMock(): void {
   global.localStorage?.clear()
+}
+
+/**
+ * Mock Date.now() for consistent timestamps in tests
+ * @param timestamp - The timestamp to return from Date.now()
+ * @returns Spy object that can be used to restore the original implementation
+ */
+export function mockDateNow(timestamp: number) {
+  return vi.spyOn(Date, 'now').mockReturnValue(timestamp)
 }

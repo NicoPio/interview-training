@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { useFavorites } from '~/app/composables/useFavorites'
-import { setupLocalStorageMock, clearLocalStorageMock } from '../utils/mockLocalStorage'
+import { setupLocalStorageMock, clearLocalStorageMock } from '../../utils/mockLocalStorage'
 
 describe('useFavorites', () => {
   beforeEach(() => {
@@ -58,9 +58,13 @@ describe('useFavorites', () => {
     expect(getFavoriteCount.value).toBe(0)
   })
 
-  it('should persist to localStorage', () => {
+  it('should persist to localStorage', async () => {
     const { addFavorite } = useFavorites()
     addFavorite('1')
+
+    // Wait for watch to execute
+    await nextTick()
+
     const stored = localStorage.getItem('question-favorites')
     expect(stored).toBeTruthy()
     const parsed = JSON.parse(stored!)

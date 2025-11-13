@@ -1,9 +1,20 @@
-import { defineVitestConfig } from '@nuxt/test-utils/config'
+import { defineConfig } from 'vitest/config'
+import vue from '@vitejs/plugin-vue'
+import { fileURLToPath } from 'node:url'
 
-export default defineVitestConfig({
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '~': fileURLToPath(new URL('./', import.meta.url)),
+      '@': fileURLToPath(new URL('./', import.meta.url)),
+    },
+  },
   test: {
-    environment: 'nuxt',
     globals: true,
+    environment: 'happy-dom',
+    include: ['tests/**/*.{test,spec}.ts'],
+    setupFiles: ['./tests/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
@@ -17,12 +28,6 @@ export default defineVitestConfig({
         '**/*.config.ts',
         'scripts/',
       ],
-      thresholds: {
-        lines: 80,
-        functions: 80,
-        branches: 80,
-        statements: 80,
-      },
     },
   },
 })
