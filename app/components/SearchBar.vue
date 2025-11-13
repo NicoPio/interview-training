@@ -16,7 +16,8 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
-const { t } = useI18n()
+// i18n is available for future translations if needed
+// const { t } = useI18n()
 
 const localValue = ref(props.modelValue)
 
@@ -41,11 +42,13 @@ const inputRef = ref<HTMLInputElement>()
 
 const { slash } = useMagicKeys()
 
-watch(slash, (pressed) => {
-  if (pressed && inputRef.value) {
-    inputRef.value.focus()
-  }
-})
+if (slash) {
+  watch(slash, (pressed) => {
+    if (pressed && inputRef.value) {
+      inputRef.value.focus()
+    }
+  })
+}
 
 const clearSearch = () => {
   localValue.value = ''
@@ -61,7 +64,6 @@ const clearSearch = () => {
       :placeholder="placeholder"
       icon="i-heroicons-magnifying-glass"
       size="lg"
-      :ui="{ icon: { trailing: { pointer: '' } } }"
     >
       <template #trailing>
         <div class="flex items-center gap-2">

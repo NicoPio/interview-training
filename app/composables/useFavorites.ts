@@ -26,7 +26,11 @@ export const useFavorites = () => {
   // Sync state to localStorage on changes (client-side only)
   if (process.client) {
     watch(favoritesState, (newValue) => {
-      localStorage.setItem('question-favorites', JSON.stringify(newValue))
+      try {
+        localStorage.setItem('question-favorites', JSON.stringify(newValue))
+      } catch {
+        // Silently fail in private/incognito mode or when storage is full
+      }
     }, { deep: true })
   }
 
@@ -38,7 +42,8 @@ export const useFavorites = () => {
   // Toggle favorite status
   const toggleFavorite = (questionId: string) => {
     if (favoritesState.value[questionId]) {
-      delete favoritesState.value[questionId]
+      const { [questionId]: _, ...rest } = favoritesState.value
+      favoritesState.value = rest
     } else {
       favoritesState.value[questionId] = true
     }
@@ -51,7 +56,8 @@ export const useFavorites = () => {
 
   // Remove from favorites
   const removeFavorite = (questionId: string) => {
-    delete favoritesState.value[questionId]
+    const { [questionId]: _, ...rest } = favoritesState.value
+    favoritesState.value = rest
   }
 
   // Get all favorite question IDs

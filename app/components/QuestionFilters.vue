@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DifficultyLevel, FilterStatus } from '~/composables/useQuestionFilters'
+import type { DifficultyLevel } from '~/types'
 
 interface Props {
   availableTags: string[]
@@ -68,19 +68,14 @@ const isDifficultySelected = (value: DifficultyLevel) => {
       </div>
     </UFormGroup>
 
-    <UFormGroup :label="t('filters.tags.label')">
+    <UFormGroup :label="selectedTags.length > 0 ? `${t('filters.tags.label')} (${selectedTags.length})` : t('filters.tags.label')">
       <USelectMenu
         v-model="selectedTags"
         :options="tagOptions"
         multiple
         searchable
         :placeholder="t('filters.tags.placeholder')"
-      >
-        <template #label>
-          <span v-if="selectedTags.length === 0">{{ t('filters.tags.placeholder') }}</span>
-          <span v-else>{{ selectedTags.length }} {{ t('filters.tags.selected') }}</span>
-        </template>
-      </USelectMenu>
+      />
     </UFormGroup>
 
     <UFormGroup :label="t('filters.status.label')">

@@ -1,3 +1,4 @@
+/* eslint-disable no-console, no-unused-vars, @typescript-eslint/no-unused-vars */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';

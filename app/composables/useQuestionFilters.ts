@@ -1,17 +1,5 @@
-import type { ProgressStatus } from './useQuestionProgress'
-
-export type DifficultyLevel = 'easy' | 'medium' | 'hard'
-export type FilterStatus = 'all' | 'not-seen' | 'seen' | 'mastered'
-
-interface Question {
-  id: string | number
-  meta: {
-    title: string
-    difficulty?: DifficultyLevel
-    tags?: string[]
-    category?: string
-  }
-}
+import type { Question, DifficultyLevel, FilterStatus } from '~/types'
+import type { LocationQueryValue } from 'vue-router'
 
 const normalizeString = (str: string | undefined): string => {
   if (!str) return ''
@@ -21,10 +9,15 @@ const normalizeString = (str: string | undefined): string => {
     .replace(/[\u0300-\u036f]/g, '')
 }
 
-const parseQueryArray = (value: string | string[] | undefined): string[] => {
+const parseQueryArray = (value: LocationQueryValue | LocationQueryValue[]): string[] => {
   if (!value) return []
-  if (Array.isArray(value)) return value
-  return value.split(',').filter(Boolean)
+  if (Array.isArray(value)) {
+    return value.filter((v): v is string => v !== null)
+  }
+  if (typeof value === 'string') {
+    return value.split(',').filter(Boolean)
+  }
+  return []
 }
 
 export const useQuestionFilters = () => {
@@ -41,10 +34,10 @@ export const useQuestionFilters = () => {
 
   if (import.meta.client) {
     searchQuery.value = (route.query.search as string) || ''
-    selectedDifficulties.value = parseQueryArray(route.query.difficulty) as DifficultyLevel[]
-    selectedTags.value = parseQueryArray(route.query.tags)
+    selectedDifficulties.value = parseQueryArray(route.query.difficulty as LocationQueryValue | LocationQueryValue[]) as DifficultyLevel[]
+    selectedTags.value = parseQueryArray(route.query.tags as LocationQueryValue | LocationQueryValue[])
     selectedStatus.value = (route.query.status as FilterStatus) || 'all'
-    showOnlyFavorites.value = route.query.favorites === 'true'
+    showOnlyFavorites.value = Boolean(route.query.favorites === 'true')
   }
 
   const updateURL = () => {
@@ -90,7 +83,7 @@ export const useQuestionFilters = () => {
 
     const tagsMatch = question.meta?.tags?.some((tag: string) =>
       normalizeString(tag).includes(normalizedQuery)
-    )
+    ) ?? false
 
     return titleMatch || tagsMatch
   }

@@ -39,7 +39,11 @@ export const useQuizMode = () => {
   // Sync mode to localStorage on changes (client-side only)
   if (process.client) {
     watch(mode, (newValue) => {
-      localStorage.setItem('quiz-mode', JSON.stringify(newValue))
+      try {
+        localStorage.setItem('quiz-mode', JSON.stringify(newValue))
+      } catch {
+        // Silently fail in private/incognito mode or when storage is full
+      }
     })
   }
 

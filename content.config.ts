@@ -1,7 +1,7 @@
 import { defineContentConfig, defineCollection, z } from "@nuxt/content";
 
-// Common schema for all content
-const commonSchema = z.object({
+// Common schema for all content (reserved for future use)
+const _commonSchema = z.object({
   id: z.number().or(z.string()),
   title: z.string(),
   slug: z.string(),

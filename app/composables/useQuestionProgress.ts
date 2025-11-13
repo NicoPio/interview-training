@@ -34,7 +34,11 @@ export const useQuestionProgress = () => {
   // Sync state to localStorage on changes (client-side only)
   if (process.client) {
     watch(progressState, (newValue) => {
-      localStorage.setItem('question-progress', JSON.stringify(newValue))
+      try {
+        localStorage.setItem('question-progress', JSON.stringify(newValue))
+      } catch {
+        // Silently fail in private/incognito mode or when storage is full
+      }
     }, { deep: true })
   }
 
@@ -81,7 +85,8 @@ export const useQuestionProgress = () => {
 
   // Reset progress for a question
   const resetProgress = (questionId: string) => {
-    delete progressState.value[questionId]
+    const { [questionId]: _, ...rest } = progressState.value
+    progressState.value = rest
   }
 
   // Reset all progress

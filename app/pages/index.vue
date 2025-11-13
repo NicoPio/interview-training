@@ -1,14 +1,5 @@
 <script setup lang="ts">
-interface Question {
-  id: string
-  title: string
-  meta: {
-    slug: string
-    category: string
-    difficulty?: 'easy' | 'medium' | 'hard'
-    tags?: string[]
-  }
-}
+import type { Question } from '~/types'
 
 // Get current locale from i18n
 const { locale } = useI18n()
@@ -18,7 +9,6 @@ const localePath = useLocalePath()
 const { data: questions } = await useAsyncData(`questions-${locale.value}`, async () => {
   // Use the correct collection based on locale
   const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-  // @ts-ignore - queryCollection type doesn't recognize our custom collection names
   const allContent = await queryCollection(collectionName).all()
   return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
 }, {
@@ -28,13 +18,13 @@ const { data: questions } = await useAsyncData(`questions-${locale.value}`, asyn
 })
 
 // Composables
-const { getFavoriteCount } = useFavorites()
+const { getFavoriteCount: _getFavoriteCount } = useFavorites()
 const {
   searchQuery,
   selectedDifficulties,
-  selectedTags,
-  selectedStatus,
-  showOnlyFavorites,
+  selectedTags: _selectedTags,
+  selectedStatus: _selectedStatus,
+  showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
   getAllUniqueTags,
   getActiveFiltersCount,

@@ -1,15 +1,5 @@
 <script setup lang="ts">
-interface Question {
-  id: number
-  title: string
-  meta: {
-
-    slug: string
-    category: string
-    difficulty?: 'easy' | 'medium' | 'hard'
-  }
-  _path: string
-}
+import type { Question } from '~/types'
 
 interface Props {
   questions: Question[]

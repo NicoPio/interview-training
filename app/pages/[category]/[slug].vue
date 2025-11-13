@@ -1,14 +1,5 @@
 <script setup lang="ts">
-interface Question {
-  id: string
-  title: string
-  meta: {
-    slug: string
-    category: string
-    difficulty?: 'easy' | 'medium' | 'hard'
-    tags?: string[]
-  }
-}
+import type { Question } from '~/types'
 
 definePageMeta({
   layout: 'interview'
@@ -29,7 +20,6 @@ const { markAsSeen } = useQuestionProgress()
 const { data: question } = await useAsyncData(`question-${slug}-${locale.value}`, async () => {
   // Use the correct collection based on locale
   const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-  // @ts-ignore - queryCollection type doesn't recognize our custom collection names
   const allContent = await queryCollection(collectionName).all()
   const result = allContent.find((item) => {
     const q = item as unknown as Question
@@ -52,14 +42,13 @@ if (!question.value) {
 // Mark as seen when question is viewed
 onMounted(() => {
   if (question.value) {
-    markAsSeen(question.value.id)
+    markAsSeen(String(question.value.id))
   }
 })
 
 // Fetch all questions for navigation
 const { data: allQuestions } = await useAsyncData(`all-questions-${locale.value}`, async () => {
   const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-  // @ts-ignore
   const allContent = await queryCollection(collectionName).all()
   return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
 }, {
@@ -143,7 +132,7 @@ useHead({
 
     <!-- Question Card -->
     <QuestionCard
-      :id="Number(question.id)" :title="question.title" :difficulty="question.meta.difficulty"
+      :id="Number(question.id)" :title="question.title ?? question.meta.title" :difficulty="question.meta.difficulty"
       :category="question.meta.category" :slug="question.meta.slug">
       <template #question>
         <!-- Question is already in the title, so we show a brief intro or nothing -->

@@ -33,7 +33,11 @@ export const useAnswerRevealState = () => {
   // Sync to localStorage on changes (client-side only)
   if (process.client) {
     watch(revealState, (newValue) => {
-      localStorage.setItem('answer-reveal-state', JSON.stringify(newValue))
+      try {
+        localStorage.setItem('answer-reveal-state', JSON.stringify(newValue))
+      } catch {
+        // Silently fail in private/incognito mode or when storage is full
+      }
     }, { deep: true })
   }
 
@@ -69,7 +73,8 @@ export const useAnswerRevealState = () => {
 
   // Reset reveal state for a question
   const resetRevealState = (questionId: string) => {
-    delete revealState.value[questionId]
+    const { [questionId]: _, ...rest } = revealState.value
+    revealState.value = rest
   }
 
   // Get global statistics
@@ -79,8 +84,8 @@ export const useAnswerRevealState = () => {
     const questionsRevealed = allStates.filter(s => s.revealCount > 0).length
 
     const timesToReveal = allStates
-      .filter(s => s.timeToReveal !== undefined)
-      .map(s => s.timeToReveal!)
+      .filter((s): s is typeof s & { timeToReveal: number } => s.timeToReveal !== undefined)
+      .map(s => s.timeToReveal)
 
     const avgTimeToReveal = timesToReveal.length > 0
       ? timesToReveal.reduce((sum, time) => sum + time, 0) / timesToReveal.length

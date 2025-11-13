@@ -47,11 +47,13 @@ const isMastered = computed(() => progress.value.status === 'mastered')
 const { space } = useMagicKeys()
 
 // Handle keyboard shortcuts
-whenever(space!, () => {
-  if (import.meta.client && !isQuizMode.value) {
-    toggleAnswer()
-  }
-})
+if (space) {
+  whenever(space, () => {
+    if (import.meta.client && !isQuizMode.value) {
+      toggleAnswer()
+    }
+  })
+}
 
 
 // Quiz mode timer logic

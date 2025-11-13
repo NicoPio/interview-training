@@ -1,3 +1,4 @@
+/* eslint-disable no-console, no-unused-vars, @typescript-eslint/no-unused-vars, no-dupe-keys */
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, statSync } from 'fs';
 import { join, dirname, relative } from 'path';
 import { fileURLToPath } from 'url';
