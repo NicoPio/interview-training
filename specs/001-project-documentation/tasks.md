@@ -99,21 +99,21 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T020 [US1] Verify homepage displays all questions sorted by ID in app/pages/index.vue
-- [ ] T021 [US1] Verify difficulty badges display correct colors (easy=green, medium=yellow, hard=red) in app/pages/index.vue
-- [ ] T022 [US1] Verify up to 3 tags are displayed per question card in app/pages/index.vue
-- [ ] T023 [US1] Verify stats section shows accurate counts by difficulty in app/pages/index.vue
-- [ ] T024 [US1] Test question card click navigation to detail pages from app/pages/index.vue
+- [x] T020 [US1] Verify homepage displays all questions sorted by ID in app/pages/index.vue
+- [x] T021 [US1] Verify difficulty badges display correct colors (easy=green, medium=yellow, hard=red) in app/pages/index.vue
+- [x] T022 [US1] Verify up to 3 tags are displayed per question card in app/pages/index.vue
+- [x] T023 [US1] Verify stats section shows accurate counts by difficulty in app/pages/index.vue
+- [x] T024 [US1] Test question card click navigation to detail pages from app/pages/index.vue
 
 ### Component Testing
 
-- [ ] T025 [P] [US1] Write unit tests for QuestionCard component in tests/components/QuestionCard.spec.ts
-- [ ] T026 [P] [US1] Write integration test for homepage question list rendering in tests/pages/index.spec.ts
+- [ ] T025 [P] [US1] Write unit tests for QuestionCard component in tests/components/QuestionCard.spec.ts (SKIPPED)
+- [ ] T026 [P] [US1] Write integration test for homepage question list rendering in tests/pages/index.spec.ts (SKIPPED)
 
 ### Documentation
 
-- [ ] T027 [P] [US1] Document question content authoring workflow in documentation/content-authoring.md
-- [ ] T028 [P] [US1] Create guide for adding new categories in documentation/content-authoring.md
+- [ ] T027 [P] [US1] Document question content authoring workflow in documentation/content-authoring.md (SKIPPED)
+- [ ] T028 [P] [US1] Create guide for adding new categories in documentation/content-authoring.md (SKIPPED)
 
 ---
 
@@ -125,22 +125,22 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T029 [US2] Verify answer reveal button functionality in app/components/QuestionCard.vue
-- [ ] T030 [US2] Verify 300ms reveal animation smoothness in app/components/QuestionCard.vue
-- [ ] T031 [US2] Verify answer section scrolls into viewport after reveal in app/components/QuestionCard.vue
-- [ ] T032 [US2] Verify spacebar keyboard shortcut toggles answer in app/components/QuestionCard.vue
-- [ ] T033 [US2] Verify reveal statistics (count, time-to-reveal) display correctly in app/components/QuestionCard.vue
+- [x] T029 [US2] Verify answer reveal button functionality in app/components/QuestionCard.vue
+- [x] T030 [US2] Verify 300ms reveal animation smoothness in app/components/QuestionCard.vue
+- [x] T031 [US2] Verify answer section scrolls into viewport after reveal in app/components/QuestionCard.vue
+- [x] T032 [US2] Verify spacebar keyboard shortcut toggles answer in app/components/QuestionCard.vue
+- [x] T033 [US2] Verify reveal statistics (count, time-to-reveal) display correctly in app/components/QuestionCard.vue
 
 ### Composable Testing
 
-- [ ] T034 [P] [US2] Write unit tests for useAnswerRevealState composable in tests/composables/useAnswerRevealState.spec.ts
-- [ ] T035 [P] [US2] Test localStorage persistence of reveal state in tests/composables/useAnswerRevealState.spec.ts
-- [ ] T036 [P] [US2] Test time-to-reveal calculation accuracy in tests/composables/useAnswerRevealState.spec.ts
+- [x] T034 [P] [US2] Write unit tests for useAnswerRevealState composable in tests/composables/useAnswerRevealState.spec.ts
+- [x] T035 [P] [US2] Test localStorage persistence of reveal state in tests/composables/useAnswerRevealState.spec.ts
+- [x] T036 [P] [US2] Test time-to-reveal calculation accuracy in tests/composables/useAnswerRevealState.spec.ts
 
 ### Edge Cases
 
-- [ ] T037 [US2] Test reveal behavior when localStorage is unavailable in tests/composables/useAnswerRevealState.spec.ts
-- [ ] T038 [US2] Test rapid reveal/hide toggling for race conditions in tests/components/QuestionCard.spec.ts
+- [x] T037 [US2] Test reveal behavior when localStorage is unavailable in tests/composables/useAnswerRevealState.spec.ts
+- [ ] T038 [US2] Test rapid reveal/hide toggling for race conditions in tests/components/QuestionCard.spec.ts (SKIPPED)
 
 ---
 
@@ -152,23 +152,23 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T039 [US3] Verify "Mark as Mastered" button toggles correctly in app/components/QuestionCard.vue
-- [ ] T040 [US3] Verify automatic "seen" status on first page view in app/pages/[category]/[slug].vue
-- [ ] T041 [US3] Verify progress bar calculations on homepage in app/components/ProgressBar.vue
-- [ ] T042 [US3] Verify progress percentage formula: (viewed + mastered) / total * 100 in app/composables/useQuestionProgress.ts
-- [ ] T043 [US3] Verify mastery percentage formula: mastered / total * 100 in app/composables/useQuestionProgress.ts
+- [x] T039 [US3] Verify "Mark as Mastered" button toggles correctly in app/components/QuestionCard.vue
+- [x] T040 [US3] Verify automatic "seen" status on first page view in app/pages/[category]/[slug].vue
+- [x] T041 [US3] Verify progress bar calculations on homepage in app/components/ProgressBar.vue
+- [x] T042 [US3] Verify progress percentage formula: (viewed + mastered) / total * 100 in app/composables/useQuestionProgress.ts
+- [x] T043 [US3] Verify mastery percentage formula: mastered / total * 100 in app/composables/useQuestionProgress.ts
 
 ### Composable Testing
 
-- [ ] T044 [P] [US3] Write unit tests for useQuestionProgress composable in tests/composables/useQuestionProgress.spec.ts
-- [ ] T045 [P] [US3] Test state transitions: not-seen → seen → mastered ↔ seen in tests/composables/useQuestionProgress.spec.ts
-- [ ] T046 [P] [US3] Test view count incrementation in tests/composables/useQuestionProgress.spec.ts
-- [ ] T047 [P] [US3] Test localStorage persistence and restoration in tests/composables/useQuestionProgress.spec.ts
+- [x] T044 [P] [US3] Write unit tests for useQuestionProgress composable in tests/composables/useQuestionProgress.spec.ts
+- [x] T045 [P] [US3] Test state transitions: not-seen → seen → mastered ↔ seen in tests/composables/useQuestionProgress.spec.ts
+- [x] T046 [P] [US3] Test view count incrementation in tests/composables/useQuestionProgress.spec.ts
+- [x] T047 [P] [US3] Test localStorage persistence and restoration in tests/composables/useQuestionProgress.spec.ts
 
 ### Component Testing
 
-- [ ] T048 [P] [US3] Write unit tests for ProgressBar component in tests/components/ProgressBar.spec.ts
-- [ ] T049 [P] [US3] Test progress bar visual rendering with mock data in tests/components/ProgressBar.spec.ts
+- [ ] T048 [P] [US3] Write unit tests for ProgressBar component in tests/components/ProgressBar.spec.ts (SKIPPED)
+- [ ] T049 [P] [US3] Test progress bar visual rendering with mock data in tests/components/ProgressBar.spec.ts (SKIPPED)
 
 ---
 
@@ -180,17 +180,17 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Verification Tasks
 
-- [ ] T050 [US4] Verify favorite button toggle functionality in app/components/QuestionCard.vue
-- [ ] T051 [US4] Verify filled heart icon display when favorited in app/components/QuestionCard.vue
-- [ ] T052 [US4] Verify favorites filter on homepage in app/pages/index.vue
-- [ ] T053 [US4] Verify favorites persist across page refreshes in app/composables/useFavorites.ts
+- [x] T050 [US4] Verify favorite button toggle functionality in app/components/QuestionCard.vue
+- [x] T051 [US4] Verify filled heart icon display when favorited in app/components/QuestionCard.vue
+- [x] T052 [US4] Verify favorites filter on homepage in app/pages/index.vue
+- [x] T053 [US4] Verify favorites persist across page refreshes in app/composables/useFavorites.ts
 
 ### Composable Testing
 
-- [ ] T054 [P] [US4] Write unit tests for useFavorites composable in tests/composables/useFavorites.spec.ts
-- [ ] T055 [P] [US4] Test toggleFavorite, addFavorite, removeFavorite methods in tests/composables/useFavorites.spec.ts
-- [ ] T056 [P] [US4] Test getFavoriteCount and getFavoriteIds computed properties in tests/composables/useFavorites.spec.ts
-- [ ] T057 [P] [US4] Test localStorage sync for favorites in tests/composables/useFavorites.spec.ts
+- [x] T054 [P] [US4] Write unit tests for useFavorites composable in tests/composables/useFavorites.spec.ts
+- [x] T055 [P] [US4] Test toggleFavorite, addFavorite, removeFavorite methods in tests/composables/useFavorites.spec.ts
+- [x] T056 [P] [US4] Test getFavoriteCount and getFavoriteIds computed properties in tests/composables/useFavorites.spec.ts
+- [x] T057 [P] [US4] Test localStorage sync for favorites in tests/composables/useFavorites.spec.ts
 
 ---
 
