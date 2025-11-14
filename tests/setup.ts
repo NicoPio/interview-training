@@ -41,6 +41,15 @@ global.computed = computed
 // @ts-expect-error - Mocking Nuxt auto-imports
 global.nextTick = nextTick
 
+// Mock useI18n from Nuxt i18n module
+// @ts-expect-error - Mocking Nuxt auto-imports
+global.useI18n = vi.fn(() => ({
+  t: (key: string) => key,
+  locale: ref('fr'),
+  locales: ref(['fr', 'en']),
+  setLocale: vi.fn(),
+}))
+
 // Reset state between tests
 beforeEach(() => {
   stateStore.clear()

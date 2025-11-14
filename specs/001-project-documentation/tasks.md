@@ -309,7 +309,7 @@ Tasks are organized by **User Story** (priority-based) to enable:
 - [ ] T102 Measure homepage load time on 3G connection (target: <3s)
 - [ ] T103 Measure filter update response time (target: <500ms)
 - [ ] T104 Verify bundle size <500KB gzipped with `nuxt analyze`
-- [ ] T105 Test static generation builds all 52+ pages without errors with `nuxt generate`
+- [x] T105 Test static generation builds all 52+ pages without errors with `nuxt generate`
 
 ### Accessibility Verification
 
@@ -349,8 +349,8 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Code Quality
 
-- [ ] T127 Run TypeScript type checking with `nuxt typecheck` (target: zero errors)
-- [ ] T128 Run ESLint with `npm run lint` (target: zero warnings)
+- [x] T127 Run TypeScript type checking with `nuxt typecheck` (target: zero errors)
+- [x] T128 Run ESLint with `npm run lint` (target: zero warnings)
 - [ ] T129 Review code comments and add JSDoc where missing
 - [ ] T130 Refactor any components exceeding 200 lines
 
@@ -362,8 +362,8 @@ Tasks are organized by **User Story** (priority-based) to enable:
 
 ### Testing Infrastructure
 
-- [ ] T131 [P] Set up E2E testing with Playwright in tests/e2e/
-- [ ] T132 [P] Write E2E tests for critical user flows in tests/e2e/
+- [x] T131 [P] Set up E2E testing with Playwright in tests/e2e/
+- [x] T132 [P] Write E2E tests for critical user flows in tests/e2e/
 - [ ] T133 [P] Set up visual regression testing with Percy or Chromatic
 
 ### Performance Optimizations
