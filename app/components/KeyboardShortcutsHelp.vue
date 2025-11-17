@@ -23,24 +23,21 @@ const shortcuts = [
 </script>
 
 <template>
-  <UModal v-model:open="showHelp">
-    <UCard>
-      <template #header>
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-            Raccourcis clavier
-          </h2>
-          <UButton
-            icon="i-heroicons-x-mark"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            @click="showHelp = false"
-          />
-        </div>
-      </template>
+  <UModal
+    v-model:open="showHelp"
+    title="Raccourcis clavier"
+    :close="{ color: 'neutral', variant: 'ghost' }"
+  >
+    <UButton
+      icon="i-heroicons-question-mark-circle"
+      color="neutral"
+      variant="ghost"
+      size="sm"
+      label="Aide"
+    />
 
-      <div class="space-y-6">
+    <template #body>
+      <div class="space-y-6 p-4">
         <div v-for="section in shortcuts" :key="section.category">
           <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
             {{ section.category }}
@@ -63,19 +60,19 @@ const shortcuts = [
           </div>
         </div>
       </div>
+    </template>
 
-      <template #footer>
-        <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-          <span>Les raccourcis sont désactivés dans les champs de saisie</span>
-          <UButton
-            color="primary"
-            size="sm"
-            @click="showHelp = false"
-          >
-            Fermer
-          </UButton>
-        </div>
-      </template>
-    </UCard>
+    <template #footer>
+      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 w-full p-4 border-t dark:border-gray-800">
+        <span>Les raccourcis sont désactivés dans les champs de saisie</span>
+        <UButton
+          color="primary"
+          size="sm"
+          @click="showHelp = false"
+        >
+          Fermer
+        </UButton>
+      </div>
+    </template>
   </UModal>
 </template>

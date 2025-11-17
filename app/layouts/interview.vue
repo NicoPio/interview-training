@@ -48,7 +48,7 @@ const { showHelp } = useKeyboardShortcuts()
                 class="lg:hidden"
                 @click="toggleSidebar"
               />
-              <NuxtLink to="/" class="flex items-center gap-2">
+              <NuxtLink to="/" class="flex items-center gap-2" active-class="" exact-active-class="">
                 <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" />
                 <span class="font-bold text-lg hidden sm:block">JS Interview Prep</span>
               </NuxtLink>
@@ -148,7 +148,7 @@ const { showHelp } = useKeyboardShortcuts()
               using Nuxt 4 & Nuxt UI
             </p>
             <div class="flex items-center gap-4">
-              <NuxtLink to="/" class="hover:text-primary-500 transition-colors">
+              <NuxtLink to="/" class="hover:text-primary-500 transition-colors" active-class="" exact-active-class="">
                 Home
               </NuxtLink>
               <UButton

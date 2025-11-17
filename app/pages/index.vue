@@ -94,7 +94,7 @@ useHead({
     <header class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur dark:bg-gray-950/80 dark:border-gray-800">
       <div class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
-          <NuxtLink to="/" class="flex items-center gap-2">
+          <NuxtLink to="/" class="flex items-center gap-2" active-class="" exact-active-class="">
             <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" />
             <span class="font-bold text-lg">JS Interview Prep</span>
           </NuxtLink>
