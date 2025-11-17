@@ -24,13 +24,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: package-lock.json
 
       - name: Upgrade npm
         run: npm install -g npm@latest
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Clean install (workaround oxc-parser)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Run ESLint
         run: npm run lint
@@ -54,13 +55,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: package-lock.json
 
       - name: Upgrade npm
         run: npm install -g npm@latest
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Clean install (workaround oxc-parser)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Run unit tests
         run: npm run test -- --run
@@ -87,13 +89,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: package-lock.json
 
       - name: Upgrade npm
         run: npm install -g npm@latest
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Clean install (workaround oxc-parser)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Generate static site
         run: npm run generate
