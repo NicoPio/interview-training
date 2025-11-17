@@ -5,7 +5,7 @@ export const useKeyboardShortcuts = () => {
   const localePath = useLocalePath()
 
   // Get magic keys
-  const { shift, slash, h, escape, arrowLeft, arrowRight, question } = useMagicKeys()
+  const { slash, h, escape, arrowLeft, arrowRight, question } = useMagicKeys()
 
   // State for help modal
   const showHelp = useState('keyboard-shortcuts-help', () => false)
