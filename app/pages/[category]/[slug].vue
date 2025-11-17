@@ -107,8 +107,15 @@ useSeoMeta({
   description: `${question.value.title} - JavaScript Interview Question #${question.value.id}`,
   ogTitle: question.value.title,
   ogDescription: `Prepare for your JavaScript interview with this ${question.value.meta.difficulty} level question.`,
-  ogImage: '/og-image.png',
-  twitterCard: 'summary_large_image'
+  ogUrl: canonicalUrl.value,
+  ogType: 'article',
+  ogImage: `${siteUrl}/og-image.svg`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  twitterCard: 'summary_large_image',
+  twitterTitle: question.value.title,
+  twitterDescription: `${question.value.meta.difficulty} level JavaScript interview question #${question.value.id}`,
+  twitterImage: `${siteUrl}/og-image.svg`
 })
 
 // Breadcrumb structured data + canonical

@@ -75,7 +75,18 @@ const canonicalUrl = computed(() => {
 
 useSeoMeta({
   title: 'JS Interview Prep - Master JavaScript Interview Questions',
-  description: 'Practice JavaScript interview questions with interactive flashcards. Prepare for your next technical interview with curated questions covering ES6, closures, promises, and more.'
+  description: 'Practice JavaScript interview questions with interactive flashcards. Prepare for your next technical interview with curated questions covering ES6, closures, promises, and more.',
+  ogTitle: 'JS Interview Prep - Master JavaScript Interview Questions',
+  ogDescription: 'Interactive flashcard system with 26+ JavaScript interview questions. Track your progress, test yourself with quiz mode, and ace your next technical interview.',
+  ogUrl: canonicalUrl.value,
+  ogType: 'website',
+  ogImage: `${siteUrl}/og-image.svg`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'JS Interview Prep - Master JavaScript Interview Questions',
+  twitterDescription: '26+ JavaScript interview questions with interactive flashcards, progress tracking, and quiz mode',
+  twitterImage: `${siteUrl}/og-image.svg`
 })
 
 useHead({
