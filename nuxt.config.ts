@@ -18,8 +18,8 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
     "@nuxt/ui",
     "@vueuse/nuxt",
-    "motion-v/nuxt",
     "@nuxtjs/i18n",
+    "@nuxtjs/sitemap",
     'nuxt-studio'
   ],
   i18n: {
@@ -43,6 +43,20 @@ export default defineNuxtConfig({
   // GitHub Pages base URL (uncomment and update if deploying to a repo page)
   app: {
     baseURL: '/interview-training/'
+  },
+
+  // Sitemap configuration
+  site: {
+    url: 'https://nicopio.github.io/interview-training',
+    name: 'JS Interview Prep'
+  },
+
+  sitemap: {
+    strictNuxtContentPaths: true,
+    exclude: [
+      '/_studio/**',
+      '/api/**'
+    ]
   },
   content: {
     preview: {

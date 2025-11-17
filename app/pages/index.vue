@@ -66,9 +66,25 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
   hard: 'error'
 }
 
+// SEO
+const siteUrl = 'https://nicopio.github.io/interview-training'
+const canonicalUrl = computed(() => {
+  const path = locale.value === 'fr' ? '/' : '/en'
+  return `${siteUrl}${path}`
+})
+
 useSeoMeta({
   title: 'JS Interview Prep - Master JavaScript Interview Questions',
   description: 'Practice JavaScript interview questions with interactive flashcards. Prepare for your next technical interview with curated questions covering ES6, closures, promises, and more.'
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: canonicalUrl.value
+    }
+  ]
 })
 </script>
 

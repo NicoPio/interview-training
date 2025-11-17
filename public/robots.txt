@@ -1,2 +1,10 @@
-User-Agent: *
-Disallow:
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nicopio.github.io/interview-training/sitemap.xml
+
+# Disallow admin routes
+Disallow: /_studio/
+Disallow: /api/

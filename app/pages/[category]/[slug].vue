@@ -96,6 +96,12 @@ const nextQuestion = computed(() => {
 })
 
 // SEO Meta tags
+const siteUrl = 'https://nicopio.github.io/interview-training'
+const canonicalUrl = computed(() => {
+  const langPrefix = locale.value === 'fr' ? '' : '/en'
+  return `${siteUrl}${langPrefix}/${category}/${slug}`
+})
+
 useSeoMeta({
   title: question.value.title,
   description: `${question.value.title} - JavaScript Interview Question #${question.value.id}`,
@@ -105,8 +111,14 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-// Breadcrumb structured data
+// Breadcrumb structured data + canonical
 useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: canonicalUrl.value
+    }
+  ],
   script: [
     {
       type: 'application/ld+json',
