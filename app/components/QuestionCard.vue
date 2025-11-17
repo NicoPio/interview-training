@@ -186,7 +186,7 @@ const shareUrl = computed(() => {
           Raccourci:
           <kbd
             class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700"
-          >Espace</kbd
+            >Espace</kbd
           >
         </p>
 
