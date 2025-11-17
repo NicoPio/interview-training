@@ -13,6 +13,7 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 **Statut**: ✅ COMPLÉTÉ
 
 **Implémentation**:
+
 - Intégration `@nuxtjs/color-mode` (inclus dans Nuxt UI)
 - Toggle dans le header avec `UColorModeButton`
 - Styles adaptés pour tous les composants (cards, modals, etc.)
@@ -20,10 +21,12 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 - Persistance du choix utilisateur
 
 **Fichiers concernés**:
+
 - `app/layouts/interview.vue` - Toggle button
 - Tous les composants utilisent les classes Tailwind `dark:`
 
 **Critères de succès**: ✅
+
 - Transition fluide entre modes
 - Persistance du choix
 
@@ -34,6 +37,7 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 **Statut**: ✅ COMPLÉTÉ
 
 **Implémentation**:
+
 - Animations avec Motion-v et Tailwind transitions
 - Page transitions fluides
 - Card hover effects avec `hover:scale-[1.02]`
@@ -42,11 +46,13 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 - Animations de révélation de réponse
 
 **Fichiers concernés**:
+
 - `app/components/QuestionCard.vue` - Reveal animations
 - `app/pages/index.vue` - Staggered card animations
 - `app/layouts/interview.vue` - Sidebar transitions
 
 **Critères de succès**: ✅
+
 - Performances maintenues (60fps)
 - Respect de `prefers-reduced-motion` (Tailwind par défaut)
 
@@ -57,12 +63,14 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 **Statut**: ✅ COMPLÉTÉ
 
 **Implémentation**:
+
 - Navigation complète au clavier via `useMagicKeys` (VueUse)
 - Composable `useKeyboardShortcuts()` centralisé
 - Modal d'aide accessible via `?`
 - Désactivation contextuelle (pas dans les inputs)
 
 **Raccourcis disponibles**:
+
 - `←` / `→` : Question précédente/suivante
 - `/` : Focus sur la recherche
 - `Espace` : Révéler/masquer la réponse
@@ -71,17 +79,20 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 - `Esc` : Fermer les modales
 
 **Fichiers concernés**:
+
 - `app/composables/useKeyboardShortcuts.ts` - Logique globale
 - `app/components/KeyboardShortcutsHelp.vue` - Modal d'aide
 - `app/components/QuestionCard.vue` - Shortcut Espace
 - `app/pages/[category]/[slug].vue` - Navigation arrows
 
 **Critères de succès**: ✅
+
 - Shortcuts intuitifs
 - Pas de conflits avec le navigateur
 - Help modal accessible
 
 **Bug fixes récents** (17 nov 2025):
+
 - ✅ Modal d'aide toujours visible → Corrigé (structure UModal v4)
 - ✅ Accessibilité Dialog → Ajout du prop `title`
 
@@ -94,17 +105,20 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 **Implémentation**:
 
 ### 1. Bouton de partage dans QuestionCard
+
 - ✅ Composant `ShareButton.vue` avec dropdown
 - ✅ Copy link to clipboard (VueUse `useClipboard`)
 - ✅ Feedback visuel (bouton devient "Copié!" en vert)
 - ✅ Intégration dans le footer de QuestionCard
 
 ### 2. Presets sociaux
+
 - ✅ **Twitter**: Intent URL avec titre et lien pré-remplis
 - ✅ **LinkedIn**: Share URL avec lien pré-rempli
 - ✅ Popup centrées (550x420)
 
 ### 3. Open Graph Meta Tags
+
 - ✅ **Pages de questions** (`/[category]/[slug]`):
   - `ogTitle`: Titre de la question
   - `ogDescription`: Description avec difficulté
@@ -122,6 +136,7 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
   - Twitter Card: `summary_large_image`
 
 ### 4. OG Image
+
 - ✅ **Placeholder SVG créé** (`/public/og-image.svg`)
   - Dimensions: 1200x630 pixels
   - Design: Gradient purple-blue avec titre, sous-titre, stats
@@ -134,6 +149,7 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
   - Tests et validation
 
 **Fichiers concernés**:
+
 - `app/components/ShareButton.vue` - Composant de partage
 - `app/components/QuestionCard.vue` - Intégration ShareButton
 - `app/pages/[category]/[slug].vue` - OG meta tags questions
@@ -142,6 +158,7 @@ La Phase 6 "Expérience utilisateur avancée" de la roadmap est maintenant **100
 - `public/OG-IMAGE-GUIDE.md` - Documentation
 
 **Critères de succès**: ✅
+
 - Rich previews fonctionnels (à tester après déploiement)
 - Feedback visuel au copy
 - URLs shareables sur Twitter/LinkedIn
@@ -171,18 +188,18 @@ Après déploiement en production, tester les rich previews avec:
 
 ## 📊 Métriques de succès Phase 6
 
-| Critère | Objectif | Statut |
-|---------|----------|--------|
-| Dark mode fonctionnel | ✅ | ✅ PASS |
-| Persistance préférence | ✅ | ✅ PASS |
-| Animations 60fps | ✅ | ✅ PASS |
-| Keyboard shortcuts | ✅ | ✅ PASS |
-| Help modal accessible | ✅ | ✅ PASS |
-| ShareButton intégré | ✅ | ✅ PASS |
-| Copy to clipboard | ✅ | ✅ PASS |
-| Twitter/LinkedIn presets | ✅ | ✅ PASS |
-| OG meta tags complets | ✅ | ✅ PASS |
-| OG image créée | ✅ (SVG) | ✅ PASS |
+| Critère                  | Objectif | Statut  |
+| ------------------------ | -------- | ------- |
+| Dark mode fonctionnel    | ✅       | ✅ PASS |
+| Persistance préférence   | ✅       | ✅ PASS |
+| Animations 60fps         | ✅       | ✅ PASS |
+| Keyboard shortcuts       | ✅       | ✅ PASS |
+| Help modal accessible    | ✅       | ✅ PASS |
+| ShareButton intégré      | ✅       | ✅ PASS |
+| Copy to clipboard        | ✅       | ✅ PASS |
+| Twitter/LinkedIn presets | ✅       | ✅ PASS |
+| OG meta tags complets    | ✅       | ✅ PASS |
+| OG image créée           | ✅ (SVG) | ✅ PASS |
 
 ---
 

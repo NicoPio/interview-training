@@ -1,16 +1,13 @@
 ---
 id: 18
 slug: what-are-prototypes-in-javascript
-title: "What are prototypes in JavaScript?"
+title: 'What are prototypes in JavaScript?'
 category: javascript
 difficulty: easy
-tags: ["types", "typing", "null", "undefined", "this"]
+tags: ['types', 'typing', 'null', 'undefined', 'this']
 ---
 
 # What are prototypes in JavaScript?
-
-
-
 
 - Every object in JavaScript has a prototype, which acts as a blueprint for shared properties and methods.
 - When you try to access a property or method on an object, JavaScript first checks the object itself.
@@ -20,21 +17,21 @@ tags: ["types", "typing", "null", "undefined", "this"]
 
 ```javascript
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 // Add a method to the prototype, shared by all Person objects:
 Person.prototype.greet = function () {
-  console.log("Hello, my name is " + this.name);
-};
+  console.log('Hello, my name is ' + this.name)
+}
 
 // Create two Person objects:
-const person1 = new Person("Alice");
-const person2 = new Person("Bob");
+const person1 = new Person('Alice')
+const person2 = new Person('Bob')
 
 // Both objects can access the greet method from the prototype:
-person1.greet(); // Output: "Hello, my name is Alice"
-person2.greet(); // Output: "Hello, my name is Bob"
+person1.greet() // Output: "Hello, my name is Alice"
+person2.greet() // Output: "Hello, my name is Bob"
 ```
 
 The `Person` function acts as a constructor to create objects with a `name` property.

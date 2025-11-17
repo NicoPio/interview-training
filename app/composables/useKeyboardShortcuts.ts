@@ -71,6 +71,6 @@ export const useKeyboardShortcuts = () => {
       arrowLeft,
       arrowRight,
       escape,
-    }
+    },
   }
 }

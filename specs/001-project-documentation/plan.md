@@ -19,6 +19,7 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 - **Static site generation** for GitHub Pages deployment (zero backend dependencies)
 
 **Technical Approach**:
+
 - Content as code (markdown files in git)
 - Client-side only state management (no backend API)
 - Composable architecture for reusable logic
@@ -29,6 +30,7 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 **Language/Version**: TypeScript 5.9.3 (strict mode) + Vue 3.5.22 (Composition API)
 
 **Primary Dependencies**:
+
 - **Nuxt 4.2.0**: Meta-framework with SSR, SSG, file-based routing, auto-imports
 - **Nuxt Content 3.8.0**: Markdown-based CMS with type-safe queries
 - **Nuxt UI 4.1.0**: Official component library (buttons, cards, badges, icons)
@@ -38,16 +40,19 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 - **@vueuse/nuxt 14.0.0**: Composable utilities (keyboard shortcuts, etc.)
 
 **Storage**:
+
 - **Content**: Static markdown files in `content/{locale}/{category}/` (read-only)
 - **User Data**: Browser localStorage (3 keys: favorites, progress, reveal-state)
 - **State**: Vue reactive state via Nuxt's `useState` composables
 
 **Testing**:
+
 - **Unit Testing**: Vitest (Nuxt Test Utils 3.20.1 available but not yet implemented)
 - **Type Checking**: TypeScript strict mode with zero `any` types
 - **Manual QA**: Browser-based testing across Chrome, Firefox, Safari, Edge
 
 **Target Platform**:
+
 - **Deployment**: GitHub Pages (static HTML/CSS/JS)
 - **Browsers**: Modern evergreen browsers (last 2 versions)
 - **Mobile**: Responsive design (320px minimum width)
@@ -56,6 +61,7 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 **Project Type**: Web application (Nuxt frontend, no backend)
 
 **Performance Goals**:
+
 - Homepage load: <2s on 4G connections
 - Filter updates: <500ms response time
 - Static generation: All 26+ routes pre-rendered at build time
@@ -63,6 +69,7 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 - Lighthouse scores: Performance 90+, Accessibility 95+
 
 **Constraints**:
+
 - No backend API or database (fully static)
 - No user accounts or authentication
 - No cross-device synchronization (localStorage only)
@@ -70,6 +77,7 @@ The JS Interview Prep application is a static-first, privacy-focused learning pl
 - GitHub Pages deployment (baseURL: `/interview-training/`)
 
 **Scale/Scope**:
+
 - Current: 26+ questions, 2 languages, 3 categories
 - Capacity: Architecture supports 1000+ questions without changes
 - Components: 8 major Vue components + 5 composables
@@ -164,6 +172,7 @@ This is a **web application** with a single Nuxt frontend and no backend. The st
 - **No `backend/` or `api/`**: Fully static, no server-side logic beyond SSR during build
 
 The structure is optimized for:
+
 1. **File-based routing**: Pages auto-generate routes
 2. **Auto-imports**: Components and composables available without imports
 3. **Type safety**: TypeScript throughout with Nuxt-generated type definitions
@@ -297,6 +306,7 @@ This section is not applicable as no constitution gates are enforced. However, d
 **Status**: N/A - No backend APIs
 
 The application is fully static with no backend API. All data interactions are:
+
 - **Read-only content**: Fetched from static markdown files at build time
 - **User data**: Stored and retrieved from browser localStorage
 - **No HTTP APIs**: No REST endpoints, GraphQL schemas, or WebSocket connections
@@ -368,12 +378,14 @@ This phase is **not executed** by the `/speckit.plan` command. To generate imple
 This will create `specs/001-project-documentation/tasks.md` with a prioritized, dependency-ordered list of implementation tasks derived from the specification and plan.
 
 **Expected Output**:
+
 - Breakdown of 71 functional requirements into actionable tasks
 - Task dependencies and parallel execution opportunities
 - Phase grouping for iterative implementation
 - Estimated complexity per task
 
 **Note**: For this documentation feature, tasks would focus on:
+
 - Completing missing documentation sections
 - Verifying existing implementation against spec
 - Adding missing tests
@@ -386,6 +398,7 @@ This will create `specs/001-project-documentation/tasks.md` with a prioritized, 
 After Phase 1 design, constitution gates should be re-evaluated. Since no constitution is defined for this project, this check is skipped.
 
 **If a constitution were defined**, this section would verify:
+
 - ✅ All mandatory sections present in artifacts
 - ✅ No violations of architectural principles
 - ✅ Test-first gates satisfied
@@ -404,9 +417,11 @@ After Phase 1 design, constitution gates should be re-evaluated. Since no consti
 ### Optional Refinements
 
 5. **Run consistency analysis**:
+
    ```bash
    /speckit.analyze
    ```
+
    Validates consistency across spec, plan, and data model.
 
 6. **Clarify underspecified areas**:
@@ -418,9 +433,11 @@ After Phase 1 design, constitution gates should be re-evaluated. Since no consti
 ### Proceed to Implementation
 
 7. **Generate implementation tasks**:
+
    ```bash
    /speckit.tasks
    ```
+
    Creates `tasks.md` with actionable task breakdown.
 
 8. **Execute implementation**:
@@ -435,21 +452,21 @@ This plan provides complete documentation of the JS Interview Prep application's
 
 ### ✅ Completed Artifacts
 
-| Artifact | Status | Description |
-|----------|--------|-------------|
-| `spec.md` | ✅ Complete | 8 user stories, 71 functional requirements, 20 success criteria |
-| `research.md` | ✅ Complete | Technical stack analysis, 10 technology decisions documented |
-| `data-model.md` | ✅ Complete | 6 entities, 5 composables, data flow diagrams, testing strategy |
-| `plan.md` | ✅ Complete | Implementation plan, project structure, architectural decisions |
-| `checklists/requirements.md` | ✅ Validated | Specification quality checklist (all items passed) |
+| Artifact                     | Status       | Description                                                     |
+| ---------------------------- | ------------ | --------------------------------------------------------------- |
+| `spec.md`                    | ✅ Complete  | 8 user stories, 71 functional requirements, 20 success criteria |
+| `research.md`                | ✅ Complete  | Technical stack analysis, 10 technology decisions documented    |
+| `data-model.md`              | ✅ Complete  | 6 entities, 5 composables, data flow diagrams, testing strategy |
+| `plan.md`                    | ✅ Complete  | Implementation plan, project structure, architectural decisions |
+| `checklists/requirements.md` | ✅ Validated | Specification quality checklist (all items passed)              |
 
 ### ⏸️ Pending Artifacts
 
-| Artifact | Status | Next Command |
-|----------|--------|--------------|
-| `tasks.md` | ⏸️ Pending | `/speckit.tasks` |
-| API contracts | N/A | No backend APIs |
-| `quickstart.md` | N/A | Documentation feature (not applicable) |
+| Artifact        | Status     | Next Command                           |
+| --------------- | ---------- | -------------------------------------- |
+| `tasks.md`      | ⏸️ Pending | `/speckit.tasks`                       |
+| API contracts   | N/A        | No backend APIs                        |
+| `quickstart.md` | N/A        | Documentation feature (not applicable) |
 
 ### 📊 Metrics
 
@@ -471,6 +488,7 @@ The JS Interview Prep application is **well-architected, fully documented, and p
 The static-first, privacy-focused architecture is **appropriate for the use case** and provides excellent performance, low hosting costs, and a simple deployment model.
 
 **Architecture Grade**: A (Excellent)
+
 - ✅ Clear separation of concerns
 - ✅ Type-safe throughout
 - ✅ Composable and reusable logic

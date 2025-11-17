@@ -1,15 +1,13 @@
 ---
 id: 25
 slug: what-is-the-difference-between-function-declarations-and-function-expressions
-title: "Quelle est la différence entre les déclarations de fonction et les expressions de fonction ?"
+title: 'Quelle est la différence entre les déclarations de fonction et les expressions de fonction ?'
 category: javascript
 difficulty: easy
-tags: ["variables","var","let","const","remontée"]
+tags: ['variables', 'var', 'let', 'const', 'remontée']
 ---
 
 # Quelle est la différence entre les déclarations de fonction et les expressions de fonction ?
-
-
 
 **Déclaration de fonction :**
 
@@ -21,7 +19,7 @@ tags: ["variables","var","let","const","remontée"]
 
 ```javascript
 function add(a, b) {
-  return a + b;
+  return a + b
 }
 ```
 
@@ -35,8 +33,8 @@ function add(a, b) {
 
 ```javascript
 var add = function (a, b) {
-  return a + b;
-};
+  return a + b
+}
 ```
 
 Dans cet Exemple, `add` is a variable that holds an anonymous fonction. Les déclarations de fonction sont remontées, tandis que les expressions de fonction ne sont pas remontées de la même manière. Si vous essayez d'appeler une expression de fonction avant sa définition, vous obtiendrez une erreur.

@@ -29,9 +29,12 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
     await page.waitForURL(/\/javascript\//)
 
     // Look for favorite/heart button
-    const favoriteButton = page.locator('button').filter({
-      hasText: /favori|favorite|heart|♥|❤/i,
-    }).or(page.locator('button[aria-label*="favori"], button[aria-label*="favorite"]'))
+    const favoriteButton = page
+      .locator('button')
+      .filter({
+        hasText: /favori|favorite|heart|♥|❤/i,
+      })
+      .or(page.locator('button[aria-label*="favori"], button[aria-label*="favorite"]'))
 
     if (await favoriteButton.first().isVisible()) {
       // Click to add to favorites
@@ -75,9 +78,12 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
     await page.goto('/')
 
     // Look for favorites filter
-    const favoritesFilter = page.locator('input[type="checkbox"]').filter({
-      hasText: /favori|favorite/i,
-    }).or(page.locator('label').filter({ hasText: /favori|favorite/i }))
+    const favoritesFilter = page
+      .locator('input[type="checkbox"]')
+      .filter({
+        hasText: /favori|favorite/i,
+      })
+      .or(page.locator('label').filter({ hasText: /favori|favorite/i }))
 
     if (await favoritesFilter.first().isVisible()) {
       await favoritesFilter.first().click()
@@ -129,9 +135,17 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
 
   test('should filter by difficulty level', async ({ page }) => {
     // Look for difficulty filter checkboxes
-    const easyCheckbox = page.locator('input[type="checkbox"]').filter({
-      hasText: /easy|facile/i,
-    }).or(page.locator('label').filter({ hasText: /easy|facile/i }).locator('input'))
+    const easyCheckbox = page
+      .locator('input[type="checkbox"]')
+      .filter({
+        hasText: /easy|facile/i,
+      })
+      .or(
+        page
+          .locator('label')
+          .filter({ hasText: /easy|facile/i })
+          .locator('input')
+      )
 
     if (await easyCheckbox.first().isVisible()) {
       // Get initial count
@@ -149,8 +163,7 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
       // Verify we can see difficulty indicators
       const pageContent = await page.content()
       const _hasEasy =
-        pageContent.toLowerCase().includes('easy') ||
-        pageContent.toLowerCase().includes('facile')
+        pageContent.toLowerCase().includes('easy') || pageContent.toLowerCase().includes('facile')
 
       console.log('✓ Difficulty filter works')
     } else {
@@ -208,7 +221,9 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
         // Combined filters should show fewer or equal results
         expect(afterBothCount).toBeLessThanOrEqual(afterSearchCount)
 
-        console.log(`✓ Combined filters: search (${afterSearchCount}) + difficulty (${afterBothCount})`)
+        console.log(
+          `✓ Combined filters: search (${afterSearchCount}) + difficulty (${afterBothCount})`
+        )
       }
     }
   })
@@ -226,8 +241,7 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
 
       // URL should contain query parameter
       const _hasQueryParam =
-        url.includes('?') &&
-        (url.includes('search') || url.includes('q') || url.includes('query'))
+        url.includes('?') && (url.includes('search') || url.includes('q') || url.includes('query'))
 
       console.log('✓ URL contains query parameter:', url)
 
@@ -290,8 +304,7 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
       // Look for badge/count indicator
       const pageContent = await page.content()
       const _hasBadge =
-        pageContent.includes('badge') ||
-        /\d+\s*(active|actif|filter)/i.test(pageContent)
+        pageContent.includes('badge') || /\d+\s*(active|actif|filter)/i.test(pageContent)
 
       console.log('✓ Checked for active filters badge')
     }

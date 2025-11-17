@@ -32,21 +32,27 @@ export const useAnswerRevealState = () => {
 
   // Sync to localStorage on changes (client-side only)
   if (process.client) {
-    watch(revealState, (newValue) => {
-      try {
-        localStorage.setItem('answer-reveal-state', JSON.stringify(newValue))
-      } catch {
-        // Silently fail in private/incognito mode or when storage is full
-      }
-    }, { deep: true })
+    watch(
+      revealState,
+      (newValue) => {
+        try {
+          localStorage.setItem('answer-reveal-state', JSON.stringify(newValue))
+        } catch {
+          // Silently fail in private/incognito mode or when storage is full
+        }
+      },
+      { deep: true }
+    )
   }
 
   // Get reveal state for a question
   const getRevealState = (questionId: string): RevealStateData => {
-    return revealState.value[questionId] || {
-      revealed: false,
-      revealCount: 0
-    }
+    return (
+      revealState.value[questionId] || {
+        revealed: false,
+        revealCount: 0,
+      }
+    )
   }
 
   // Mark answer as revealed
@@ -56,7 +62,7 @@ export const useAnswerRevealState = () => {
       revealed: true,
       revealedAt: Date.now(),
       revealCount: current.revealCount + 1,
-      timeToReveal: timeToReveal || current.timeToReveal
+      timeToReveal: timeToReveal || current.timeToReveal,
     }
   }
 
@@ -66,7 +72,7 @@ export const useAnswerRevealState = () => {
     if (current) {
       revealState.value[questionId] = {
         ...current,
-        revealed: false
+        revealed: false,
       }
     }
   }
@@ -81,20 +87,21 @@ export const useAnswerRevealState = () => {
   const getGlobalStats = () => {
     const allStates = Object.values(revealState.value)
     const totalReveals = allStates.reduce((sum, state) => sum + state.revealCount, 0)
-    const questionsRevealed = allStates.filter(s => s.revealCount > 0).length
+    const questionsRevealed = allStates.filter((s) => s.revealCount > 0).length
 
     const timesToReveal = allStates
       .filter((s): s is typeof s & { timeToReveal: number } => s.timeToReveal !== undefined)
-      .map(s => s.timeToReveal)
+      .map((s) => s.timeToReveal)
 
-    const avgTimeToReveal = timesToReveal.length > 0
-      ? timesToReveal.reduce((sum, time) => sum + time, 0) / timesToReveal.length
-      : 0
+    const avgTimeToReveal =
+      timesToReveal.length > 0
+        ? timesToReveal.reduce((sum, time) => sum + time, 0) / timesToReveal.length
+        : 0
 
     return {
       totalReveals,
       questionsRevealed,
-      avgTimeToReveal: Math.round(avgTimeToReveal / 1000) // Convert to seconds
+      avgTimeToReveal: Math.round(avgTimeToReveal / 1000), // Convert to seconds
     }
   }
 
@@ -104,6 +111,6 @@ export const useAnswerRevealState = () => {
     markRevealed,
     markHidden,
     resetRevealState,
-    getGlobalStats
+    getGlobalStats,
   }
 }

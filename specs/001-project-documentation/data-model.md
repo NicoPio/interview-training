@@ -27,24 +27,25 @@ All user data (progress, favorites, preferences) is stored **locally** in the br
 ```typescript
 interface Question {
   // Metadata (from YAML frontmatter)
-  id: number                    // Unique sequential identifier (1, 2, 3, ...)
-  slug: string                  // URL-friendly identifier (e.g., "primitive-detection")
-  title: string                 // Display title in French or English
-  category: string              // Category slug (e.g., "javascript", "html", "css")
-  difficulty: 'easy' | 'medium' | 'hard'  // Difficulty level
-  tags: string[]                // Array of topic tags (e.g., ["closures", "scope"])
+  id: number // Unique sequential identifier (1, 2, 3, ...)
+  slug: string // URL-friendly identifier (e.g., "primitive-detection")
+  title: string // Display title in French or English
+  category: string // Category slug (e.g., "javascript", "html", "css")
+  difficulty: 'easy' | 'medium' | 'hard' // Difficulty level
+  tags: string[] // Array of topic tags (e.g., ["closures", "scope"])
 
   // Content (from markdown body)
-  question: string              // Question content (markdown)
-  answer: string                // Answer content (markdown)
+  question: string // Question content (markdown)
+  answer: string // Answer content (markdown)
 
   // Computed (by Nuxt Content)
-  _path: string                 // Full path (e.g., "/fr/javascript/q001-...")
-  body: object                  // Parsed markdown AST
+  _path: string // Full path (e.g., "/fr/javascript/q001-...")
+  body: object // Parsed markdown AST
 }
 ```
 
 **Validation Rules**:
+
 - `id` MUST be a positive integer
 - `id` MUST be unique across all questions
 - `slug` MUST be kebab-case and URL-safe
@@ -56,6 +57,7 @@ interface Question {
 - Question and answer content MUST be valid markdown
 
 **Relationships**:
+
 - Belongs to one **Category** (via `category` field)
 - Has many **Tags** (via `tags` array)
 - Has one **ProgressRecord** (via `id` in localStorage)
@@ -68,12 +70,11 @@ interface Question {
 ---
 id: 1
 slug: primitive-detection
-title: "Comment détecter les types de valeurs primitives ou non-primitives en JavaScript ?"
+title: 'Comment détecter les types de valeurs primitives ou non-primitives en JavaScript ?'
 category: javascript
 difficulty: medium
-tags: ["primitifs", "types", "variables"]
+tags: ['primitifs', 'types', 'variables']
 ---
-
 # Question content here...
 
 # Answer content here...
@@ -91,10 +92,10 @@ tags: ["primitifs", "types", "variables"]
 
 ```typescript
 interface ProgressRecord {
-  questionId: string           // Question ID as string (e.g., "1", "2", "3")
-  status: ProgressStatus       // Current progress status
-  lastViewed: number           // Unix timestamp of last view (milliseconds)
-  viewCount: number            // Total number of times viewed
+  questionId: string // Question ID as string (e.g., "1", "2", "3")
+  status: ProgressStatus // Current progress status
+  lastViewed: number // Unix timestamp of last view (milliseconds)
+  viewCount: number // Total number of times viewed
 }
 
 type ProgressStatus = 'not-seen' | 'seen' | 'mastered'
@@ -113,6 +114,7 @@ mastered
 ```
 
 **Validation Rules**:
+
 - `questionId` MUST be a string representation of a valid question ID
 - `status` MUST be one of: 'not-seen', 'seen', 'mastered'
 - `lastViewed` MUST be a valid Unix timestamp (milliseconds) or undefined
@@ -142,12 +144,14 @@ type QuestionProgressState = {
 ```
 
 **Business Logic**:
+
 - **Auto-mark as seen**: When a user views a question detail page for the first time
 - **Manual mastery**: User explicitly marks a question as mastered
 - **Toggle mastery**: Clicking "Mastered" again reverts to "seen"
 - **View counter**: Increments on every page view
 
 **Relationships**:
+
 - Belongs to one **Question** (via `questionId`)
 - One-to-one relationship (each question has at most one progress record)
 
@@ -163,12 +167,13 @@ type QuestionProgressState = {
 
 ```typescript
 interface FavoriteRecord {
-  questionId: string           // Question ID as string
-  isFavorite: boolean          // True if favorited, omitted if not
+  questionId: string // Question ID as string
+  isFavorite: boolean // True if favorited, omitted if not
 }
 ```
 
 **Validation Rules**:
+
 - `questionId` MUST be a string representation of a valid question ID
 - If present in the map, the value MUST be `true`
 - If not favorited, the key is omitted from the map (not set to `false`)
@@ -190,12 +195,14 @@ type FavoritesState = {
 ```
 
 **Business Logic**:
+
 - **Add favorite**: Set `favorites[questionId] = true`
 - **Remove favorite**: Delete `favorites[questionId]` from map
 - **Toggle**: Add if absent, remove if present
 - **Check favorite**: `questionId in favorites`
 
 **Relationships**:
+
 - Belongs to one **Question** (via `questionId`)
 - One-to-one relationship (each question has at most one favorite record)
 
@@ -211,14 +218,15 @@ type FavoritesState = {
 
 ```typescript
 interface RevealState {
-  questionId: string           // Question ID as string
-  revealed: boolean            // Current reveal state (true = visible)
-  timeToReveal: number | null  // Milliseconds from page load to first reveal
-  revealCount: number          // Total number of times answer was revealed
+  questionId: string // Question ID as string
+  revealed: boolean // Current reveal state (true = visible)
+  timeToReveal: number | null // Milliseconds from page load to first reveal
+  revealCount: number // Total number of times answer was revealed
 }
 ```
 
 **Validation Rules**:
+
 - `questionId` MUST be a string representation of a valid question ID
 - `revealed` MUST be a boolean (defaults to false)
 - `timeToReveal` MUST be a positive number (milliseconds) or null
@@ -249,6 +257,7 @@ type AnswerRevealState = {
 ```
 
 **Business Logic**:
+
 - **First reveal**: Record `timeToReveal = Date.now() - pageLoadTime`, increment `revealCount`
 - **Subsequent reveals**: Only increment `revealCount`, `timeToReveal` unchanged
 - **Hide answer**: Set `revealed = false`
@@ -258,13 +267,14 @@ type AnswerRevealState = {
 
 ```typescript
 interface GlobalRevealStats {
-  totalReveals: number         // Sum of all revealCounts
-  questionsRevealed: number    // Count of questions with revealCount > 0
-  avgTimeToReveal: number      // Average timeToReveal in seconds (rounded)
+  totalReveals: number // Sum of all revealCounts
+  questionsRevealed: number // Count of questions with revealCount > 0
+  avgTimeToReveal: number // Average timeToReveal in seconds (rounded)
 }
 ```
 
 **Relationships**:
+
 - Belongs to one **Question** (via `questionId`)
 - One-to-one relationship (each question has at most one reveal state)
 
@@ -280,11 +290,11 @@ interface GlobalRevealStats {
 
 ```typescript
 interface FilterState {
-  searchQuery: string                    // Search text (title/tags)
+  searchQuery: string // Search text (title/tags)
   selectedDifficulties: DifficultyLevel[] // Selected difficulty filters
-  selectedTags: string[]                 // Selected tag filters
-  selectedStatus: FilterStatus           // Progress status filter
-  showOnlyFavorites: boolean             // Favorites-only filter
+  selectedTags: string[] // Selected tag filters
+  selectedStatus: FilterStatus // Progress status filter
+  showOnlyFavorites: boolean // Favorites-only filter
 }
 
 type DifficultyLevel = 'easy' | 'medium' | 'hard'
@@ -292,6 +302,7 @@ type FilterStatus = 'all' | 'not-seen' | 'seen' | 'mastered'
 ```
 
 **Validation Rules**:
+
 - `searchQuery` can be any string (empty = no filter)
 - `selectedDifficulties` MUST be an array of valid difficulty levels
 - `selectedTags` MUST be an array of strings
@@ -299,6 +310,7 @@ type FilterStatus = 'all' | 'not-seen' | 'seen' | 'mastered'
 - `showOnlyFavorites` MUST be a boolean
 
 **Business Logic**:
+
 - **Search**: Case-insensitive, accent-insensitive matching on title and tags
 - **Multiple difficulties**: OR logic (match any selected difficulty)
 - **Multiple tags**: OR logic (match any selected tag)
@@ -319,6 +331,7 @@ Filters are synchronized to URL query parameters:
 ```
 
 **Relationships**:
+
 - UI state only (no direct entity relationships)
 - Used to filter **Question** arrays in memory
 
@@ -334,24 +347,27 @@ Filters are synchronized to URL query parameters:
 
 ```typescript
 interface QuizModeState {
-  mode: QuizMode               // Current mode
-  timerDuration: number        // Timer duration in seconds
+  mode: QuizMode // Current mode
+  timerDuration: number // Timer duration in seconds
 }
 
 type QuizMode = 'standard' | 'quiz'
 ```
 
 **Validation Rules**:
+
 - `mode` MUST be one of: 'standard', 'quiz'
 - `timerDuration` MUST be a positive integer (defaults to 30)
 
 **Business Logic**:
+
 - **Standard mode**: No timer, keyboard shortcuts enabled
 - **Quiz mode**: 30-second countdown timer, keyboard shortcuts disabled
 - **Auto-reveal**: Answer automatically reveals when timer reaches 0
 - **Manual reveal**: User can reveal before timer expires (stops timer)
 
 **Relationships**:
+
 - Global UI state (no entity relationships)
 - Affects behavior of **QuestionCard** component
 
@@ -368,6 +384,7 @@ Each data domain is managed by a dedicated composable:
 **State**: `useState<FavoritesState>('question-favorites')`
 
 **Methods**:
+
 - `isFavorite(questionId: string): boolean`
 - `toggleFavorite(questionId: string): void`
 - `addFavorite(questionId: string): void`
@@ -385,6 +402,7 @@ Each data domain is managed by a dedicated composable:
 **State**: `useState<QuestionProgressState>('question-progress')`
 
 **Methods**:
+
 - `getProgress(questionId: string): ProgressRecord`
 - `markAsSeen(questionId: string): void`
 - `markAsMastered(questionId: string): void`
@@ -404,6 +422,7 @@ Each data domain is managed by a dedicated composable:
 **State**: `useState<AnswerRevealState>('question-reveal-state')`
 
 **Methods**:
+
 - `getRevealState(questionId: string): RevealState`
 - `markRevealed(questionId: string, timeToReveal: number): void`
 - `markHidden(questionId: string): void`
@@ -418,6 +437,7 @@ Each data domain is managed by a dedicated composable:
 **State**: Reactive refs (no persistence)
 
 **Methods**:
+
 - `filterQuestions(questions: Question[]): Question[]`
 - `getAllUniqueTags(questions: Question[]): string[]`
 - `getActiveFiltersCount(): number`
@@ -433,6 +453,7 @@ Each data domain is managed by a dedicated composable:
 **State**: `useState<QuizModeState>('quiz-mode')`
 
 **Methods**:
+
 - `toggleMode(): void`
 - `isQuizMode(): boolean`
 
@@ -519,11 +540,13 @@ State persisted in browser
 ### Referential Integrity
 
 **Question IDs**:
+
 - All localStorage records reference question IDs
 - If a question is deleted from content, orphaned records remain in localStorage (no cleanup)
 - When loading, invalid question IDs are silently ignored (no errors)
 
 **Category Consistency**:
+
 - Questions must exist in matching category directory
 - Category in frontmatter must match directory name
 - Nuxt Content enforces this via file structure
@@ -577,6 +600,7 @@ function migrateProgressData(data: unknown): QuestionProgressState {
 ### Backward Compatibility
 
 Current implementation has no versioning. Future changes should:
+
 - Maintain backward compatibility with existing localStorage data
 - Gracefully handle missing fields
 - Never break existing user data
@@ -588,12 +612,14 @@ Current implementation has no versioning. Future changes should:
 ### No Server-Side Storage
 
 **Privacy Benefits**:
+
 - No user data leaves the browser
 - No tracking or analytics on user progress
 - No account system or authentication required
 - GDPR-compliant (no PII collected or processed)
 
 **Security Considerations**:
+
 - XSS attacks could access localStorage (mitigated by CSP headers)
 - User data vulnerable if device is compromised
 - No encryption of localStorage data (browser responsibility)
@@ -694,6 +720,7 @@ The data model for JS Interview Prep is **simple, type-safe, and client-centric*
 ✅ **Reactive** state with Vue 3
 
 This architecture provides:
+
 - **Privacy**: No user data transmitted to servers
 - **Performance**: Instant data access from localStorage
 - **Simplicity**: No database or API complexity

@@ -1,15 +1,13 @@
 ---
 id: 2
 slug: explain-the-key-features-introduced-in-javascript-es6
-title: "Expliquez les fonctionnalités clés introduites dans JavaScript ES6"
+title: 'Expliquez les fonctionnalités clés introduites dans JavaScript ES6'
 category: javascript
 difficulty: easy
-tags: ["es6","ecmascript","variables","var","let"]
+tags: ['es6', 'ecmascript', 'variables', 'var', 'let']
 ---
 
 # Expliquez les fonctionnalités clés introduites dans JavaScript ES6
-
-
 
 Dans ES6, JavaScript a introduit ces fonctionnalités clés:
 

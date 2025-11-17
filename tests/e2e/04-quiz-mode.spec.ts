@@ -20,9 +20,12 @@ test.describe('US6: Quiz Mode with Timer', () => {
 
   test('should toggle quiz mode on and off', async ({ page }) => {
     // Look for quiz mode toggle
-    const quizToggle = page.locator('button, input[type="checkbox"]').filter({
-      hasText: /quiz|mode quiz/i,
-    }).or(page.locator('[aria-label*="quiz"], [data-testid*="quiz"]'))
+    const quizToggle = page
+      .locator('button, input[type="checkbox"]')
+      .filter({
+        hasText: /quiz|mode quiz/i,
+      })
+      .or(page.locator('[aria-label*="quiz"], [data-testid*="quiz"]'))
 
     if (await quizToggle.first().isVisible()) {
       // Enable quiz mode
@@ -62,11 +65,16 @@ test.describe('US6: Quiz Mode with Timer', () => {
       await page.waitForURL(/\/javascript\//)
 
       // Look for timer display
-      const timerElement = page.locator('text=/\\d+[:\\s]\\d+/').or(
-        page.locator('[data-testid*="timer"], [class*="timer"]')
-      )
+      const timerElement = page
+        .locator('text=/\\d+[:\\s]\\d+/')
+        .or(page.locator('[data-testid*="timer"], [class*="timer"]'))
 
-      if (await timerElement.first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      if (
+        await timerElement
+          .first()
+          .isVisible({ timeout: 2000 })
+          .catch(() => false)
+      ) {
         const timerText = await timerElement.first().textContent()
         console.log('✓ Timer displayed:', timerText)
 
@@ -101,7 +109,12 @@ test.describe('US6: Quiz Mode with Timer', () => {
       // Look for timer
       const timerElement = page.locator('text=/\\d+[:\\s]\\d+/')
 
-      if (await timerElement.first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      if (
+        await timerElement
+          .first()
+          .isVisible({ timeout: 2000 })
+          .catch(() => false)
+      ) {
         console.log('⏱ Waiting for timer to reach zero (this may take 30 seconds)...')
 
         // Wait for auto-reveal (max 32 seconds)
@@ -169,7 +182,12 @@ test.describe('US6: Quiz Mode with Timer', () => {
       // Get initial timer value
       const timerElement = page.locator('text=/\\d+[:\\s]\\d+/')
 
-      if (await timerElement.first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      if (
+        await timerElement
+          .first()
+          .isVisible({ timeout: 2000 })
+          .catch(() => false)
+      ) {
         const initialTimer = await timerElement.first().textContent()
 
         // Wait a bit
@@ -215,11 +233,14 @@ test.describe('US6: Quiz Mode with Timer', () => {
       await page.waitForURL(/\/javascript\//)
 
       // Check timer format (should be MM:SS or SS)
-      const timerElement = page.locator('text=/\\d+[:\\s]\\d+/').or(
-        page.locator('text=/\\d+s/')
-      )
+      const timerElement = page.locator('text=/\\d+[:\\s]\\d+/').or(page.locator('text=/\\d+s/'))
 
-      if (await timerElement.first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      if (
+        await timerElement
+          .first()
+          .isVisible({ timeout: 2000 })
+          .catch(() => false)
+      ) {
         const timerText = await timerElement.first().textContent()
 
         // Verify format (e.g., "30", "0:30", "30s")

@@ -2,7 +2,11 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { ref } from 'vue'
 import { useQuizMode } from '~/app/composables/useQuizMode'
 import type { QuizModeType, QuizSession } from '~/app/composables/useQuizMode'
-import { setupLocalStorageMock, clearLocalStorageMock, mockDateNow } from '../../utils/mockLocalStorage'
+import {
+  setupLocalStorageMock,
+  clearLocalStorageMock,
+  mockDateNow,
+} from '../../utils/mockLocalStorage'
 
 // Mock useState from Nuxt
 let mockModeState = ref<QuizModeType>('study')

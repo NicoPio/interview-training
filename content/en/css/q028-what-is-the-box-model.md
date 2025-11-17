@@ -1,15 +1,13 @@
 ---
 id: 28
 slug: what-is-the-box-model
-title: "What is the CSS Box Model?"
+title: 'What is the CSS Box Model?'
 category: css
 difficulty: medium
-tags: ["css", "box-model", "layout"]
+tags: ['css', 'box-model', 'layout']
 ---
 
 # What is the CSS Box Model?
-
-
 
 The CSS Box Model is a fundamental concept that describes how elements are structured and displayed on a web page. Every element in CSS is represented as a rectangular box, and the box model defines how the different parts of that box behave.
 

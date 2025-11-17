@@ -1,15 +1,13 @@
 ---
 id: 24
 slug: what-are-generator-functions-in-javascript
-title: "Que sont les fonctions génératrices en JavaScript ?"
+title: 'Que sont les fonctions génératrices en JavaScript ?'
 category: javascript
 difficulty: easy
-tags: ["this","context","call","apply","bind"]
+tags: ['this', 'context', 'call', 'apply', 'bind']
 ---
 
 # Que sont les fonctions génératrices en JavaScript ?
-
-
 
 En JavaScript, les fonctions génératrices sont un Type spécial de fonction qui vous permet de contrôler le flux d'exécution et de le mettre en pause/reprendre à certains points. Generator fonctions are defined En utilisant `function*` syntax and use La `yield` keyword to produce a sequence of values. Lorsqu'une fonction génératrice est appelée, elle retourne un itérateur appelé un générateur.
 
@@ -17,17 +15,17 @@ En JavaScript, les fonctions génératrices sont un Type spécial de fonction qu
 
 ```javascript
 function* simpleGenerator() {
-  yield 1;
-  yield 2;
-  yield 3;
+  yield 1
+  yield 2
+  yield 3
 }
 
-const generator = simpleGenerator();
+const generator = simpleGenerator()
 
-console.log(generator.next()); // { value: 1, done: false }
-console.log(generator.next()); // { value: 2, done: false }
-console.log(generator.next()); // { value: 3, done: false }
-console.log(generator.next()); // { value: undefined, done: true }
+console.log(generator.next()) // { value: 1, done: false }
+console.log(generator.next()) // { value: 2, done: false }
+console.log(generator.next()) // { value: 3, done: false }
+console.log(generator.next()) // { value: undefined, done: true }
 ```
 
 Dans cet exemple :

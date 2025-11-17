@@ -19,16 +19,19 @@ This is a **documentation and verification feature** for an **existing, producti
 ## Task Organization
 
 Tasks are organized by **User Story** (priority-based) to enable:
+
 - Independent implementation and testing of each story
 - Parallel work on different stories
 - Incremental delivery (MVP → P1 → P2 → P3)
 
 **MVP Scope** (Already Implemented):
+
 - User Story 1 (Browse Questions) ✅
 - User Story 2 (Answer Reveal) ✅
 - User Story 3 (Progress Tracking) ✅
 
 **Extended Features** (Also Implemented):
+
 - User Story 4-8 (Favorites, Filters, Quiz, i18n, Dark Mode) ✅
 
 ## Task Status Legend
@@ -155,8 +158,8 @@ Tasks are organized by **User Story** (priority-based) to enable:
 - [x] T039 [US3] Verify "Mark as Mastered" button toggles correctly in app/components/QuestionCard.vue
 - [x] T040 [US3] Verify automatic "seen" status on first page view in app/pages/[category]/[slug].vue
 - [x] T041 [US3] Verify progress bar calculations on homepage in app/components/ProgressBar.vue
-- [x] T042 [US3] Verify progress percentage formula: (viewed + mastered) / total * 100 in app/composables/useQuestionProgress.ts
-- [x] T043 [US3] Verify mastery percentage formula: mastered / total * 100 in app/composables/useQuestionProgress.ts
+- [x] T042 [US3] Verify progress percentage formula: (viewed + mastered) / total \* 100 in app/composables/useQuestionProgress.ts
+- [x] T043 [US3] Verify mastery percentage formula: mastered / total \* 100 in app/composables/useQuestionProgress.ts
 
 ### Composable Testing
 
@@ -424,12 +427,14 @@ Phase 1 (Setup) → Phase 2 (Foundation) → User Stories (can run in parallel)
 Tasks marked with `[P]` can run concurrently. Here are recommended parallel execution groups:
 
 ### Group 1: Documentation (After Phase 1)
+
 ```
 T002 (README) || T003 (CONTRIBUTING) || T004 (Architecture Diagram)
 T006 (Test Utils) || T007 (Coverage Config) || T008 (ESLint) || T009 (Prettier) || T010 (CI/CD)
 ```
 
 ### Group 2: User Story Verification (After Phase 2)
+
 ```
 Phase 3 (US1) || Phase 6 (US4) || Phase 9 (US7) || Phase 10 (US8)
 Phase 4 (US2) || Phase 5 (US3) [depends on US2] || Phase 7 (US5) [depends on US4]
@@ -437,12 +442,14 @@ Phase 8 (US6) [depends on US3]
 ```
 
 ### Group 3: Component Testing (After Verification)
+
 ```
 T025 (QuestionCard tests) || T026 (Homepage tests) || T048 (ProgressBar tests)
 T068 (SearchBar tests) || T069 (QuestionFilters tests)
 ```
 
 ### Group 4: Quality Checks (Phase 11)
+
 ```
 T101 (Lighthouse) || T111-114 (Browser tests) || T115-118 (Mobile tests)
 T106 (Accessibility) || T107 (Keyboard Nav) || T108 (Screen Reader)
@@ -455,6 +462,7 @@ T106 (Accessibility) || T107 (Keyboard Nav) || T108 (Screen Reader)
 ### MVP Scope (Already Implemented ✅)
 
 The MVP includes User Stories 1-3 (P1), which are already fully implemented:
+
 - ✅ Browse questions with categories and difficulty levels
 - ✅ Interactive answer reveal with tracking
 - ✅ Progress tracking with mastery status
@@ -464,6 +472,7 @@ The MVP includes User Stories 1-3 (P1), which are already fully implemented:
 ### Phase 1 Delivery (Already Implemented ✅)
 
 Extended features including User Stories 4-5 (P2):
+
 - ✅ Favorites system
 - ✅ Advanced search and filtering
 
@@ -472,6 +481,7 @@ Extended features including User Stories 4-5 (P2):
 ### Phase 2 Delivery (Already Implemented ✅)
 
 Polish features including User Stories 6-8 (P3):
+
 - ✅ Quiz mode with timer
 - ✅ Bilingual support (FR/EN)
 - ✅ Dark mode

@@ -16,6 +16,7 @@ tests/e2e/
 ## 🎯 Couverture
 
 ### User Story 1 : Browse and Discover Questions
+
 - ✅ Affichage de la homepage avec toutes les questions
 - ✅ Badges de difficulté avec couleurs correctes
 - ✅ Affichage des tags de questions
@@ -25,6 +26,7 @@ tests/e2e/
 - ✅ Gestion de l'état vide
 
 ### User Story 2-3 : Answer Reveal & Progress Tracking
+
 - ✅ Bouton de révélation de réponse
 - ✅ Raccourci clavier spacebar
 - ✅ Marquage automatique "vu"
@@ -35,6 +37,7 @@ tests/e2e/
 - ✅ Calcul des pourcentages
 
 ### User Story 4-5 : Favorites & Advanced Filtering
+
 - ✅ Toggle statut favori
 - ✅ Filtre par favoris
 - ✅ Recherche textuelle (avec debounce)
@@ -49,6 +52,7 @@ tests/e2e/
 - ✅ Persistance des favoris
 
 ### User Story 6 : Quiz Mode
+
 - ✅ Toggle mode quiz
 - ✅ Timer 30 secondes
 - ✅ Auto-révélation au timer=0
@@ -59,6 +63,7 @@ tests/e2e/
 - ✅ Indicateur de mode quiz
 
 ### User Story 7-8 : i18n & Dark Mode
+
 - ✅ Switch FR/EN
 - ✅ Traductions UI
 - ✅ Navigation sur page équivalente
@@ -73,21 +78,25 @@ tests/e2e/
 ## 🚀 Exécution des Tests
 
 ### Tous les tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Tests avec UI interactive
+
 ```bash
 npm run test:e2e:ui
 ```
 
 ### Tests en mode debug
+
 ```bash
 npm run test:e2e:debug
 ```
 
 ### Tests spécifiques
+
 ```bash
 # User Story 1 uniquement
 npx playwright test 01-browse
@@ -123,16 +132,19 @@ La configuration se trouve dans `playwright.config.ts` :
 ## 📝 Conventions de Tests
 
 ### Sélecteurs
+
 - Privilégier les sélecteurs textuels : `hasText: /pattern/i`
 - Utiliser les attributs ARIA quand disponibles
 - Fallback sur les classes/data-attributes
 
 ### Assertions
+
 - Toujours utiliser `await expect()` pour Playwright
 - Console.log pour tracer l'exécution
 - Timeouts adaptés au contexte (debounce, animations)
 
 ### Gestion des Erreurs
+
 - Tests gracefully dégradés (⚠ warning si élément absent)
 - Pas de fail strict sur éléments UI optionnels
 - Focus sur les flows critiques
@@ -140,12 +152,14 @@ La configuration se trouve dans `playwright.config.ts` :
 ## 🔄 Maintenance
 
 ### Ajout de Nouveaux Tests
+
 1. Créer un fichier `0X-feature-name.spec.ts`
 2. Suivre la structure existante (describe > beforeEach > tests)
 3. Ajouter la couverture dans ce README
 4. Mettre à jour tasks.md
 
 ### Debugging
+
 ```bash
 # Voir les traces
 npx playwright test --trace on

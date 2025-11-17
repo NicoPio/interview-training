@@ -1,15 +1,13 @@
 ---
 id: 1
 slug: how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
-title: "How do you detect primitive or non-primitive value types in JavaScript?"
+title: 'How do you detect primitive or non-primitive value types in JavaScript?'
 category: javascript
 difficulty: medium
-tags: ["primitives", "types", "variables", "var", "let"]
+tags: ['primitives', 'types', 'variables', 'var', 'let']
 ---
 
 # How do you detect primitive or non-primitive value types in JavaScript?
-
-
 
 In JavaScript, values are generally categorized as either primitive or non-primitive (also known as reference types). Primitive values include:
 
@@ -24,33 +22,31 @@ Non-primitive values are objects, which include arrays, functions, and custom ob
 
 We can detect primitive or non-primitive in JavaScript in the following ways:
 
-###  1. Using the `typeof` operator:
+### 1. Using the `typeof` operator:
 
 - This operator returns a string indicating the type of a value.
 - Primitive types will return their corresponding strings (e.g., "number", "string", "boolean").
 - Non-primitive types will typically return "object" or "function".
 
-
 ```js
 // Using the typeof operator:
 
-let num = 10;
-let str = "Hello";
-let bool = true;
-let obj = {};
-let func = function () {};
+let num = 10
+let str = 'Hello'
+let bool = true
+let obj = {}
+let func = function () {}
 
-console.log(typeof num); // Output: "number"
-console.log(typeof str); // Output: "string"
-console.log(typeof bool); // Output: "boolean"
-console.log(typeof obj); // Output: "object"
-console.log(typeof func); // Output: "function"
+console.log(typeof num) // Output: "number"
+console.log(typeof str) // Output: "string"
+console.log(typeof bool) // Output: "boolean"
+console.log(typeof obj) // Output: "object"
+console.log(typeof func) // Output: "function"
 ```
-
 
 **Important note:** `typeof null` returns "object" even though it's a primitive value.
 
-###  2. Using the Object() constructor:
+### 2. Using the Object() constructor:
 
 - This constructor creates a new object wrapper for a value.
 - If a value is primitive, it will be equal to its object-wrapped version.
@@ -59,6 +55,6 @@ console.log(typeof func); // Output: "function"
 ```javascript
 // Using the Object() constructor:
 
-console.log(num === Object(num)); // Output: true (primitive)
-console.log(obj === Object(obj)); // Output: false (non-primitive)
+console.log(num === Object(num)) // Output: true (primitive)
+console.log(obj === Object(obj)) // Output: false (non-primitive)
 ```

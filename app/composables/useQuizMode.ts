@@ -77,7 +77,7 @@ export const useQuizMode = () => {
       startedAt: Date.now(),
       questionIds: shuffled,
       currentIndex: 0,
-      answers: []
+      answers: [],
     }
 
     mode.value = 'quiz'
@@ -90,7 +90,7 @@ export const useQuizMode = () => {
     currentSession.value.answers.push({
       questionId,
       correct,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     })
   }
 
@@ -133,7 +133,7 @@ export const useQuizMode = () => {
     if (!currentSession.value) return { current: 0, total: 0 }
     return {
       current: currentSession.value.currentIndex + 1,
-      total: currentSession.value.questionIds.length
+      total: currentSession.value.questionIds.length,
     }
   })
 
@@ -143,7 +143,7 @@ export const useQuizMode = () => {
 
     const { answers } = currentSession.value
     const total = answers.length
-    const correct = answers.filter(a => a.correct).length
+    const correct = answers.filter((a) => a.correct).length
     const incorrect = total - correct
     const percentage = total > 0 ? Math.round((correct / total) * 100) : 0
 
@@ -152,7 +152,7 @@ export const useQuizMode = () => {
       correct,
       incorrect,
       percentage,
-      duration: Date.now() - currentSession.value.startedAt
+      duration: Date.now() - currentSession.value.startedAt,
     }
   })
 
@@ -191,6 +191,6 @@ export const useQuizMode = () => {
     getResults,
     isQuizComplete,
     endQuiz,
-    resetQuiz
+    resetQuiz,
   }
 }

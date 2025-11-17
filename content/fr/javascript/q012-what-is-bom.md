@@ -4,12 +4,10 @@ slug: what-is-bom
 title: "Qu'est-ce que le BOM ?"
 category: javascript
 difficulty: easy
-tags: ["dom","navigateur","bom","fonctions","timing"]
+tags: ['dom', 'navigateur', 'bom', 'fonctions', 'timing']
 ---
 
 # Qu'est-ce que le BOM ?
-
-
 
 BOM (Browser Object Model) est une interface de programmation s'étendant au-delà du DOM, fournissant un contrôle sur les fonctionnalités liées au navigateur.
 

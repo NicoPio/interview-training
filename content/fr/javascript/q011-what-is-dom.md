@@ -4,12 +4,10 @@ slug: what-is-dom
 title: "Qu'est-ce que le DOM ?"
 category: javascript
 difficulty: easy
-tags: ["variables","var","let","const","dom"]
+tags: ['variables', 'var', 'let', 'const', 'dom']
 ---
 
 # Qu'est-ce que le DOM ?
-
-
 
 DOM signifie Document Object Model, servant d'interface de programmation pour les documents web.
 

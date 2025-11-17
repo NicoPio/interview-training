@@ -4,12 +4,10 @@ slug: what-is-the-correct-way-to-use-the-rest-parameter-in-javascript
 title: "Quelle est la bonne façon d'utiliser le paramètre rest en JavaScript ?"
 category: javascript
 difficulty: easy
-tags: ["paramètres-reste","décomposition","fonctions"]
+tags: ['paramètres-reste', 'décomposition', 'fonctions']
 ---
 
 # Quelle est la bonne façon d'utiliser le paramètre rest en JavaScript ?
-
-
 
 La bonne façon d'utiliser le paramètre rest en JavaScript est de s'assurer qu'il est le dernier paramètre dans la déclaration de fonction.
 

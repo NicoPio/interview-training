@@ -33,7 +33,8 @@ export const nuxtUIStubs = {
     props: ['label'],
   },
   UCheckbox: {
-    template: '<input type="checkbox" :checked="modelValue" @change="$emit(\'update:modelValue\', $event.target.checked)" />',
+    template:
+      '<input type="checkbox" :checked="modelValue" @change="$emit(\'update:modelValue\', $event.target.checked)" />',
     props: ['modelValue', 'label'],
   },
   USelectMenu: {
@@ -42,7 +43,7 @@ export const nuxtUIStubs = {
     methods: {
       handleChange(e: Event) {
         const target = e.target as HTMLSelectElement
-        const values = Array.from(target.selectedOptions).map(opt => opt.value)
+        const values = Array.from(target.selectedOptions).map((opt) => opt.value)
         this.$emit('update:modelValue', values)
       },
     },

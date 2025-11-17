@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 /* Custom Animations */
 @keyframes fade-in-up {
@@ -35,11 +35,19 @@
   }
 }
 
-.prose p, .prose pre, .prose li, .prose blockquote {
+.prose p,
+.prose pre,
+.prose li,
+.prose blockquote {
   @apply mb-4 leading-7;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
   @apply mt-8 mb-4 font-bold;
 }
 

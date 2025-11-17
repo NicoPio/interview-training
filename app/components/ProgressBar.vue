@@ -20,12 +20,8 @@ const notSeenCount = computed(() => props.totalQuestions - stats.value.total)
   <UCard>
     <div class="space-y-4">
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-          Your Progress
-        </h3>
-        <UBadge color="primary" variant="subtle">
-          {{ progressPercentage }}% Complete
-        </UBadge>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Your Progress</h3>
+        <UBadge color="primary" variant="subtle"> {{ progressPercentage }}% Complete </UBadge>
       </div>
 
       <!-- Progress Bar -->

@@ -6,10 +6,7 @@ const switchLocalePath = useSwitchLocalePath()
 
 // Filter locales to only include English and French
 const availableLocales = computed(() => {
-  return [
-    locales.en,
-    locales.fr
-  ]
+  return [locales.en, locales.fr]
 })
 
 // Handle locale change

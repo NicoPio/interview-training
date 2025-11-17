@@ -33,21 +33,27 @@ export const useQuestionProgress = () => {
 
   // Sync state to localStorage on changes (client-side only)
   if (process.client) {
-    watch(progressState, (newValue) => {
-      try {
-        localStorage.setItem('question-progress', JSON.stringify(newValue))
-      } catch {
-        // Silently fail in private/incognito mode or when storage is full
-      }
-    }, { deep: true })
+    watch(
+      progressState,
+      (newValue) => {
+        try {
+          localStorage.setItem('question-progress', JSON.stringify(newValue))
+        } catch {
+          // Silently fail in private/incognito mode or when storage is full
+        }
+      },
+      { deep: true }
+    )
   }
 
   // Get progress for a specific question
   const getProgress = (questionId: string): QuestionProgressData => {
-    return progressState.value[questionId] || {
-      status: 'not-seen',
-      viewCount: 0
-    }
+    return (
+      progressState.value[questionId] || {
+        status: 'not-seen',
+        viewCount: 0,
+      }
+    )
   }
 
   // Mark question as seen
@@ -57,7 +63,7 @@ export const useQuestionProgress = () => {
       ...current,
       status: current.status === 'not-seen' ? 'seen' : current.status,
       lastViewed: Date.now(),
-      viewCount: current.viewCount + 1
+      viewCount: current.viewCount + 1,
     }
   }
 
@@ -68,7 +74,7 @@ export const useQuestionProgress = () => {
       ...current,
       status: 'mastered',
       lastViewed: Date.now(),
-      viewCount: current.viewCount
+      viewCount: current.viewCount,
     }
   }
 
@@ -79,7 +85,7 @@ export const useQuestionProgress = () => {
       ...current,
       status: 'seen',
       lastViewed: Date.now(),
-      viewCount: current.viewCount
+      viewCount: current.viewCount,
     }
   }
 
@@ -99,9 +105,9 @@ export const useQuestionProgress = () => {
     const allProgress = Object.values(progressState.value)
     return {
       total: allProgress.length,
-      seen: allProgress.filter(p => p.status === 'seen').length,
-      mastered: allProgress.filter(p => p.status === 'mastered').length,
-      notSeen: 0 // This needs to be calculated with total questions count
+      seen: allProgress.filter((p) => p.status === 'seen').length,
+      mastered: allProgress.filter((p) => p.status === 'mastered').length,
+      notSeen: 0, // This needs to be calculated with total questions count
     }
   }
 
@@ -129,6 +135,6 @@ export const useQuestionProgress = () => {
     resetAllProgress,
     getStats,
     getProgressPercentage,
-    getMasteryPercentage
+    getMasteryPercentage,
   }
 }

@@ -5,7 +5,7 @@
 **Status**: Draft
 **Input**: User description: "Comprehensive documentation of the existing JS Interview Prep application including all implemented features, architecture, user flows, and data models"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Browse and Discover Interview Questions (Priority: P1)
 
@@ -150,7 +150,7 @@ A user can toggle between light and dark color schemes. The preference is saved 
 - **What happens if URL query parameters are manually edited to invalid values?** Filters validate input types. Invalid parameters are ignored, and valid defaults are applied.
 - **How does the system handle questions with identical slugs in different categories?** The routing structure `/[category]/[slug]` prevents collisions. Each category has its own namespace.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -187,8 +187,8 @@ A user can toggle between light and dark color schemes. The preference is saved 
 - **FR-020**: System MUST allow users to unmark mastered questions by clicking the "Mastered" button again
 - **FR-021**: System MUST track the last viewed timestamp for each question
 - **FR-022**: System MUST track the view count for each question
-- **FR-023**: System MUST calculate and display overall progress percentage (viewed + mastered) / total questions * 100
-- **FR-024**: System MUST calculate and display mastery percentage (mastered / total questions * 100)
+- **FR-023**: System MUST calculate and display overall progress percentage (viewed + mastered) / total questions \* 100
+- **FR-024**: System MUST calculate and display mastery percentage (mastered / total questions \* 100)
 - **FR-025**: System MUST display categorized counts: not-seen, seen, and mastered questions
 - **FR-026**: System MUST persist progress data in localStorage with key `question-progress`
 
@@ -297,7 +297,7 @@ A user can toggle between light and dark color schemes. The preference is saved 
   - Attributes: mode (standard/quiz), timerDuration (seconds)
   - Relationships: None (global UI state)
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

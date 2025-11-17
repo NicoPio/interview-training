@@ -27,6 +27,7 @@ const state = useState<StateType>('unique-key', () => initialValue)
 **Storage Key**: `'question-favorites'`
 
 **Methods**:
+
 - `isFavorite(questionId)` - Check if question is favorited
 - `toggleFavorite(questionId)` - Toggle favorite status
 - `addFavorite(questionId)` - Add to favorites
@@ -36,6 +37,7 @@ const state = useState<StateType>('unique-key', () => initialValue)
 - `clearAllFavorites()` - Clear all favorites
 
 **Pattern**:
+
 ```typescript
 const favoritesState = useState<FavoritesState>('question-favorites', () => {
   if (process.client) {
@@ -45,11 +47,15 @@ const favoritesState = useState<FavoritesState>('question-favorites', () => {
   return {}
 })
 
-watch(favoritesState, (newValue) => {
-  if (process.client) {
-    localStorage.setItem('question-favorites', JSON.stringify(newValue))
-  }
-}, { deep: true })
+watch(
+  favoritesState,
+  (newValue) => {
+    if (process.client) {
+      localStorage.setItem('question-favorites', JSON.stringify(newValue))
+    }
+  },
+  { deep: true }
+)
 ```
 
 ---
@@ -62,11 +68,13 @@ watch(favoritesState, (newValue) => {
 **Storage Key**: `'question-progress'`
 
 **State Transitions**:
+
 ```
 not-seen (default) → seen → mastered ↔ seen
 ```
 
 **Methods**:
+
 - `getProgress(questionId)` - Get progress record for question
 - `markAsSeen(questionId)` - Mark as seen (auto-called on page view)
 - `markAsMastered(questionId)` - Mark as mastered
@@ -78,6 +86,7 @@ not-seen (default) → seen → mastered ↔ seen
 - `getMasteryPercentage(total)` - Calculate mastery %
 
 **ProgressRecord Schema**:
+
 ```typescript
 {
   status: 'not-seen' | 'seen' | 'mastered'
@@ -96,21 +105,24 @@ not-seen (default) → seen → mastered ↔ seen
 **Storage Key**: `'question-reveal-state'`
 
 **Methods**:
+
 - `getRevealState(questionId)` - Get reveal state for question
 - `markRevealed(questionId, timeToReveal)` - Mark answer as revealed
 - `markHidden(questionId)` - Mark answer as hidden
 - `getGlobalStats()` - Get global reveal statistics
 
 **RevealState Schema**:
+
 ```typescript
 {
   revealed: boolean
-  timeToReveal: number | null  // Milliseconds from load to first reveal
-  revealCount: number           // Total reveals for this question
+  timeToReveal: number | null // Milliseconds from load to first reveal
+  revealCount: number // Total reveals for this question
 }
 ```
 
 **Metrics**:
+
 - `totalReveals` - Sum of all reveal counts
 - `questionsRevealed` - Count of questions with revealCount > 0
 - `avgTimeToReveal` - Average time to first reveal (seconds)
@@ -124,6 +136,7 @@ not-seen (default) → seen → mastered ↔ seen
 **State**: In-memory reactive refs (no persistence)
 
 **Filter Types**:
+
 - `searchQuery` - Text search (title/tags, accent-insensitive)
 - `selectedDifficulties` - Array of difficulty levels
 - `selectedTags` - Array of tags
@@ -131,6 +144,7 @@ not-seen (default) → seen → mastered ↔ seen
 - `showOnlyFavorites` - Boolean filter
 
 **Methods**:
+
 - `filterQuestions(questions)` - Apply all active filters
 - `getAllUniqueTags(questions)` - Get available tags
 - `getActiveFiltersCount()` - Count active filters
@@ -138,6 +152,7 @@ not-seen (default) → seen → mastered ↔ seen
 - `toggleDifficultyFilter(difficulty)` - Toggle difficulty
 
 **URL Synchronization**:
+
 ```typescript
 watch([filters...], () => {
   router.replace({ query: buildQueryParams() })
@@ -156,10 +171,12 @@ watch([filters...], () => {
 **Storage**: No persistence (session-only)
 
 **Methods**:
+
 - `toggleMode()` - Switch between standard and quiz
 - `isQuizMode()` - Check if quiz mode is active
 
 **Quiz Behavior**:
+
 - 30-second countdown timer
 - Auto-reveal on timer expiration
 - Keyboard shortcuts disabled
@@ -184,9 +201,13 @@ const state = useState('key', () => {
 
 // 2. Watch and sync changes
 if (process.client) {
-  watch(state, (newValue) => {
-    localStorage.setItem('key', JSON.stringify(newValue))
-  }, { deep: true })
+  watch(
+    state,
+    (newValue) => {
+      localStorage.setItem('key', JSON.stringify(newValue))
+    },
+    { deep: true }
+  )
 }
 ```
 
@@ -234,10 +255,12 @@ All getters return sensible defaults:
 
 ```typescript
 const getProgress = (id: string) => {
-  return state.value[id] || {
-    status: 'not-seen',
-    viewCount: 0
-  }
+  return (
+    state.value[id] || {
+      status: 'not-seen',
+      viewCount: 0,
+    }
+  )
 }
 ```
 

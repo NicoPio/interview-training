@@ -4,12 +4,10 @@ slug: what-are-callback-functions-in-javascript-and-what-is-callback-hell
 title: "Que sont les fonctions de rappel (callbacks) en JavaScript et qu'est-ce que le callback hell ?"
 category: javascript
 difficulty: medium
-tags: ["this","context","call","apply","bind"]
+tags: ['this', 'context', 'call', 'apply', 'bind']
 ---
 
 # Que sont les fonctions de rappel (callbacks) en JavaScript et qu'est-ce que le callback hell ?
-
-
 
 En JavaScript, un callback est une fonction qui est passée comme argument à une autre fonction et est exécutée après la complétion d'une opération asynchrone ou à un moment spécifié. Les callbacks sont couramment utilisés dans des scénarios comme la gestion de tâches asynchrones, la gestion d'événements, et d'autres situations où l'ordre d'exécution n'est pas garanti.
 
@@ -17,15 +15,15 @@ En JavaScript, un callback est une fonction qui est passée comme argument à un
 
 ```javascript
 function customGreeting(name) {
-  console.log("Welcome, " + name + "! How can we assist you today?");
+  console.log('Welcome, ' + name + '! How can we assist you today?')
 }
 
 function outerFunction(callback) {
-  let name = prompt("Please enter your name.");
-  callback(name);
+  let name = prompt('Please enter your name.')
+  callback(name)
 }
 
-outerFunction(customGreeting);
+outerFunction(customGreeting)
 ```
 
 Dans cet Exemple, La `customGreeting` fonction is La callback fonction passed to `outerFunction`.
@@ -41,10 +39,10 @@ getUser(function (user) {
     getPosts(user.id, function (posts) {
       displayUserProfile(user, profile, posts, function () {
         // More nested callbacks...
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})
 ```
 
 Dans cet exemple, nous avons des callbacks imbriqués pour obtenir un utilisateur, récupérer son profil, récupérer ses posts, et finalement afficher le profil utilisateur. Au fur et à mesure que plus d'opérations asynchrones sont ajoutées, le code devient plus difficile à lire et maintenir.

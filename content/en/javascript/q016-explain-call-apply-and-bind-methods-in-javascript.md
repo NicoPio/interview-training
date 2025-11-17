@@ -1,15 +1,13 @@
 ---
 id: 16
 slug: explain-call-apply-and-bind-methods-in-javascript
-title: "Explain call(), apply() and bind() methods in JavaScript."
+title: 'Explain call(), apply() and bind() methods in JavaScript.'
 category: javascript
 difficulty: medium
-tags: ["this", "context", "call", "apply", "bind"]
+tags: ['this', 'context', 'call', 'apply', 'bind']
 ---
 
 # Explain call(), apply() and bind() methods in JavaScript.
-
-
 
 In JavaScript, the `call`, `apply`, and `bind` methods are used to manipulate how a function is invoked and set the value of `this` within the function.
 
@@ -19,12 +17,12 @@ The `call` method is used to invoke a function with a specified `this` value and
 
 ```javascript
 function sayHello(greeting) {
-  console.log(greeting + " " + this.name);
+  console.log(greeting + ' ' + this.name)
 }
 
-const person = { name: "John" };
+const person = { name: 'John' }
 
-sayHello.call(person, "Hello"); // Outputs: Hello John
+sayHello.call(person, 'Hello') // Outputs: Hello John
 ```
 
 Here, `call` is used to invoke the `sayHello` function with `person` as the `this` value, and `'Hello'` as an argument.
@@ -37,12 +35,12 @@ The `apply` method is similar to `call`, but it accepts arguments as an array.
 
 ```javascript
 function sayHello(greeting) {
-  console.log(greeting + " " + this.name);
+  console.log(greeting + ' ' + this.name)
 }
 
-const person = { name: "John" };
+const person = { name: 'John' }
 
-sayHello.apply(person, ["Hello"]); // Outputs: Hello John
+sayHello.apply(person, ['Hello']) // Outputs: Hello John
 ```
 
 In this example, `apply` is used to achieve the same result as `call`, but the arguments are provided as an array.
@@ -55,13 +53,13 @@ The `bind` method creates a new function with a specified `this` value and, opti
 
 ```javascript
 function sayHello(greeting) {
-  console.log(greeting + " " + this.name);
+  console.log(greeting + ' ' + this.name)
 }
 
-const person = { name: "John" };
+const person = { name: 'John' }
 
-const sayHelloToJohn = sayHello.bind(person);
-sayHelloToJohn("Hello"); // Outputs: Hello John
+const sayHelloToJohn = sayHello.bind(person)
+sayHelloToJohn('Hello') // Outputs: Hello John
 ```
 
 Here, `bind` is used to create a new function (`sayHelloToJohn`) where `this` is permanently set to `person`. When calling `sayHelloToJohn`, it's as if you're calling `sayHello` with `person` as `this`.

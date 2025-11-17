@@ -177,9 +177,7 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
         hasText: /dark|mode|theme|sombre/i,
       })
       .or(
-        page.locator(
-          '[data-testid*="color-mode"], [data-testid*="theme"], [aria-label*="theme"]'
-        )
+        page.locator('[data-testid*="color-mode"], [data-testid*="theme"], [aria-label*="theme"]')
       )
 
     if (await darkModeToggle.first().isVisible()) {

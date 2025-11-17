@@ -5,14 +5,20 @@ import type { Question } from '~/types'
 const { locale } = useI18n()
 
 // Fetch all questions for the TOC with i18n support
-const { data: questions } = await useAsyncData(`all-questions-${locale.value}`, async () => {
-  // Use the correct collection based on locale
-  const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-  const allContent = await queryCollection(collectionName).all()
-  return allContent.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)) as unknown as Question[]
-}, {
-  watch: [locale] // Refetch when locale changes
-})
+const { data: questions } = await useAsyncData(
+  `all-questions-${locale.value}`,
+  async () => {
+    // Use the correct collection based on locale
+    const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
+    const allContent = await queryCollection(collectionName).all()
+    return allContent.sort(
+      (a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)
+    ) as unknown as Question[]
+  },
+  {
+    watch: [locale], // Refetch when locale changes
+  }
+)
 
 // Mobile sidebar state
 const isSidebarOpen = ref(false)
@@ -24,9 +30,12 @@ const toggleSidebar = () => {
 
 // Close sidebar when route changes (mobile)
 const route = useRoute()
-watch(() => route.path, () => {
-  isSidebarOpen.value = false
-})
+watch(
+  () => route.path,
+  () => {
+    isSidebarOpen.value = false
+  }
+)
 
 // Initialize keyboard shortcuts
 const { showHelp } = useKeyboardShortcuts()
@@ -36,7 +45,9 @@ const { showHelp } = useKeyboardShortcuts()
   <UApp>
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <!-- Header -->
-      <header class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur dark:bg-gray-950/80 dark:border-gray-800">
+      <header
+        class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur dark:bg-gray-950/80 dark:border-gray-800"
+      >
         <div class="container mx-auto px-4 py-4">
           <div class="flex items-center justify-between">
             <!-- Logo / Title -->
@@ -48,7 +59,12 @@ const { showHelp } = useKeyboardShortcuts()
                 class="lg:hidden"
                 @click="toggleSidebar"
               />
-              <NuxtLink to="/" class="flex items-center gap-2" active-class="" exact-active-class="">
+              <NuxtLink
+                to="/"
+                class="flex items-center gap-2"
+                active-class=""
+                exact-active-class=""
+              >
                 <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" />
                 <span class="font-bold text-lg hidden sm:block">JS Interview Prep</span>
               </NuxtLink>
@@ -141,14 +157,21 @@ const { showHelp } = useKeyboardShortcuts()
       <!-- Footer -->
       <footer class="border-t mt-12 bg-white dark:bg-gray-950 dark:border-gray-800">
         <div class="container mx-auto px-4 py-6">
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400">
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400"
+          >
             <p>
               Built with
               <UIcon name="i-heroicons-heart-solid" class="text-red-500 inline" />
               using Nuxt 4 & Nuxt UI
             </p>
             <div class="flex items-center gap-4">
-              <NuxtLink to="/" class="hover:text-primary-500 transition-colors" active-class="" exact-active-class="">
+              <NuxtLink
+                to="/"
+                class="hover:text-primary-500 transition-colors"
+                active-class=""
+                exact-active-class=""
+              >
                 Home
               </NuxtLink>
               <UButton

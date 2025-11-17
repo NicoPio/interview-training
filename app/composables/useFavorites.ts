@@ -25,13 +25,17 @@ export const useFavorites = () => {
 
   // Sync state to localStorage on changes (client-side only)
   if (process.client) {
-    watch(favoritesState, (newValue) => {
-      try {
-        localStorage.setItem('question-favorites', JSON.stringify(newValue))
-      } catch {
-        // Silently fail in private/incognito mode or when storage is full
-      }
-    }, { deep: true })
+    watch(
+      favoritesState,
+      (newValue) => {
+        try {
+          localStorage.setItem('question-favorites', JSON.stringify(newValue))
+        } catch {
+          // Silently fail in private/incognito mode or when storage is full
+        }
+      },
+      { deep: true }
+    )
   }
 
   // Check if a question is favorited
@@ -62,7 +66,7 @@ export const useFavorites = () => {
 
   // Get all favorite question IDs
   const getFavoriteIds = computed(() => {
-    return Object.keys(favoritesState.value).filter(id => favoritesState.value[id])
+    return Object.keys(favoritesState.value).filter((id) => favoritesState.value[id])
   })
 
   // Get count of favorites
@@ -83,6 +87,6 @@ export const useFavorites = () => {
     removeFavorite,
     getFavoriteIds,
     getFavoriteCount,
-    clearAllFavorites
+    clearAllFavorites,
   }
 }

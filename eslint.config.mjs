@@ -27,22 +27,29 @@ export default withNuxt(
     ],
 
     rules: {
-    // Indentation rules (basic only, no @stylistic)
-      'indent': ['error', 2, { SwitchCase: 1 }],
+      // Indentation rules (basic only, no @stylistic)
+      indent: ['error', 2, { SwitchCase: 1 }],
       'vue/html-indent': ['error', 2],
-      'vue/script-indent': ['error', 2, {
-        baseIndent: 0,
-        switchCase: 1
-      }],
+      'vue/script-indent': [
+        'error',
+        2,
+        {
+          baseIndent: 0,
+          switchCase: 1,
+        },
+      ],
 
       // TypeScript strict mode rules
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off', // Vue composables don't need explicit return types
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_'
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/unified-signatures': 'off', // Known bug with Vue SFC files
 
@@ -58,15 +65,15 @@ export default withNuxt(
       'no-var': 'error',
 
       // Nuxt specific - keep process.client for test compatibility
-      'nuxt/prefer-import-meta': 'off'
-    }
+      'nuxt/prefer-import-meta': 'off',
+    },
   },
   // Override rules for test files
   {
     files: ['tests/**/*.spec.ts', 'tests/**/*.test.ts'],
     rules: {
       'no-console': 'off', // Allow console.log in tests
-      '@typescript-eslint/no-non-null-assertion': 'off' // Allow non-null assertions in tests
-    }
+      '@typescript-eslint/no-non-null-assertion': 'off', // Allow non-null assertions in tests
+    },
   }
 )

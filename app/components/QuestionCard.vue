@@ -55,7 +55,6 @@ if (space) {
   })
 }
 
-
 // Quiz mode timer logic
 const startQuizTimer = () => {
   if (isQuizMode.value && !showAnswer.value) {
@@ -101,7 +100,7 @@ const toggleAnswer = () => {
         if (answerSection.value) {
           answerSection.value.scrollIntoView({
             behavior: 'smooth',
-            block: 'start'
+            block: 'start',
           })
         }
       }, 100) // Wait for transition
@@ -120,7 +119,7 @@ onMounted(() => {
 const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
   easy: 'success',
   medium: 'warning',
-  hard: 'error'
+  hard: 'error',
 }
 
 // Share URL
@@ -130,7 +129,6 @@ const shareUrl = computed(() => {
   }
   return ''
 })
-
 </script>
 
 <template>
@@ -146,9 +144,7 @@ const shareUrl = computed(() => {
             <UBadge color="neutral" variant="subtle" size="xs">
               {{ props.category }}
             </UBadge>
-            <UBadge color="neutral" variant="outline" size="xs">
-              #{{ props.id }}
-            </UBadge>
+            <UBadge color="neutral" variant="outline" size="xs"> #{{ props.id }} </UBadge>
           </div>
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">
             {{ props.title }}
@@ -187,7 +183,11 @@ const shareUrl = computed(() => {
 
         <!-- Keyboard shortcut hint -->
         <p v-if="!isQuizMode" class="text-xs text-gray-500 dark:text-gray-400">
-          Raccourci: <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">Espace</kbd> 
+          Raccourci:
+          <kbd
+            class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700"
+            >Espace</kbd
+          >
         </p>
 
         <!-- Reveal statistics -->
@@ -208,7 +208,11 @@ const shareUrl = computed(() => {
         leave-from-class="opacity-100 transform translate-y-0"
         leave-to-class="opacity-0 transform -translate-y-4"
       >
-        <div v-if="showAnswer" ref="answerSection" class="prose prose-gray dark:prose-invert max-w-none border-t pt-6">
+        <div
+          v-if="showAnswer"
+          ref="answerSection"
+          class="prose prose-gray dark:prose-invert max-w-none border-t pt-6"
+        >
           <h3 class="text-lg font-semibold text-green-600 dark:text-green-400 mb-4">Réponse</h3>
           <slot name="answer" />
         </div>
@@ -239,7 +243,10 @@ const shareUrl = computed(() => {
           <ShareButton v-if="shareUrl" :url="shareUrl" :title="title" />
         </div>
         <div class="text-xs text-gray-500">
-          <NuxtLink :to="localePath(`/${category}/${slug}`)" class="hover:text-primary-500 transition-colors">
+          <NuxtLink
+            :to="localePath(`/${category}/${slug}`)"
+            class="hover:text-primary-500 transition-colors"
+          >
             Permalink
           </NuxtLink>
         </div>

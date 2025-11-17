@@ -1,16 +1,13 @@
 ---
 id: 17
 slug: explain-pure-and-impure-functions-in-javascript
-title: "Expliquez les fonctions pures et impures en JavaScript."
+title: 'Expliquez les fonctions pures et impures en JavaScript.'
 category: javascript
 difficulty: easy
-tags: ["variables","var","let","const","this"]
+tags: ['variables', 'var', 'let', 'const', 'this']
 ---
 
 # Expliquez les fonctions pures et impures en JavaScript.
-
-
-
 
 #### Fonction pure :
 
@@ -18,7 +15,7 @@ Une fonction pure est une fonction qui retourne toujours le même résultat si l
 
 ```javascript
 function add(a, b) {
-  return a + b;
+  return a + b
 }
 ```
 
@@ -31,15 +28,15 @@ Dans cet Exemple, La `add` fonction is pure because it only depends on its input
 Une fonction impure est une fonction qui dépend ou modifie l'état externe ou a des effets secondaires.
 
 ```javascript
-let total = 0;
+let total = 0
 
 function addToTotal(value) {
-  total += value;
+  total += value
 }
 
 // Example usage of the impure function
-addToTotal(5);
-console.log(total); // Output: 5
+addToTotal(5)
+console.log(total) // Output: 5
 ```
 
 Dans cet case, `addToTotal` is impure because it modifies La external variable `total` and has a side effect that can affect other parts of La program.

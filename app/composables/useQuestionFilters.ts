@@ -34,8 +34,12 @@ export const useQuestionFilters = () => {
 
   if (import.meta.client) {
     searchQuery.value = (route.query.search as string) || ''
-    selectedDifficulties.value = parseQueryArray(route.query.difficulty as LocationQueryValue | LocationQueryValue[]) as DifficultyLevel[]
-    selectedTags.value = parseQueryArray(route.query.tags as LocationQueryValue | LocationQueryValue[])
+    selectedDifficulties.value = parseQueryArray(
+      route.query.difficulty as LocationQueryValue | LocationQueryValue[]
+    ) as DifficultyLevel[]
+    selectedTags.value = parseQueryArray(
+      route.query.tags as LocationQueryValue | LocationQueryValue[]
+    )
     selectedStatus.value = (route.query.status as FilterStatus) || 'all'
     showOnlyFavorites.value = Boolean(route.query.favorites === 'true')
   }
@@ -81,9 +85,9 @@ export const useQuestionFilters = () => {
 
     const titleMatch = normalizeString(question.meta?.title).includes(normalizedQuery)
 
-    const tagsMatch = question.meta?.tags?.some((tag: string) =>
-      normalizeString(tag).includes(normalizedQuery)
-    ) ?? false
+    const tagsMatch =
+      question.meta?.tags?.some((tag: string) => normalizeString(tag).includes(normalizedQuery)) ??
+      false
 
     return titleMatch || tagsMatch
   }

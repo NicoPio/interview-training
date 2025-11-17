@@ -90,10 +90,10 @@ Each question is a Markdown file with YAML frontmatter:
 ---
 id: 1
 slug: how-to-detect-primitives
-title: "How do you detect primitive or non-primitive value types in JavaScript?"
+title: 'How do you detect primitive or non-primitive value types in JavaScript?'
 category: javascript
 difficulty: easy
-tags: ["primitives", "types", "typeof"]
+tags: ['primitives', 'types', 'typeof']
 ---
 
 ::question
@@ -111,6 +111,7 @@ In JavaScript, values are categorized as either primitive or non-primitive...
 ### QuestionCard
 
 Interactive flashcard component with:
+
 - Question display
 - Reveal answer button with animation
 - Difficulty and category badges
@@ -120,6 +121,7 @@ Interactive flashcard component with:
 ### TableOfContents
 
 Sidebar navigation with:
+
 - List of all questions
 - Active question highlight
 - Difficulty indicators
@@ -129,6 +131,7 @@ Sidebar navigation with:
 ### Interview Layout
 
 Main application layout featuring:
+
 - Sticky header with branding
 - Sidebar (desktop) / Drawer (mobile)
 - Color mode toggle
@@ -165,10 +168,10 @@ touch content/javascript/q027-your-question.md
 ---
 id: 27
 slug: your-question-slug
-title: "Your Question Title"
+title: 'Your Question Title'
 category: javascript
 difficulty: medium
-tags: ["tag1", "tag2"]
+tags: ['tag1', 'tag2']
 ---
 
 ::question
@@ -195,6 +198,7 @@ node scripts/split-content.js
 See [documentation/ROADMAP.md](documentation/ROADMAP.md) for the complete development roadmap.
 
 ### ✅ Completed
+
 - ✅ Content restructuring with individual files (26+ questions)
 - ✅ QuestionCard component with reveal functionality and animations
 - ✅ Answer reveal tracking with time-to-reveal metrics
@@ -214,6 +218,7 @@ See [documentation/ROADMAP.md](documentation/ROADMAP.md) for the complete develo
 - ✅ Static site generation for GitHub Pages
 
 ### 🔮 Future Enhancements
+
 - PWA support with offline capability
 - Visual regression testing
 - E2E testing with Playwright

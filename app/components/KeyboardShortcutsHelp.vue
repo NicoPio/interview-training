@@ -5,11 +5,11 @@ const shortcuts = [
   {
     category: 'Navigation',
     items: [
-      { keys: ['H'], description: 'Aller à l\'accueil' },
+      { keys: ['H'], description: "Aller à l'accueil" },
       { keys: ['←'], description: 'Question précédente' },
       { keys: ['→'], description: 'Question suivante' },
       { keys: ['/'], description: 'Focus sur la recherche' },
-    ]
+    ],
   },
   {
     category: 'Actions',
@@ -17,8 +17,8 @@ const shortcuts = [
       { keys: ['Space'], description: 'Révéler/Cacher la réponse' },
       { keys: ['?'], description: 'Afficher cette aide' },
       { keys: ['Esc'], description: 'Fermer les modales' },
-    ]
-  }
+    ],
+  },
 ]
 </script>
 
@@ -63,15 +63,11 @@ const shortcuts = [
     </template>
 
     <template #footer>
-      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 w-full p-4 border-t dark:border-gray-800">
+      <div
+        class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 w-full p-4 border-t dark:border-gray-800"
+      >
         <span>Les raccourcis sont désactivés dans les champs de saisie</span>
-        <UButton
-          color="primary"
-          size="sm"
-          @click="showHelp = false"
-        >
-          Fermer
-        </UButton>
+        <UButton color="primary" size="sm" @click="showHelp = false"> Fermer </UButton>
       </div>
     </template>
   </UModal>

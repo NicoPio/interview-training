@@ -56,10 +56,10 @@ Each question uses this markdown structure with YAML frontmatter:
 ---
 id: 1
 slug: question-slug
-title: "Question title"
+title: 'Question title'
 category: javascript
 difficulty: easy|medium|hard
-tags: ["tag1", "tag2"]
+tags: ['tag1', 'tag2']
 ---
 
 ::question
@@ -86,6 +86,7 @@ node scripts/split-content.js  # Split monolithic content
 ## Code Conventions
 
 ### Vue/Nuxt
+
 - **Composition API** only with "script setup" sugar syntax (no Options API)
 - **Script Setup** with TypeScript
 - **Auto-imports**: composables, components, Vue APIs (configured by Nuxt)
@@ -93,16 +94,19 @@ node scripts/split-content.js  # Split monolithic content
 - use useState for common store
 
 ### TypeScript
+
 - Strict types enabled
 - Type props, emits, returns
 - No `any` unless justified exception
 
 ### Styling
+
 - **TailwindCSS 4** for styling
 - Use **Nuxt UI components** when available
 - Utility classes over custom CSS
 
 ### i18n
+
 - Default locale: **French**
 - English available via `/en` prefix
 - Use `$t()` for translations
@@ -130,6 +134,7 @@ node scripts/split-content.js  # Split monolithic content
 ## Nuxt Studio
 
 Nuxt Studio integration active for online content editing:
+
 - Admin route: `/_studio`
 - Repository: NicoPio/interview-training
 - Branch: main
@@ -145,6 +150,7 @@ Nuxt Studio integration active for online content editing:
 ## Implemented Features
 
 ✅ Phase 1-3 (Completed)
+
 - QuestionCard with reveal animation
 - TableOfContents navigation
 - Dynamic routing
@@ -154,6 +160,7 @@ Nuxt Studio integration active for online content editing:
 - Favorites system
 
 🚧 Phase 4-5 (In Progress)
+
 - Advanced search
 - Multiple filters
 - Share functionality
@@ -182,6 +189,7 @@ Nuxt Studio integration active for online content editing:
 ## Complete Documentation
 
 Comprehensive project documentation available in `specs/001-project-documentation/`:
+
 - **spec.md**: Complete specification with 8 user stories, 71 functional requirements
 - **plan.md**: Implementation plan with technical stack analysis
 - **research.md**: Technology decisions and architectural patterns

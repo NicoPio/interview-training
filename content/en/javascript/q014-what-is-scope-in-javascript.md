@@ -1,15 +1,13 @@
 ---
 id: 14
 slug: what-is-scope-in-javascript
-title: "What is scope in JavaScript?"
+title: 'What is scope in JavaScript?'
 category: javascript
 difficulty: medium
-tags: ["variables", "var", "let", "const", "this"]
+tags: ['variables', 'var', 'let', 'const', 'this']
 ---
 
 # What is scope in JavaScript?
-
-
 
 In JavaScript, the term "scope" refers to the context in which variables and functions are declared and accessed. It defines the visibility and accessibility of these variables and functions within the code. Understanding scope is crucial for managing the lifecycle and behavior of variables and functions in a program.
 
@@ -19,14 +17,14 @@ In JavaScript, the term "scope" refers to the context in which variables and fun
 - Global variables are accessible throughout the entire code, including within functions.
 
 ```javascript
-var globalVar = "I am global";
+var globalVar = 'I am global'
 
 function exampleFunction() {
-  console.log(globalVar); // Accessible inside the function
+  console.log(globalVar) // Accessible inside the function
 }
 
-exampleFunction();
-console.log(globalVar); // Accessible outside the function
+exampleFunction()
+console.log(globalVar) // Accessible outside the function
 ```
 
 **Local Scope:**
@@ -36,11 +34,11 @@ console.log(globalVar); // Accessible outside the function
 
 ```javascript
 function exampleFunction() {
-  var localVar = "I am local";
-  console.log(localVar); // Accessible inside the function
+  var localVar = 'I am local'
+  console.log(localVar) // Accessible inside the function
 }
 
-exampleFunction();
+exampleFunction()
 // console.log(localVar); // This would result in an error because localVar is not accessible outside the function
 ```
 

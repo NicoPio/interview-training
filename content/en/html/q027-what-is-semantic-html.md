@@ -1,15 +1,13 @@
 ---
 id: 27
 slug: what-is-semantic-html
-title: "What is Semantic HTML?"
+title: 'What is Semantic HTML?'
 category: html
 difficulty: easy
-tags: ["html", "semantics", "accessibility"]
+tags: ['html', 'semantics', 'accessibility']
 ---
 
 # What is Semantic HTML?
-
-
 
 Semantic HTML refers to the use of HTML markup to reinforce the meaning of content on web pages, rather than merely defining its appearance. Semantic HTML uses HTML tags that carry meaning about the content they contain.
 

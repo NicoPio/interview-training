@@ -206,7 +206,8 @@ test.describe('US2-US3: Answer Reveal and Progress Tracking', () => {
       if (revealState) {
         const parsed = JSON.parse(revealState)
         const hasTimingData = Object.values(parsed).some(
-          (state: { revealedAt?: number; timeToReveal?: number }) => state.revealedAt || state.timeToReveal
+          (state: { revealedAt?: number; timeToReveal?: number }) =>
+            state.revealedAt || state.timeToReveal
         )
         console.log('✓ Time-to-reveal tracked:', hasTimingData)
       }

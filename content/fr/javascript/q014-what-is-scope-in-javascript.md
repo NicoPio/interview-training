@@ -4,12 +4,10 @@ slug: what-is-scope-in-javascript
 title: "Qu'est-ce que la portée (scope) en JavaScript ?"
 category: javascript
 difficulty: medium
-tags: ["variables","var","let","const","this"]
+tags: ['variables', 'var', 'let', 'const', 'this']
 ---
 
 # Qu'est-ce que la portée (Portée) en JavaScript ?
-
-
 
 En JavaScript, le terme "portée" fait référence au contexte dans lequel les variables et fonctions sont déclarées et accessibles. Il définit la visibilité et l'accessibilité de ces variables et fonctions dans le code. Comprendre la portée est crucial pour gérer le cycle de vie et le comportement des variables et fonctions dans un programme.
 
@@ -19,14 +17,14 @@ En JavaScript, le terme "portée" fait référence au contexte dans lequel les v
 - Les variables globales sont accessibles dans tout le code, y compris dans les fonctions.
 
 ```javascript
-var globalVar = "I am global";
+var globalVar = 'I am global'
 
 function exampleFunction() {
-  console.log(globalVar); // Accessible inside the function
+  console.log(globalVar) // Accessible inside the function
 }
 
-exampleFunction();
-console.log(globalVar); // Accessible outside the function
+exampleFunction()
+console.log(globalVar) // Accessible outside the function
 ```
 
 **Portée locale :**
@@ -36,11 +34,11 @@ console.log(globalVar); // Accessible outside the function
 
 ```javascript
 function exampleFunction() {
-  var localVar = "I am local";
-  console.log(localVar); // Accessible inside the function
+  var localVar = 'I am local'
+  console.log(localVar) // Accessible inside the function
 }
 
-exampleFunction();
+exampleFunction()
 // console.log(localVar); // This would result in an error because localVar is not accessible outside the function
 ```
 

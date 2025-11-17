@@ -68,7 +68,13 @@ const isDifficultySelected = (value: DifficultyLevel) => {
       </div>
     </UFormField>
 
-    <UFormField :label="selectedTags.length > 0 ? `${t('filters.tags.label')} (${selectedTags.length})` : t('filters.tags.label')">
+    <UFormField
+      :label="
+        selectedTags.length > 0
+          ? `${t('filters.tags.label')} (${selectedTags.length})`
+          : t('filters.tags.label')
+      "
+    >
       <USelectMenu
         v-model="selectedTags"
         :options="tagOptions"
@@ -86,7 +92,9 @@ const isDifficultySelected = (value: DifficultyLevel) => {
       <UCheckbox v-model="showOnlyFavorites" :label="t('filters.favorites')" />
     </div>
 
-    <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
+    <div
+      class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800"
+    >
       <UButton
         :disabled="activeCount === 0"
         variant="outline"

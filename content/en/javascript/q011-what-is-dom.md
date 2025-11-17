@@ -1,15 +1,13 @@
 ---
 id: 11
 slug: what-is-dom
-title: "What is DOM?"
+title: 'What is DOM?'
 category: javascript
 difficulty: easy
-tags: ["variables", "var", "let", "const", "dom"]
+tags: ['variables', 'var', 'let', 'const', 'dom']
 ---
 
 # What is DOM?
-
-
 
 DOM stands for Document Object Model, serving as a programming interface for web documents.
 

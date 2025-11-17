@@ -16,7 +16,7 @@ const stateStore = new Map()
 
 global.useState = vi.fn((key: string, init?: () => unknown) => {
   if (!stateStore.has(key)) {
-    const initialValue = typeof init === 'function' ? init() : init ?? null
+    const initialValue = typeof init === 'function' ? init() : (init ?? null)
     stateStore.set(key, ref(initialValue))
   }
   return stateStore.get(key)

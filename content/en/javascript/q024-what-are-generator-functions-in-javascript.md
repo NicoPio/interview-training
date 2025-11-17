@@ -1,15 +1,13 @@
 ---
 id: 24
 slug: what-are-generator-functions-in-javascript
-title: "What are generator functions in JavaScript?"
+title: 'What are generator functions in JavaScript?'
 category: javascript
 difficulty: easy
-tags: ["this", "context", "call", "apply", "bind"]
+tags: ['this', 'context', 'call', 'apply', 'bind']
 ---
 
 # What are generator functions in JavaScript?
-
-
 
 In JavaScript, generator functions are a special kind of function that allows you to control the execution flow and pause/resume it at certain points. Generator functions are defined using the `function*` syntax and use the `yield` keyword to produce a sequence of values. When a generator function is called, it returns an iterator called a generator.
 
@@ -17,17 +15,17 @@ In JavaScript, generator functions are a special kind of function that allows yo
 
 ```javascript
 function* simpleGenerator() {
-  yield 1;
-  yield 2;
-  yield 3;
+  yield 1
+  yield 2
+  yield 3
 }
 
-const generator = simpleGenerator();
+const generator = simpleGenerator()
 
-console.log(generator.next()); // { value: 1, done: false }
-console.log(generator.next()); // { value: 2, done: false }
-console.log(generator.next()); // { value: 3, done: false }
-console.log(generator.next()); // { value: undefined, done: true }
+console.log(generator.next()) // { value: 1, done: false }
+console.log(generator.next()) // { value: 2, done: false }
+console.log(generator.next()) // { value: 3, done: false }
+console.log(generator.next()) // { value: undefined, done: true }
 ```
 
 In this example:

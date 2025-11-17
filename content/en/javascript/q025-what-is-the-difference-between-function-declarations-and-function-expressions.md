@@ -1,15 +1,13 @@
 ---
 id: 25
 slug: what-is-the-difference-between-function-declarations-and-function-expressions
-title: "What is the difference between function declarations and function expressions?"
+title: 'What is the difference between function declarations and function expressions?'
 category: javascript
 difficulty: easy
-tags: ["variables", "var", "let", "const", "hoisting"]
+tags: ['variables', 'var', 'let', 'const', 'hoisting']
 ---
 
 # What is the difference between function declarations and function expressions?
-
-
 
 **Function Declaration:**
 
@@ -21,7 +19,7 @@ tags: ["variables", "var", "let", "const", "hoisting"]
 
 ```javascript
 function add(a, b) {
-  return a + b;
+  return a + b
 }
 ```
 
@@ -35,8 +33,8 @@ function add(a, b) {
 
 ```javascript
 var add = function (a, b) {
-  return a + b;
-};
+  return a + b
+}
 ```
 
 In this example, `add` is a variable that holds an anonymous function. Function declarations are hoisted, while function expressions are not hoisted in the same way. If you try to call a function expression before its definition, you'll get an error.

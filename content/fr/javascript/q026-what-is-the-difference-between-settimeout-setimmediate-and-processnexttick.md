@@ -1,16 +1,13 @@
 ---
 id: 26
 slug: what-is-the-difference-between-settimeout-setimmediate-and-processnexttick
-title: "Quelle est la différence entre setTimeout, setImmediate et process.nextTick ?"
+title: 'Quelle est la différence entre setTimeout, setImmediate et process.nextTick ?'
 category: javascript
 difficulty: easy
-tags: ["this","context","call","apply","bind"]
+tags: ['this', 'context', 'call', 'apply', 'bind']
 ---
 
-
 # Quelle est la différence entre setTimeout, setImmediate et process.nextTick ?
-
-
 
 **1. setTimeout :**
 
@@ -21,8 +18,8 @@ tags: ["this","context","call","apply","bind"]
 
 ```javascript
 setTimeout(() => {
-  console.log("This will be executed after 1000 milliseconds");
-}, 1000);
+  console.log('This will be executed after 1000 milliseconds')
+}, 1000)
 ```
 
 **2. setImmediate :**
@@ -34,8 +31,8 @@ setTimeout(() => {
 
 ```javascript
 setImmediate(() => {
-  console.log("This will be executed in the next iteration of the event loop");
-});
+  console.log('This will be executed in the next iteration of the event loop')
+})
 ```
 
 **3. process.nextTick :**
@@ -47,13 +44,12 @@ setImmediate(() => {
 
 ```javascript
 process.nextTick(() => {
-  console.log("This will be executed in the next event loop cycle");
-});
+  console.log('This will be executed in the next event loop cycle')
+})
 ```
 
 Ces fonctions sont toutes utilisées dans Node.js pour planifier l'exécution de callbacks, mais elles diffèrent en termes de moment où le callback sera exécuté.
 
 [↑ Back to haut](# table-of-Contenus)
-
 
 [↑ Back to haut](# table-of-Contenus)

@@ -79,10 +79,10 @@ Create a new markdown file in `content/{locale}/{category}/`:
 ---
 id: 99
 slug: your-question-slug
-title: "Your Question Title"
+title: 'Your Question Title'
 category: javascript
 difficulty: easy|medium|hard
-tags: ["tag1", "tag2"]
+tags: ['tag1', 'tag2']
 ---
 
 # Your Question Title

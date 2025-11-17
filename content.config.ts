@@ -1,4 +1,4 @@
-import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 
 // Common schema for all content (reserved for future use)
 const _commonSchema = z.object({
@@ -29,4 +29,4 @@ export default defineContentConfig({
       },
     }),
   },
-});
+})

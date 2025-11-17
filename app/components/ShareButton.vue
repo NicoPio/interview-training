@@ -18,31 +18,41 @@ const handleCopyLink = () => {
 const handleShareTwitter = () => {
   const text = encodeURIComponent(`${props.title} - JS Interview Prep`)
   const url = encodeURIComponent(props.url)
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=550,height=420')
+  window.open(
+    `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+    '_blank',
+    'width=550,height=420'
+  )
 }
 
 const handleShareLinkedIn = () => {
   const url = encodeURIComponent(props.url)
-  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=550,height=420')
+  window.open(
+    `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+    '_blank',
+    'width=550,height=420'
+  )
 }
 
-const shareOptions = computed<DropdownMenuItem[][]>(() => [[
-  {
-    label: 'Copier le lien',
-    icon: 'i-heroicons-link',
-    onSelect: handleCopyLink
-  },
-  {
-    label: 'Twitter',
-    icon: 'i-heroicons-at-symbol',
-    onSelect: handleShareTwitter
-  },
-  {
-    label: 'LinkedIn',
-    icon: 'i-heroicons-briefcase',
-    onSelect: handleShareLinkedIn
-  }
-]])
+const shareOptions = computed<DropdownMenuItem[][]>(() => [
+  [
+    {
+      label: 'Copier le lien',
+      icon: 'i-heroicons-link',
+      onSelect: handleCopyLink,
+    },
+    {
+      label: 'Twitter',
+      icon: 'i-heroicons-at-symbol',
+      onSelect: handleShareTwitter,
+    },
+    {
+      label: 'LinkedIn',
+      icon: 'i-heroicons-briefcase',
+      onSelect: handleShareLinkedIn,
+    },
+  ],
+])
 </script>
 
 <template>

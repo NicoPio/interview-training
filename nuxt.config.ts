@@ -1,26 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
   // Enable SSR for proper content rendering
   ssr: true,
 
   vite: { plugins: [tailwindcss()] },
-  css: ["./app/assets/css/main.css"],
+  css: ['./app/assets/css/main.css'],
   modules: [
-    "@nuxt/content",
-    "@nuxt/eslint",
-    "@nuxt/image",
-    "@nuxt/scripts",
-    "@nuxt/test-utils/module",
-    "@nuxt/ui",
-    "@vueuse/nuxt",
-    "@nuxtjs/i18n",
-    "@nuxtjs/sitemap",
-    'nuxt-studio'
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxt/scripts',
+    '@nuxt/test-utils/module',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/sitemap',
+    'nuxt-studio',
   ],
   i18n: {
     locales: [
@@ -37,31 +37,28 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/'],
       crawlLinks: true, // Auto-discover all routes
-    }
+    },
   },
 
   // GitHub Pages base URL (uncomment and update if deploying to a repo page)
   app: {
-    baseURL: '/interview-training/'
+    baseURL: '/interview-training/',
   },
 
   // Sitemap configuration
   site: {
     url: 'https://nicopio.github.io/interview-training',
-    name: 'JS Interview Prep'
+    name: 'JS Interview Prep',
   },
 
   sitemap: {
     strictNuxtContentPaths: true,
-    exclude: [
-      '/_studio/**',
-      '/api/**'
-    ]
+    exclude: ['/_studio/**', '/api/**'],
   },
   content: {
     preview: {
-      api: 'https://api.nuxt.studio'
-    }
+      api: 'https://api.nuxt.studio',
+    },
   },
   studio: {
     // Studio admin route (default: '/_studio')
@@ -73,7 +70,7 @@ export default defineNuxtConfig({
       owner: 'NicoPio', // your GitHub username or organization
       repo: 'interview-training', // your repository name (not full URL)
       branch: 'main', // the branch to commit to (default: main)
-      rootDir: '' // Nuxt app is at the root of the repository
-    }
+      rootDir: '', // Nuxt app is at the root of the repository
+    },
   },
-});
+})

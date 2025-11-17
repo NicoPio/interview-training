@@ -15,6 +15,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Nuxt 4 (latest stable version)
 
 **Rationale**:
+
 - **File-based routing**: Automatic route generation from `app/pages/` structure eliminates manual route configuration
 - **Auto-imports**: Components, composables, and Vue APIs are automatically imported, reducing boilerplate
 - **Hybrid rendering**: SSR enabled for SEO while supporting client-side hydration for interactivity
@@ -24,11 +25,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Developer experience**: Hot module replacement, dev tools, and excellent error messages
 
 **Alternatives considered**:
+
 - **Next.js 14**: Similar capabilities but requires more configuration for static export and has different conventions
 - **Astro**: Excellent for content-heavy sites but less suitable for interactive SPAs with complex state management
 - **Vite + Vue 3**: More control but requires manual setup of routing, SSR, static generation, and module integration
 
 **Implementation details**:
+
 - SSR enabled: `ssr: true` in nuxt.config.ts
 - Nitro preset: `github-pages` for static deployment
 - Prerendering: `crawlLinks: true` auto-discovers all routes
@@ -41,6 +44,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Nuxt Content v3 with markdown-based content
 
 **Rationale**:
+
 - **Markdown-first**: Question content authored in familiar markdown with YAML frontmatter
 - **Type-safe queries**: `queryCollection()` API provides TypeScript-aware content fetching
 - **File-based CMS**: Content lives in `content/` directory, version-controlled with git
@@ -50,11 +54,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Git-based workflow**: Content updates via commits, ideal for technical audiences
 
 **Alternatives considered**:
+
 - **Headless CMS (Strapi, Contentful)**: Adds runtime API dependencies, hosting costs, and complexity. Overkill for ~26 questions.
 - **Static JSON files**: Less human-friendly for authoring content with code blocks and formatting
 - **Database + API**: Contradicts static-first architecture; requires backend hosting
 
 **Implementation details**:
+
 - Content structure: `content/{locale}/{category}/q{number}-{slug}.md`
 - Frontmatter schema: id, slug, title, category, difficulty, tags
 - Custom slots: `::question` and `::answer` for structured content
@@ -67,6 +73,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Nuxt UI (official component library)
 
 **Rationale**:
+
 - **Official integration**: Built specifically for Nuxt with zero configuration
 - **Composition-ready**: Works seamlessly with Vue 3 Composition API and script setup
 - **Accessible**: ARIA-compliant components with keyboard navigation
@@ -77,12 +84,14 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Consistent design**: Cohesive component library reduces custom component needs
 
 **Alternatives considered**:
+
 - **PrimeVue**: More comprehensive but heavier bundle size and less Nuxt-specific
 - **Headless UI**: Requires more custom styling, less out-of-the-box functionality
 - **Vuetify**: Material Design focused, larger bundle, Vue 2 legacy concerns
 - **Custom components**: More control but significant development time for basics like buttons, badges, cards
 
 **Implementation details**:
+
 - Components used: UCard, UButton, UBadge, UIcon, UColorModeButton
 - Auto-imported: All Nuxt UI components available without imports
 - Color mode: Automatic persistence via localStorage
@@ -95,6 +104,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: TailwindCSS 4 (latest version)
 
 **Rationale**:
+
 - **Utility-first**: Rapid UI development with utility classes
 - **Design system**: Consistent spacing, colors, typography via Tailwind configuration
 - **JIT compilation**: Only used classes included in final CSS bundle
@@ -105,11 +115,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Nuxt UI compatibility**: Nuxt UI components extend Tailwind's design tokens
 
 **Alternatives considered**:
+
 - **UnoCSS**: Faster JIT but less ecosystem maturity and tooling
 - **Custom CSS**: More control but loses utility-first benefits and design consistency
 - **CSS Modules**: More verbose, requires more boilerplate
 
 **Implementation details**:
+
 - Integration: `@tailwindcss/vite` plugin in Vite config
 - Configuration: Extends default Tailwind theme for Nuxt UI integration
 - Dark mode: `class` strategy with Nuxt UI color mode
@@ -122,6 +134,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Nuxt i18n module
 
 **Rationale**:
+
 - **Official module**: Maintained by Nuxt team with first-class support
 - **Route-based**: Automatic locale prefixing (`/en/*` for English)
 - **Content integration**: Works with Nuxt Content for locale-specific collections
@@ -131,10 +144,12 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Persistent preference**: Locale stored and restored across sessions
 
 **Alternatives considered**:
+
 - **Vue i18n standalone**: Requires manual routing setup and less Nuxt integration
 - **Custom solution**: Would reinvent the wheel for locale routing and content fetching
 
 **Implementation details**:
+
 - Locales: French (default, no prefix) and English (`/en` prefix)
 - Strategy: `prefix` with `defaultLocale: 'fr'`
 - Translation files: `i18n/{locale}.json` for UI strings
@@ -147,6 +162,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Composables with Nuxt `useState` for shared state
 
 **Rationale**:
+
 - **Built-in**: Nuxt's `useState` provides SSR-safe reactive state
 - **Composable pattern**: Reusable logic encapsulated in composables
 - **Type-safe**: Full TypeScript inference for state and methods
@@ -156,11 +172,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Tree-shakeable**: Unused composables excluded from bundle
 
 **Alternatives considered**:
+
 - **Pinia**: Overkill for simple client-side state; adds bundle weight
 - **Vuex**: Legacy store pattern, more verbose than composables
 - **Vanilla reactive()**: No SSR safety guarantees, manual singleton management
 
 **Implementation details**:
+
 - Composables: `useFavorites`, `useQuestionProgress`, `useQuestionFilters`, `useAnswerRevealState`, `useQuizMode`
 - State initialization: From localStorage on client-side mount
 - Persistence: `watch()` with deep option syncs to localStorage
@@ -173,6 +191,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Motion-v for Vue 3 animations
 
 **Rationale**:
+
 - **Vue 3 native**: Built specifically for Vue 3 Composition API
 - **Performant**: GPU-accelerated transforms and opacity
 - **Simple API**: Declarative animation syntax via directives
@@ -181,11 +200,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **SSR compatible**: No client-side rendering issues
 
 **Alternatives considered**:
+
 - **GSAP**: More powerful but heavier bundle and steeper learning curve
 - **CSS transitions**: Less dynamic, requires more manual state management
 - **Framer Motion**: React-specific, not Vue compatible
 
 **Implementation details**:
+
 - Answer reveal: 300ms opacity + transform transition
 - Hover effects: Scale and shadow transitions on cards
 - Page transitions: Smooth navigation between routes
@@ -197,6 +218,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: VueUse composables library
 
 **Rationale**:
+
 - **Comprehensive**: 200+ composables for common browser APIs
 - **Type-safe**: Full TypeScript support
 - **Tree-shakeable**: Import only what's used
@@ -205,10 +227,12 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Composition API first**: Designed for Vue 3 script setup
 
 **Alternatives considered**:
+
 - **Custom composables**: Reinventing the wheel for common patterns
 - **Vanilla APIs**: More verbose, requires manual cleanup and SSR guards
 
 **Implementation details**:
+
 - `useMagicKeys`: Keyboard shortcut handling (Spacebar for answer reveal)
 - `whenever`: Reactive side effects for keyboard events
 - Other utilities available for future features (useScroll, useIntersectionObserver, etc.)
@@ -220,6 +244,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: TypeScript with strict mode
 
 **Rationale**:
+
 - **Type safety**: Catch errors at compile time
 - **Nuxt native**: Zero-config TypeScript support
 - **IntelliSense**: Autocomplete for Vue components, props, APIs
@@ -228,9 +253,11 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Ecosystem**: Most Nuxt modules provide full TypeScript support
 
 **Alternatives considered**:
+
 - **JavaScript**: Less safety, more runtime errors, worse DX
 
 **Implementation details**:
+
 - Strict mode: Enforced via Nuxt's generated tsconfig
 - No `any` types: Explicit types for all props, emits, composables
 - Interface definitions: Clear contracts for Question, Progress, etc.
@@ -242,6 +269,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Decision**: Static deployment to GitHub Pages
 
 **Rationale**:
+
 - **Free hosting**: No server costs for static sites
 - **Zero configuration**: Nitro's `github-pages` preset handles everything
 - **Git-based deployment**: Automatic deploys via GitHub Actions
@@ -250,11 +278,13 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Custom domains**: Support for custom domain configuration
 
 **Alternatives considered**:
+
 - **Vercel**: Commercial platform, less control over deployment
 - **Netlify**: Similar to Vercel, adds external dependency
 - **Self-hosted**: Requires server maintenance and costs
 
 **Implementation details**:
+
 - Preset: `github-pages` in nitro config
 - Base URL: `/interview-training/` for repo-based deployment
 - Build output: Static HTML, CSS, JS in `dist/` directory
@@ -269,6 +299,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Pattern**: Pre-render all routes at build time
 
 **Benefits**:
+
 - **Performance**: Instant page loads from static HTML
 - **SEO**: Full HTML content available for crawlers
 - **Cost**: Zero backend hosting costs
@@ -276,6 +307,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **Security**: No server-side vulnerabilities
 
 **Implementation**:
+
 - Build command: `nuxt generate`
 - Output: Static HTML for all routes in `/dist`
 - Route discovery: Automatic crawling from homepage
@@ -288,6 +320,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Pattern**: Reusable Vue components with clear responsibilities
 
 **Components**:
+
 - **QuestionCard**: Flashcard with reveal animation, progress tracking
 - **ProgressBar**: Visual progress indicators with statistics
 - **SearchBar**: Search input with result count
@@ -296,6 +329,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **TableOfContents**: Sidebar navigation (future enhancement)
 
 **Benefits**:
+
 - **Reusability**: Components used across multiple pages
 - **Testability**: Isolated component testing
 - **Maintainability**: Single responsibility principle
@@ -308,6 +342,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Pattern**: Extract shared logic into reusable composables
 
 **Composables**:
+
 - **useFavorites**: Favorite management with localStorage sync
 - **useQuestionProgress**: Progress tracking (seen/mastered) with persistence
 - **useAnswerRevealState**: Answer reveal tracking with time metrics
@@ -315,6 +350,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 - **useQuizMode**: Quiz mode state management
 
 **Benefits**:
+
 - **Separation of concerns**: Business logic separate from UI
 - **Reusability**: Logic shared across components
 - **Testability**: Pure functions easy to unit test
@@ -327,18 +363,21 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Pattern**: Browser-only state with localStorage persistence
 
 **Strategy**:
+
 1. Initialize state from localStorage on mount (client-side only)
 2. Use Nuxt's `useState` for reactive singleton state
 3. Watch state changes and sync to localStorage
 4. Handle SSR by guarding browser APIs with `process.client`
 
 **Benefits**:
+
 - **Privacy**: No user data sent to servers
 - **Simplicity**: No backend database or API
 - **Performance**: Instant state access from memory
 - **Offline-capable**: Works without internet after initial load
 
 **Trade-offs**:
+
 - No cross-device sync
 - Data loss if localStorage is cleared
 - Per-browser storage (no account system)
@@ -350,6 +389,7 @@ The JS Interview Prep application is built on a modern, static-first architectur
 **Pattern**: Routes auto-generated from file structure
 
 **Structure**:
+
 ```
 app/pages/
 ├── index.vue              → /
@@ -359,10 +399,12 @@ app/pages/
 ```
 
 **i18n routing**:
+
 - French (default): `/`, `/javascript`, `/javascript/closure`
 - English: `/en`, `/en/javascript`, `/en/javascript/closure`
 
 **Benefits**:
+
 - **Convention over configuration**: No manual route definitions
 - **Type safety**: Route parameters inferred by Nuxt
 - **SEO**: Clean URLs with meaningful slugs
@@ -374,6 +416,7 @@ app/pages/
 **Pattern**: Version-controlled markdown content
 
 **Structure**:
+
 ```
 content/
 ├── fr/
@@ -388,6 +431,7 @@ content/
 ```
 
 **Benefits**:
+
 - **Version control**: Full git history for content changes
 - **Review process**: Content changes via pull requests
 - **Collaboration**: Contributors can add questions via markdown
@@ -425,11 +469,13 @@ content/
 **Approach**: All user data stored in localStorage
 
 **Benefits**:
+
 - No user data transmitted to servers
 - No backend security vulnerabilities
 - GDPR-friendly (no PII collection)
 
 **Risks**:
+
 - XSS attacks could access localStorage (mitigated by CSP headers)
 - No data backup or recovery (user responsibility)
 
@@ -438,6 +484,7 @@ content/
 **Recommendation**: Add CSP headers in deployment
 
 **Suggested policy**:
+
 ```
 Content-Security-Policy:
   default-src 'self';
@@ -455,6 +502,7 @@ Content-Security-Policy:
 **Capacity**: Easily supports 1000+ questions
 
 **Scaling considerations**:
+
 - Virtual scrolling for long lists (not yet needed)
 - Pagination for category pages (not yet implemented)
 - Search indexing (currently client-side, sufficient for <500 questions)
@@ -464,6 +512,7 @@ Content-Security-Policy:
 **Current features**: Browse, flashcards, progress, favorites, filters, quiz, i18n, dark mode
 
 **Potential additions** (out of scope):
+
 - Spaced repetition algorithm
 - Analytics dashboard
 - Social sharing
@@ -471,6 +520,7 @@ Content-Security-Policy:
 - Collaborative study features
 
 **Architectural constraints**:
+
 - Static-first approach limits real-time features
 - No backend means no user accounts or cross-device sync
 - Client-side only limits data processing capabilities
@@ -508,6 +558,7 @@ npm run preview      # Preview production build
 ### Browser Compatibility
 
 **Targets**: Modern evergreen browsers (last 2 versions)
+
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
@@ -524,6 +575,7 @@ npm run preview      # Preview production build
 
 **Standards**: WCAG 2.1 AA
 **Features**:
+
 - Semantic HTML
 - ARIA labels
 - Keyboard navigation
@@ -539,6 +591,7 @@ npm run preview      # Preview production build
 **Question**: Should we add analytics to track real-world performance?
 
 **Options**:
+
 - Google Analytics (privacy concerns)
 - Plausible Analytics (privacy-friendly)
 - No analytics (current approach)
@@ -550,11 +603,13 @@ npm run preview      # Preview production build
 **Question**: Should we add offline support via service workers?
 
 **Benefits**:
+
 - Offline access to questions
 - Install as native app
 - Better mobile experience
 
 **Costs**:
+
 - Cache management complexity
 - Additional testing burden
 - Bundle size increase
@@ -566,6 +621,7 @@ npm run preview      # Preview production build
 **Question**: Should we add a web-based content editor?
 
 **Options**:
+
 - Nuxt Studio (already configured)
 - Custom admin panel
 - Keep markdown-only workflow
