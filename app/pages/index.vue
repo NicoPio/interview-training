@@ -93,21 +93,21 @@ useSeoMeta({
     <!-- Hero Section -->
     <section class="container mx-auto px-4 py-16 md:py-24">
       <div class="max-w-4xl mx-auto text-center">
-        <div class="flex justify-center mb-6">
+        <div class="flex justify-center mb-6 animate-[scale-in_0.5s_ease-out]">
           <UIcon name="i-heroicons-code-bracket" class="text-6xl text-primary-500" />
         </div>
 
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 animate-[fade-in-up_0.6s_ease-out_0.1s_both]">
           Master Frontend
           <span class="text-primary-500">Interview Questions</span>
         </h1>
 
-        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-[fade-in-up_0.6s_ease-out_0.2s_both]">
           Practice with interactive flashcards covering essential JavaScript concepts.
           Reveal answers when ready and track your progress.
         </p>
 
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-4 animate-[fade-in-up_0.6s_ease-out_0.3s_both]">
           <UButton
             :to="localePath('/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript')"
             size="xl" icon="i-heroicons-play">
@@ -131,37 +131,34 @@ useSeoMeta({
     <section class="container mx-auto px-4 py-12">
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <UCard>
+          <UCard class="animate-[fade-in-up_0.6s_ease-out_0.4s_both]">
             <div class="text-center">
               <div class="text-3xl font-bold text-primary-500">{{ stats.total }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Questions</div>
             </div>
           </UCard>
           <UCard
-            class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+            class="cursor-pointer hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.45s_both]"
             :class="{ 'ring-2 ring-green-500': selectedDifficulties.includes('easy') }"
-            @click="toggleDifficultyFilter('easy')"
-          >
+            @click="toggleDifficultyFilter('easy')">
             <div class="text-center">
               <div class="text-3xl font-bold text-green-500">{{ stats.easy }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Easy</div>
             </div>
           </UCard>
           <UCard
-            class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+            class="cursor-pointer hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.5s_both]"
             :class="{ 'ring-2 ring-yellow-500': selectedDifficulties.includes('medium') }"
-            @click="toggleDifficultyFilter('medium')"
-          >
+            @click="toggleDifficultyFilter('medium')">
             <div class="text-center">
               <div class="text-3xl font-bold text-yellow-500">{{ stats.medium }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Medium</div>
             </div>
           </UCard>
           <UCard
-            class="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+            class="cursor-pointer hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.55s_both]"
             :class="{ 'ring-2 ring-red-500': selectedDifficulties.includes('hard') }"
-            @click="toggleDifficultyFilter('hard')"
-          >
+            @click="toggleDifficultyFilter('hard')">
             <div class="text-center">
               <div class="text-3xl font-bold text-red-500">{{ stats.hard }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hard</div>
@@ -200,15 +197,17 @@ useSeoMeta({
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
           <NuxtLink
-            v-for="question in filteredQuestions" :key="question.id"
-            :to="localePath(`/${question.meta.category}/${question.meta.slug}`)" class="block group">
-            <UCard class="hover:shadow-lg transition-all duration-200 hover:scale-[1.01]">
+            v-for="(question, index) in filteredQuestions"
+            :key="question.id"
+            :to="localePath(`/${question.meta.category}/${question.meta.slug}`)"
+            class="block group animate-[fade-in-up_0.5s_ease-out_both]"
+            :style="{ animationDelay: `${index * 0.03}s` }">
+            <UCard
+              class="hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-primary-500/20">
               <div class="flex items-start gap-4">
-
-
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors mb-2">
+                    class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors duration-200 mb-2">
                     {{ question.title }}
                   </h3>
 
@@ -228,7 +227,7 @@ useSeoMeta({
 
                 <UIcon
                   name="i-heroicons-chevron-right"
-                  class="text-gray-400 group-hover:text-primary-500 transition-colors shrink-0" />
+                  class="text-gray-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-200 shrink-0" />
               </div>
             </UCard>
           </NuxtLink>

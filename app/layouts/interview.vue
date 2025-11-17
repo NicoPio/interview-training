@@ -27,6 +27,9 @@ const route = useRoute()
 watch(() => route.path, () => {
   isSidebarOpen.value = false
 })
+
+// Initialize keyboard shortcuts
+const { showHelp } = useKeyboardShortcuts()
 </script>
 
 <template>
@@ -61,6 +64,15 @@ watch(() => route.path, () => {
                 to="/"
               >
                 <span class="hidden sm:inline">Search</span>
+              </UButton>
+              <UButton
+                icon="i-heroicons-question-mark-circle"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                @click="showHelp = true"
+              >
+                <span class="hidden sm:inline">Aide</span>
               </UButton>
               <LanguageSwitcher />
               <UColorModeButton />
@@ -153,6 +165,9 @@ watch(() => route.path, () => {
           </div>
         </div>
       </footer>
+
+      <!-- Keyboard Shortcuts Help Modal -->
+      <KeyboardShortcutsHelp />
     </div>
   </UApp>
 </template>

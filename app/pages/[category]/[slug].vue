@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Question } from '~/types'
+import { whenever } from '@vueuse/core'
 
 definePageMeta({
   layout: 'interview'
@@ -45,6 +46,29 @@ onMounted(() => {
     markAsSeen(String(question.value.id))
   }
 })
+
+// Keyboard navigation (Arrow Left/Right)
+const router = useRouter()
+const { keys } = useKeyboardShortcuts()
+const { arrowLeft, arrowRight } = keys
+
+// Navigate to previous question
+if (arrowLeft) {
+  whenever(arrowLeft, () => {
+    if (previousQuestion.value) {
+      router.push(localePath(`/${previousQuestion.value.meta.category}/${previousQuestion.value.meta.slug}`))
+    }
+  })
+}
+
+// Navigate to next question
+if (arrowRight) {
+  whenever(arrowRight, () => {
+    if (nextQuestion.value) {
+      router.push(localePath(`/${nextQuestion.value.meta.category}/${nextQuestion.value.meta.slug}`))
+    }
+  })
+}
 
 // Fetch all questions for navigation
 const { data: allQuestions } = await useAsyncData(`all-questions-${locale.value}`, async () => {

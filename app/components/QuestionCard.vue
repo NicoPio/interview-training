@@ -123,6 +123,14 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
   hard: 'error'
 }
 
+// Share URL
+const shareUrl = computed(() => {
+  if (import.meta.client) {
+    return `${window.location.origin}${localePath(`/${props.category}/${props.slug}`)}`
+  }
+  return ''
+})
+
 </script>
 
 <template>
@@ -228,6 +236,7 @@ const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
           >
             {{ isMastered ? 'Mastered' : 'Mark as Mastered' }}
           </UButton>
+          <ShareButton v-if="shareUrl" :url="shareUrl" :title="title" />
         </div>
         <div class="text-xs text-gray-500">
           <NuxtLink :to="localePath(`/${category}/${slug}`)" class="hover:text-primary-500 transition-colors">

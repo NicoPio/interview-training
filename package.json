@@ -33,7 +33,6 @@
     "@vueuse/nuxt": "^14.0.0",
     "better-sqlite3": "^12.4.1",
     "eslint": "^9.39.0",
-    "motion-v": "^1.7.4",
     "nuxt": "^4.2.0",
     "nuxt-studio": "^0.0.0",
     "tailwindcss": "^4.1.16",
