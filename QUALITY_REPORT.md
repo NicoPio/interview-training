@@ -353,8 +353,7 @@ npx gh-pages --dotfiles -d .output/public
 
 1. Visual regression testing (Percy/Chromatic)
 2. Performance optimization
-3. PWA features (offline support)
-4. Analytics integration (privacy-friendly)
+3. Analytics integration (privacy-friendly)
 
 ---
 

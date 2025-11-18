@@ -598,24 +598,6 @@ npm run preview      # Preview production build
 
 **Recommendation**: Add lightweight, privacy-friendly analytics if needed
 
-### Progressive Web App (PWA)
-
-**Question**: Should we add offline support via service workers?
-
-**Benefits**:
-
-- Offline access to questions
-- Install as native app
-- Better mobile experience
-
-**Costs**:
-
-- Cache management complexity
-- Additional testing burden
-- Bundle size increase
-
-**Recommendation**: Consider for v2.0 if mobile usage is high
-
 ### Content Management UI
 
 **Question**: Should we add a web-based content editor?
@@ -676,7 +658,6 @@ The stack is **production-ready**, **well-documented**, and **aligned with moder
 ### Areas for Future Enhancement
 
 ⚠️ No cross-device synchronization (by design)
-⚠️ Limited offline capabilities (no service workers)
 ⚠️ No analytics or usage tracking
 ⚠️ Manual content workflow (no CMS UI)
 ⚠️ Client-side only limits real-time features

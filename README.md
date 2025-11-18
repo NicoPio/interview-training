@@ -219,7 +219,6 @@ See [documentation/ROADMAP.md](documentation/ROADMAP.md) for the complete develo
 
 ### 🔮 Future Enhancements
 
-- PWA support with offline capability
 - Visual regression testing
 - E2E testing with Playwright
 - Content validation scripts

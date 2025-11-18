@@ -2,55 +2,41 @@
 
 ## Project Overview
 
-Nuxt 4 application for JavaScript interview preparation with interactive flashcard system. The project uses Nuxt Content to manage 26+ interview questions with reveal answers, progress tracking, and i18n support (French by default).
+Nuxt 4 app for JavaScript interview prep with flashcards. 26+ questions with reveal, progress tracking, i18n (FR default).
 
-## Tech Stack
+**Stack**: Nuxt 4.2 + Vue 3.5 + Nuxt Content + Nuxt UI + TailwindCSS 4 + TypeScript strict + i18n (FR/EN) + VueUse
 
-- **Framework**: Nuxt 4.2.0 (SSR enabled)
-- **Vue**: 3.5.22 with Composition API
-- **Content**: Nuxt Content for markdown questions
-- **UI**: Nuxt UI + TailwindCSS 4
-- **TypeScript**: Strict mode
-- **i18n**: FR (default) / EN with `prefix_except_default` strategy
-- **Deployment**: GitHub Pages (`baseURL: /interview-training/`)
-- **Animation**: Motion-v for transitions
-- **Utilities**: VueUse for composables
+## Key Architecture
 
-## Project Structure
+- **Content**: Markdown questions in `content/javascript/` with YAML frontmatter + `::question`/`::answer` slots
+- **Routing**: `/` (all) → `/[category]` (filtered) → `/[category]/[slug]` (single)
+- **State**: localStorage (favorites, progress) + composables (useFavorites, useQuestionProgress, useQuizMode, useAnswerRevealState)
+- **Deployment**: GitHub Pages (`baseURL: /interview-training/`) with SSG prerendering
 
-```
-app/
-├── components/
-│   ├── QuestionCard.vue         # Flashcard component with reveal
-│   ├── TableOfContents.vue      # Sidebar navigation
-│   ├── ProgressBar.vue          # Progress bar
-│   └── LanguageSwitcher.vue     # FR/EN switcher
-├── composables/
-│   ├── useAnswerRevealState.ts  # Answer reveal state
-│   ├── useFavorites.ts          # Favorites management (localStorage)
-│   ├── useQuestionProgress.ts   # Progress tracking
-│   └── useQuizMode.ts           # Quiz mode
-├── layouts/
-│   └── interview.vue            # Main layout with sidebar
-└── pages/
-    ├── index.vue                # Homepage with all questions
-    └── [category]/
-        ├── index.vue            # Category filtered list
-        └── [slug].vue           # Individual question page
+## Commands
 
-content/
-└── javascript/                  # 26+ questions in markdown
-    ├── q001-primitive-detection.md
-    ├── q002-es6-features.md
-    └── ...
-
-scripts/
-└── split-content.js             # Utility to split monolithic content
+```bash
+npm run dev          # Dev server
+npm run generate     # Static generation
+npm run lint         # ESLint
+npm run lint:fix     # Auto-fix
+npm run format       # Prettier
+npm run typecheck    # TypeScript check
 ```
 
-## Content Format (Nuxt Content)
+## Code Conventions
 
-Each question uses this markdown structure with YAML frontmatter:
+**See `.claude/CLAUDE.md` for detailed conventions** (Vue/Nuxt, TypeScript, Styling, i18n)
+
+Key rules:
+- Composition API + script setup only
+- TypeScript strict, no `any`
+- Nuxt UI components first, TailwindCSS 4 for styling
+- French default (use `$t()` for i18n)
+- SSR enabled: use `onMounted` for browser APIs
+- Reply in French (DX language)
+
+## Content Format
 
 ```markdown
 ---
@@ -67,139 +53,44 @@ Question text
 ::
 
 ::answer
-Detailed answer with code examples
+Detailed answer
 ::
 ```
 
-## Important Commands
-
-```bash
-npm run dev          # Dev server (port 3000)
-npm run build        # Production build
-npm run generate     # Static generation
-npm run preview      # Preview production build
-
-# Utility script
-node scripts/split-content.js  # Split monolithic content
-```
-
-## Code Conventions
-
-### Vue/Nuxt
-
-- **Composition API** only with "script setup" sugar syntax (no Options API)
-- **Script Setup** with TypeScript
-- **Auto-imports**: composables, components, Vue APIs (configured by Nuxt)
-- Prefer **composables** for reusable logic
-- use useState for common store
-
-### TypeScript
-
-- Strict types enabled
-- Type props, emits, returns
-- No `any` unless justified exception
-
-### Styling
-
-- **TailwindCSS 4** for styling
-- Use **Nuxt UI components** when available
-- Utility classes over custom CSS
-
-### i18n
-
-- Default locale: **French**
-- English available via `/en` prefix
-- Use `$t()` for translations
-
-## State and Data
-
-- **localStorage**: favorites, progress, preferences
-- **Nuxt Content**: source of truth for questions
-- **Composables**: shared state logic (useFavorites, useQuestionProgress, etc.)
-
-## Dynamic Routing
-
-- `/` - Homepage with all questions
-- `/[category]` - Category filtered list
-- `/[category]/[slug]` - Individual question page
-- Prerendering enabled for all routes (crawlLinks: true)
-
-## GitHub Pages Deployment
-
-- Base URL: `/interview-training/`
-- Nitro preset: `github-pages`
-- Branch: `main`
-- Auto-discovery of routes for prerender
-
-## Nuxt Studio
-
-Nuxt Studio integration active for online content editing:
-
-- Admin route: `/_studio`
-- Repository: NicoPio/interview-training
-- Branch: main
-
-## Adding New Questions
-
-1. Create `content/javascript/q0XX-question-title.md`
-2. Use frontmatter format + `::question` and `::answer` slots
-3. ID must be sequential and unique
-4. Slug must be kebab-case and descriptive
-5. Tags should be in English and lowercase
-
 ## Implemented Features
 
-✅ Phase 1-3 (Completed)
-
+✅ **Phase 1-6 Completed**
 - QuestionCard with reveal animation
 - TableOfContents navigation
 - Dynamic routing
-- Responsive layout with sidebar
-- Progress tracking (localStorage)
-- Quiz mode
-- Favorites system
+- Progress tracking + Quiz mode + Favorites
+- Dark mode + Keyboard shortcuts + Share functionality
+- Open Graph meta tags for social sharing
 
-🚧 Phase 4-5 (In Progress)
+🚧 **Phase 5 In Progress**
+- Advanced search & filters
 
-- Advanced search
-- Multiple filters
-- Share functionality
+## Documentation References
 
-## Important Considerations
+- **Full roadmap**: `documentation/ROADMAP.md` (14KB, 10 phases)
+- **Complete specs**: `specs/001-project-documentation/spec.md` (28KB, 8 user stories, 71 requirements)
+- **Implementation plan**: `specs/001-project-documentation/plan.md` (20KB)
+- **Data model**: `specs/001-project-documentation/data-model.md` (19KB)
+- **Tasks**: `specs/001-project-documentation/tasks.md` (23KB, 143 tasks)
+- **Nuxt Studio**: Admin at `/_studio`, repo: NicoPio/interview-training
 
-1. **SSR is enabled**: be careful with `window`, `localStorage` (use onMounted)
-2. **Base URL**: all links must be aware of `/interview-training/`
-3. **i18n**: prioritize French
-4. **Nuxt Content**: use `queryContent()` to fetch questions
-5. **Performance**: pages are prerendered, favor static generation
+## Important
 
-## Known Issues
+1. **SSR**: Be careful with `window`/`localStorage` (use `onMounted`)
+2. **Base URL**: All links aware of `/interview-training/`
+3. **i18n**: French priority
+4. **Nuxt Content**: Use `queryContent()` to fetch
+5. **Performance**: Prerendered static pages
 
-- Nuxt Studio configuration needs verification (malformed repo URL in config)
-- `.env` changes are not tracked (file in .gitignore)
+## Quick Links
 
-## Useful Resources
+- [Nuxt 4](https://nuxt.com) | [Content](https://content.nuxt.com) | [UI](https://ui.nuxt.com) | [TailwindCSS](https://tailwindcss.com)
 
-- [Nuxt 4 Docs](https://nuxt.com)
-- [Nuxt Content](https://content.nuxt.com)
-- [Nuxt UI](https://ui.nuxt.com)
-- [TailwindCSS 4](https://tailwindcss.com)
-- Detailed roadmap: `documentation/ROADMAP.md`
+## Philosophy
 
-## Complete Documentation
-
-Comprehensive project documentation available in `specs/001-project-documentation/`:
-
-- **spec.md**: Complete specification with 8 user stories, 71 functional requirements
-- **plan.md**: Implementation plan with technical stack analysis
-- **research.md**: Technology decisions and architectural patterns
-- **data-model.md**: Data structures, composables, and state management
-- **tasks.md**: 143 implementation tasks organized by user story
-
-## Project Philosophy
-
-- **DX First**: optimal developer experience
-- **Content First**: content (questions) is king
-- **Progressive Enhancement**: start simple, add progressively
-- **Type Safe**: TypeScript everywhere
-- **Performance**: static generation, native Nuxt optimizations
+**DX First** • **Content First** • **Progressive Enhancement** • **Type Safe** • **Performance**

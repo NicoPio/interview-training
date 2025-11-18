@@ -498,24 +498,6 @@ interface Props {
 
 ---
 
-### Tâche 7.3 : PWA
-
-**Objectif :** Application installable offline
-
-**Actions :**
-
-- Intégrer `@vite-pwa/nuxt`
-- Service worker
-- Manifest.json
-- Offline fallback
-
-**Critères de succès :**
-
-- Installable depuis navigateur
-- Fonctionne offline
-
----
-
 ## PHASE 8 : Contenu & Scalabilité 📚
 
 ### Tâche 8.1 : Ajouter nouvelles catégories

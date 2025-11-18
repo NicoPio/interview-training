@@ -377,8 +377,6 @@ The following features are explicitly **not included** in the current implementa
 - Print-optimized layouts for question sets
 - Integration with external learning management systems (LMS)
 - Mobile native applications (iOS/Android)
-- Progressive Web App (PWA) installation prompts
-- Offline-first functionality with service workers
 - Audio/video question content
 - AI-powered answer evaluation
 - Timed full mock interview sessions

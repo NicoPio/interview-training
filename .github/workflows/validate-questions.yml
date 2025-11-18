@@ -1,0 +1,206 @@
+name: Validate Questions
+
+on:
+  pull_request:
+    paths:
+      - 'content/**/*.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/**/*.md'
+
+jobs:
+  validate:
+    name: Validate Question Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate frontmatter format
+        run: |
+          echo "🔍 Validating question frontmatter..."
+
+          ERRORS=0
+
+          for file in $(find content -name "*.md" -not -name "index.md"); do
+            echo "Checking: $file"
+
+            # Check if frontmatter exists
+            if ! grep -q "^---$" "$file"; then
+              echo "❌ Missing frontmatter in $file"
+              ERRORS=$((ERRORS + 1))
+              continue
+            fi
+
+            # Extract frontmatter
+            FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+
+            # Check required fields
+            for field in "id:" "slug:" "title:" "category:" "difficulty:" "tags:"; do
+              if ! echo "$FRONTMATTER" | grep -q "^$field"; then
+                echo "❌ Missing $field in $file"
+                ERRORS=$((ERRORS + 1))
+              fi
+            done
+
+            # Validate category
+            CATEGORY=$(echo "$FRONTMATTER" | grep "^category:" | sed 's/category: *//')
+            if [[ ! "$CATEGORY" =~ ^(javascript|html|css|vuejs|reactjs)$ ]]; then
+              echo "❌ Invalid category '$CATEGORY' in $file"
+              echo "   Must be one of: javascript, html, css, vuejs, reactjs"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Validate difficulty
+            DIFFICULTY=$(echo "$FRONTMATTER" | grep "^difficulty:" | sed 's/difficulty: *//')
+            if [[ ! "$DIFFICULTY" =~ ^(easy|medium|hard)$ ]]; then
+              echo "❌ Invalid difficulty '$DIFFICULTY' in $file"
+              echo "   Must be one of: easy, medium, hard"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Validate ID is a number
+            ID=$(echo "$FRONTMATTER" | grep "^id:" | sed 's/id: *//')
+            if ! [[ "$ID" =~ ^[0-9]+$ ]]; then
+              echo "❌ Invalid ID '$ID' in $file (must be a number)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Validate slug format (kebab-case)
+            SLUG=$(echo "$FRONTMATTER" | grep "^slug:" | sed 's/slug: *//' | tr -d "'\"")
+            if ! [[ "$SLUG" =~ ^[a-z0-9-]+$ ]]; then
+              echo "❌ Invalid slug '$SLUG' in $file (must be kebab-case)"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Validate tags format
+            TAGS=$(echo "$FRONTMATTER" | grep "^tags:")
+            if ! echo "$TAGS" | grep -q "\["; then
+              echo "❌ Invalid tags format in $file (must be array)"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+
+          if [ $ERRORS -gt 0 ]; then
+            echo ""
+            echo "❌ Validation failed with $ERRORS error(s)"
+            exit 1
+          else
+            echo ""
+            echo "✅ All questions validated successfully!"
+          fi
+
+      - name: Check for duplicate IDs
+        run: |
+          echo "🔍 Checking for duplicate question IDs..."
+
+          # Extract all IDs from frontmatter
+          IDS=$(find content -name "*.md" -not -name "index.md" -exec grep -h "^id:" {} \; | sed 's/id: *//' | sort -n)
+
+          # Check for duplicates
+          DUPLICATES=$(echo "$IDS" | uniq -d)
+
+          if [ -n "$DUPLICATES" ]; then
+            echo "❌ Found duplicate IDs:"
+            echo "$DUPLICATES"
+
+            # Show which files have duplicate IDs
+            for id in $DUPLICATES; do
+              echo ""
+              echo "Files with ID $id:"
+              find content -name "*.md" -not -name "index.md" -exec grep -l "^id: $id$" {} \;
+            done
+
+            exit 1
+          else
+            echo "✅ No duplicate IDs found"
+          fi
+
+      - name: Check for duplicate slugs
+        run: |
+          echo "🔍 Checking for duplicate slugs..."
+
+          # Extract all slugs from frontmatter
+          SLUGS=$(find content -name "*.md" -not -name "index.md" -exec grep -h "^slug:" {} \; | sed 's/slug: *//' | tr -d "'\"" | sort)
+
+          # Check for duplicates
+          DUPLICATES=$(echo "$SLUGS" | uniq -d)
+
+          if [ -n "$DUPLICATES" ]; then
+            echo "❌ Found duplicate slugs:"
+            echo "$DUPLICATES"
+
+            # Show which files have duplicate slugs
+            for slug in $DUPLICATES; do
+              echo ""
+              echo "Files with slug '$slug':"
+              find content -name "*.md" -not -name "index.md" -exec grep -l "^slug: ['\"]\\?$slug['\"]\\?$" {} \;
+            done
+
+            exit 1
+          else
+            echo "✅ No duplicate slugs found"
+          fi
+
+      - name: Validate markdown syntax
+        run: |
+          echo "🔍 Checking for common markdown issues..."
+
+          ERRORS=0
+
+          for file in $(find content -name "*.md" -not -name "index.md"); do
+            # Check for unclosed code blocks
+            CODE_BLOCKS=$(grep -c "^\`\`\`" "$file" || true)
+            if [ $((CODE_BLOCKS % 2)) -ne 0 ]; then
+              echo "❌ Unclosed code block in $file"
+              ERRORS=$((ERRORS + 1))
+            fi
+
+            # Check for empty titles
+            if grep -q "^title: ''$" "$file" || grep -q "^title: \"\"$" "$file"; then
+              echo "❌ Empty title in $file"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+
+          if [ $ERRORS -gt 0 ]; then
+            echo ""
+            echo "❌ Markdown validation failed with $ERRORS error(s)"
+            exit 1
+          else
+            echo "✅ Markdown syntax validated successfully!"
+          fi
+
+      - name: Generate validation report
+        if: always()
+        run: |
+          echo "📊 Question Validation Report"
+          echo "=============================="
+          echo ""
+          echo "Total questions: $(find content -name "*.md" -not -name "index.md" | wc -l)"
+          echo ""
+          echo "Questions by category:"
+          for category in javascript html css vuejs reactjs; do
+            count=$(find content -name "*.md" -not -name "index.md" -exec grep -l "^category: $category$" {} \; | wc -l)
+            echo "  - $category: $count"
+          done
+          echo ""
+          echo "Questions by difficulty:"
+          for difficulty in easy medium hard; do
+            count=$(find content -name "*.md" -not -name "index.md" -exec grep -l "^difficulty: $difficulty$" {} \; | wc -l)
+            echo "  - $difficulty: $count"
+          done
+          echo ""
+          echo "Questions by locale:"
+          for locale in fr en; do
+            count=$(find content/$locale -name "*.md" 2>/dev/null | wc -l)
+            echo "  - $locale: $count"
+          done

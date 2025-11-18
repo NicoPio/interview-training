@@ -372,9 +372,8 @@ Tasks are organized by **User Story** (priority-based) to enable:
 ### Performance Optimizations
 
 - [ ] T134 [P] Implement virtual scrolling for question lists if >100 questions
-- [ ] T135 [P] Add service worker for offline support (PWA)
-- [ ] T136 [P] Implement image optimization with Nuxt Image module
-- [ ] T137 [P] Add route-level code splitting if needed
+- [ ] T135 [P] Implement image optimization with Nuxt Image module
+- [ ] T136 [P] Add route-level code splitting if needed
 
 ### Analytics (Privacy-Friendly)
 
