@@ -5,6 +5,9 @@
 /** Question difficulty level (easy, medium, or hard) */
 export type DifficultyLevel = 'easy' | 'medium' | 'hard'
 
+/** Question category (javascript, html, css, vuejs, reactjs) */
+export type Category = 'javascript' | 'html' | 'css' | 'vuejs' | 'reactjs'
+
 /** Filter status for question progress filtering */
 export type FilterStatus = 'all' | 'not-seen' | 'seen' | 'mastered'
 

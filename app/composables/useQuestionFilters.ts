@@ -1,4 +1,4 @@
-import type { Question, DifficultyLevel, FilterStatus } from '~/types'
+import type { Question, DifficultyLevel, FilterStatus, Category } from '~/types'
 import type { LocationQueryValue } from 'vue-router'
 
 const normalizeString = (str: string | undefined): string => {
@@ -26,17 +26,21 @@ export const useQuestionFilters = () => {
   const { getProgress } = useQuestionProgress()
   const { isFavorite } = useFavorites()
 
-  const searchQuery = ref<string>('')
-  const selectedDifficulties = ref<DifficultyLevel[]>([])
-  const selectedTags = ref<string[]>([])
-  const selectedStatus = ref<FilterStatus>('all')
-  const showOnlyFavorites = ref<boolean>(false)
+  const searchQuery = useState<string>('search-query', () => '')
+  const selectedDifficulties = useState<DifficultyLevel[]>('selected-difficulties', () => [])
+  const selectedCategories = useState<Category[]>('selected-categories', () => [])
+  const selectedTags = useState<string[]>('selected-tags', () => [])
+  const selectedStatus = useState<FilterStatus>('selected-status', () => 'all')
+  const showOnlyFavorites = useState<boolean>('show-only-favorites', () => false)
 
   if (import.meta.client) {
     searchQuery.value = (route.query.search as string) || ''
     selectedDifficulties.value = parseQueryArray(
       route.query.difficulty as LocationQueryValue | LocationQueryValue[]
     ) as DifficultyLevel[]
+    selectedCategories.value = parseQueryArray(
+      route.query.categories as LocationQueryValue | LocationQueryValue[]
+    ) as Category[]
     selectedTags.value = parseQueryArray(
       route.query.tags as LocationQueryValue | LocationQueryValue[]
     )
@@ -55,6 +59,10 @@ export const useQuestionFilters = () => {
       query.difficulty = selectedDifficulties.value.join(',')
     }
 
+    if (selectedCategories.value.length > 0) {
+      query.categories = selectedCategories.value.join(',')
+    }
+
     if (selectedTags.value.length > 0) {
       query.tags = selectedTags.value.join(',')
     }
@@ -71,7 +79,7 @@ export const useQuestionFilters = () => {
   }
 
   watch(
-    [searchQuery, selectedDifficulties, selectedTags, selectedStatus, showOnlyFavorites],
+    [searchQuery, selectedDifficulties, selectedCategories, selectedTags, selectedStatus, showOnlyFavorites],
     () => {
       updateURL()
     },
@@ -121,6 +129,13 @@ export const useQuestionFilters = () => {
         return false
       }
 
+      if (
+        selectedCategories.value.length > 0 &&
+        !selectedCategories.value.includes(question.meta.category as Category)
+      ) {
+        return false
+      }
+
       if (selectedTags.value.length > 0) {
         const questionTags = question.meta.tags || []
         const hasMatchingTag = selectedTags.value.some((tag) => questionTags.includes(tag))
@@ -146,10 +161,25 @@ export const useQuestionFilters = () => {
     return Array.from(tagsSet).sort()
   }
 
+  const getAllCategories = (questions: Question[]): { category: Category; count: number }[] => {
+    const categoryCount = new Map<Category, number>()
+    questions.forEach((question) => {
+      const category = question.meta.category as Category
+      categoryCount.set(category, (categoryCount.get(category) || 0) + 1)
+    })
+
+    // Order: javascript, html, css, vuejs, reactjs
+    const orderedCategories: Category[] = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
+    return orderedCategories
+      .filter((cat) => categoryCount.has(cat))
+      .map((cat) => ({ category: cat, count: categoryCount.get(cat)! }))
+  }
+
   const getActiveFiltersCount = (): number => {
     let count = 0
     if (searchQuery.value) count++
     if (selectedDifficulties.value.length > 0) count++
+    if (selectedCategories.value.length > 0) count++
     if (selectedTags.value.length > 0) count++
     if (selectedStatus.value !== 'all') count++
     if (showOnlyFavorites.value) count++
@@ -159,6 +189,7 @@ export const useQuestionFilters = () => {
   const resetFilters = () => {
     searchQuery.value = ''
     selectedDifficulties.value = []
+    selectedCategories.value = []
     selectedTags.value = []
     selectedStatus.value = 'all'
     showOnlyFavorites.value = false
@@ -173,16 +204,28 @@ export const useQuestionFilters = () => {
     }
   }
 
+  const toggleCategoryFilter = (category: Category) => {
+    const index = selectedCategories.value.indexOf(category)
+    if (index > -1) {
+      selectedCategories.value.splice(index, 1)
+    } else {
+      selectedCategories.value.push(category)
+    }
+  }
+
   return {
     searchQuery,
     selectedDifficulties,
+    selectedCategories,
     selectedTags,
     selectedStatus,
     showOnlyFavorites,
     filterQuestions,
     getAllUniqueTags,
+    getAllCategories,
     getActiveFiltersCount,
     resetFilters,
     toggleDifficultyFilter,
+    toggleCategoryFilter,
   }
 }

@@ -6,6 +6,14 @@
       "medium": "Medium",
       "hard": "Hard"
     },
+    "category": {
+      "label": "Category",
+      "javascript": "JavaScript",
+      "html": "HTML",
+      "css": "CSS",
+      "vuejs": "Vue.js",
+      "reactjs": "React.js"
+    },
     "tags": {
       "label": "Tags",
       "placeholder": "Select tags",

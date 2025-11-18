@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { DifficultyLevel } from '~/types'
+import type { DifficultyLevel, Category } from '~/types'
 
 interface Props {
   availableTags: string[]
+  availableCategories: { category: Category; count: number }[]
 }
 
 const props = defineProps<Props>()
@@ -11,11 +12,13 @@ const { t } = useI18n()
 
 const {
   selectedDifficulties,
+  selectedCategories,
   selectedTags,
   selectedStatus,
   showOnlyFavorites,
   resetFilters,
   getActiveFiltersCount,
+  toggleCategoryFilter,
 } = useQuestionFilters()
 
 const difficultyOptions = computed(() => [
@@ -23,6 +26,14 @@ const difficultyOptions = computed(() => [
   { value: 'medium', label: t('filters.difficulty.medium') },
   { value: 'hard', label: t('filters.difficulty.hard') },
 ])
+
+const categoryOptions = computed(() => {
+  return props.availableCategories.map(({ category, count }) => ({
+    value: category,
+    label: t(`filters.category.${category}`),
+    count,
+  }))
+})
 
 const statusOptions = computed(() => [
   { value: 'all', label: t('filters.status.all') },
@@ -52,6 +63,14 @@ const toggleDifficulty = (value: DifficultyLevel) => {
 const isDifficultySelected = (value: DifficultyLevel) => {
   return selectedDifficulties.value.includes(value)
 }
+
+const toggleCategory = (value: Category) => {
+  toggleCategoryFilter(value)
+}
+
+const isCategorySelected = (value: Category) => {
+  return selectedCategories.value.includes(value)
+}
 </script>
 
 <template>
@@ -61,10 +80,30 @@ const isDifficultySelected = (value: DifficultyLevel) => {
         <UCheckbox
           v-for="option in difficultyOptions"
           :key="option.value"
+          :id="`difficulty-${option.value}`"
           :model-value="isDifficultySelected(option.value as DifficultyLevel)"
           :label="option.label"
           @update:model-value="toggleDifficulty(option.value as DifficultyLevel)"
         />
+      </div>
+    </UFormField>
+
+    <UFormField :label="t('filters.category.label')">
+      <div class="flex flex-wrap gap-2">
+        <UCheckbox
+          v-for="option in categoryOptions"
+          :key="option.value"
+          :id="`category-${option.value}`"
+          :model-value="isCategorySelected(option.value as Category)"
+          @update:model-value="toggleCategory(option.value as Category)"
+        >
+          <template #label>
+            <span class="flex items-center gap-1">
+              {{ option.label }}
+              <UBadge size="xs" color="neutral" variant="subtle">{{ option.count }}</UBadge>
+            </span>
+          </template>
+        </UCheckbox>
       </div>
     </UFormField>
 
@@ -89,7 +128,7 @@ const isDifficultySelected = (value: DifficultyLevel) => {
     </UFormField>
 
     <div class="mt-4">
-      <UCheckbox v-model="showOnlyFavorites" :label="t('filters.favorites')" />
+      <UCheckbox id="show-favorites" v-model="showOnlyFavorites" :label="t('filters.favorites')" />
     </div>
 
     <div

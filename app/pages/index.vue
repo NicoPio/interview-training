@@ -33,6 +33,7 @@ const {
   showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
   getAllUniqueTags,
+  getAllCategories,
   getActiveFiltersCount,
   resetFilters,
   toggleDifficultyFilter,
@@ -48,6 +49,12 @@ const filteredQuestions = computed(() => {
 const availableTags = computed(() => {
   if (!questions.value) return []
   return getAllUniqueTags(questions.value)
+})
+
+// Available categories for filter
+const availableCategories = computed(() => {
+  if (!questions.value) return []
+  return getAllCategories(questions.value)
 })
 
 // Count questions by difficulty (based on filtered results)
@@ -251,7 +258,7 @@ useHead({
               </UBadge>
             </div>
           </template>
-          <QuestionFilters :available-tags="availableTags" />
+          <QuestionFilters :available-tags="availableTags" :available-categories="availableCategories" />
         </UCard>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
