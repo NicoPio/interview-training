@@ -4,10 +4,7 @@ slug: what-is-the-box-model
 title: Qu'est-ce que le modèle de boîte CSS ?
 category: css
 difficulty: medium
-tags:
-  - css
-  - box-model
-  - layout
+tags: ['css', 'box-model', 'layout']
 ---
 
 # Qu'est-ce que le modèle de boîte CSS ?

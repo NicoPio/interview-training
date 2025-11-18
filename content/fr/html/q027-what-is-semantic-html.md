@@ -4,10 +4,7 @@ slug: what-is-semantic-html
 title: Qu'est-ce que le HTML sémantique ?
 category: html
 difficulty: easy
-tags:
-  - html
-  - semantics
-  - accessibility
+tags: ['html', 'semantics', 'accessibility']
 ---
 
 # Qu'est-ce que le HTML sémantique ?
