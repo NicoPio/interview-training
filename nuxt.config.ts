@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/sitemap',
     'nuxt-studio',
-    '@nuxtjs/plausible',
   ],
   i18n: {
     locales: [
@@ -73,19 +72,5 @@ export default defineNuxtConfig({
       branch: 'main', // the branch to commit to (default: main)
       rootDir: '', // Nuxt app is at the root of the repository
     },
-  },
-
-  // Plausible Analytics Configuration
-  plausible: {
-    // Domain to track (update after deploying to custom domain)
-    domain: 'nicopio.github.io',
-    // Use custom API host if self-hosting Plausible
-    // apiHost: 'https://plausible.io',
-    // Enable tracking on localhost (useful for testing)
-    trackLocalhost: false,
-    // Automatically track outbound links
-    autoOutboundTracking: true,
-    // Automatically track file downloads
-    autoFileDownloads: true,
   },
 })
