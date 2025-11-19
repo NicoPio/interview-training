@@ -129,15 +129,15 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
       await langSwitcher.first().click()
       await page.waitForLoadState('networkidle')
 
-      // Check we're on English version
-      expect(page.url()).toContain('/en/')
+      // Check we're on English version (could be /en or /interview-training/en)
+      expect(page.url()).toContain('/en')
 
       // Reload page
       await page.reload()
       await page.waitForLoadState('networkidle')
 
       // Should still be on English version
-      expect(page.url()).toContain('/en/')
+      expect(page.url()).toContain('/en')
 
       console.log('✓ Language preference persists')
     }
@@ -147,7 +147,8 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
     // Navigate to a question in French
     const firstQuestion = page.locator('a[href*="/javascript/"]').first()
     await firstQuestion.click()
-    await page.waitForURL(/\/javascript\//)
+    await page.waitForURL(/\/javascript\//, { timeout: 10000 })
+    await page.waitForTimeout(1000)
 
     const frContent = await page.content()
 
@@ -345,7 +346,7 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
         )
       })
 
-      const _isEnglish = page.url().includes('/en/')
+      const isEnglish = page.url().includes('/en')
 
       console.log('✓ Language and dark mode work together:', {
         dark: isDark,

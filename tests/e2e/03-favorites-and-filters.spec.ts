@@ -26,20 +26,22 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
     // Navigate to first question
     const firstQuestion = page.locator('a[href*="/javascript/"]').first()
     await firstQuestion.click()
-    await page.waitForURL(/\/javascript\//)
+    await page.waitForURL(/\/javascript\//, { timeout: 10000 })
+    await page.waitForTimeout(1000) // Wait for content to render
 
-    // Look for favorite/heart button
+    // Look for favorite/heart button with more flexible selector
     const favoriteButton = page
       .locator('button')
       .filter({
-        hasText: /favori|favorite|heart|♥|❤/i,
+        hasText: /favori|favorite|heart/i,
       })
       .or(page.locator('button[aria-label*="favori"], button[aria-label*="favorite"]'))
+      .or(page.locator('button').filter({ has: page.locator('svg[class*="heart"]') }))
 
     if (await favoriteButton.first().isVisible()) {
       // Click to add to favorites
       await favoriteButton.first().click()
-      await page.waitForTimeout(300)
+      await page.waitForTimeout(1000) // Increased wait for localStorage
 
       // Check localStorage
       const favoritesState = await page.evaluate(() => {

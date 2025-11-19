@@ -28,11 +28,9 @@ const { getFavoriteCount: _getFavoriteCount } = useFavorites()
 const {
   searchQuery,
   selectedDifficulties,
-  selectedTags: _selectedTags,
   selectedStatus: _selectedStatus,
   showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
-  getAllUniqueTags,
   getAllCategories,
   getActiveFiltersCount,
   resetFilters,
@@ -43,12 +41,6 @@ const {
 const filteredQuestions = computed(() => {
   if (!questions.value) return []
   return filterQuestions(questions.value)
-})
-
-// Available tags for filter
-const availableTags = computed(() => {
-  if (!questions.value) return []
-  return getAllUniqueTags(questions.value)
 })
 
 // Available categories for filter
@@ -126,7 +118,7 @@ useHead({
       <div class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
           <NuxtLink to="/" class="flex items-center gap-2" active-class="" exact-active-class="">
-            <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" />
+            <UIcon name="i-heroicons-code-bracket" class="text-2xl text-primary-500" aria-hidden="true" />
             <span class="font-bold text-lg">JS Interview Prep</span>
           </NuxtLink>
           <div class="flex items-center gap-2">
@@ -141,7 +133,7 @@ useHead({
     <section class="container mx-auto px-4 py-16 md:py-24">
       <div class="max-w-4xl mx-auto text-center">
         <div class="flex justify-center mb-6 animate-[scale-in_0.5s_ease-out]">
-          <UIcon name="i-heroicons-code-bracket" class="text-6xl text-primary-500" />
+          <UIcon name="i-heroicons-code-bracket" class="text-6xl text-primary-500" aria-hidden="true" />
         </div>
 
         <h1
@@ -258,7 +250,7 @@ useHead({
               </UBadge>
             </div>
           </template>
-          <QuestionFilters :available-tags="availableTags" :available-categories="availableCategories" />
+          <QuestionFilters  :available-categories="availableCategories" />
         </UCard>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
@@ -303,6 +295,7 @@ useHead({
                 <UIcon
                   name="i-heroicons-chevron-right"
                   class="text-gray-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-200 shrink-0"
+                  aria-hidden="true"
                 />
               </div>
             </UCard>
@@ -317,6 +310,7 @@ useHead({
           <UIcon
             name="i-heroicons-magnifying-glass"
             class="text-6xl text-gray-300 dark:text-gray-700 mb-4"
+            aria-hidden="true"
           />
           <p class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
             Aucun résultat trouvé
@@ -337,7 +331,7 @@ useHead({
         <div class="max-w-4xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
           <p>
             Built with
-            <UIcon name="i-heroicons-heart-solid" class="text-red-500 inline" />
+            <UIcon name="i-heroicons-heart-solid" class="text-red-500 inline" aria-hidden="true" />
             using Nuxt 4, Nuxt Content & Nuxt UI
           </p>
         </div>

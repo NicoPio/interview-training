@@ -2,7 +2,6 @@
 import type { DifficultyLevel, Category } from '~/types'
 
 interface Props {
-  availableTags: string[]
   availableCategories: { category: Category; count: number }[]
 }
 
@@ -13,8 +12,6 @@ const { t } = useI18n()
 const {
   selectedDifficulties,
   selectedCategories,
-  selectedTags,
-  selectedStatus,
   showOnlyFavorites,
   resetFilters,
   getActiveFiltersCount,
@@ -32,20 +29,6 @@ const categoryOptions = computed(() => {
     value: category,
     label: t(`filters.category.${category}`),
     count,
-  }))
-})
-
-const statusOptions = computed(() => [
-  { value: 'all', label: t('filters.status.all') },
-  { value: 'not-seen', label: t('filters.status.notSeen') },
-  { value: 'seen', label: t('filters.status.seen') },
-  { value: 'mastered', label: t('filters.status.mastered') },
-])
-
-const tagOptions = computed(() => {
-  return props.availableTags.map((tag) => ({
-    label: tag,
-    value: tag,
   }))
 })
 
@@ -76,11 +59,11 @@ const isCategorySelected = (value: Category) => {
 <template>
   <div class="space-y-6 gap-2">
     <UFormField :label="t('filters.difficulty.label')">
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-6">
         <UCheckbox
           v-for="option in difficultyOptions"
-          :key="option.value"
           :id="`difficulty-${option.value}`"
+          :key="option.value"
           :model-value="isDifficultySelected(option.value as DifficultyLevel)"
           :label="option.label"
           @update:model-value="toggleDifficulty(option.value as DifficultyLevel)"
@@ -89,11 +72,11 @@ const isCategorySelected = (value: Category) => {
     </UFormField>
 
     <UFormField :label="t('filters.category.label')">
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-6">
         <UCheckbox
           v-for="option in categoryOptions"
-          :key="option.value"
           :id="`category-${option.value}`"
+          :key="option.value"
           :model-value="isCategorySelected(option.value as Category)"
           @update:model-value="toggleCategory(option.value as Category)"
         >
@@ -107,25 +90,6 @@ const isCategorySelected = (value: Category) => {
       </div>
     </UFormField>
 
-    <UFormField
-      :label="
-        selectedTags.length > 0
-          ? `${t('filters.tags.label')} (${selectedTags.length})`
-          : t('filters.tags.label')
-      "
-    >
-      <USelectMenu
-        v-model="selectedTags"
-        :options="tagOptions"
-        multiple
-        searchable
-        :placeholder="t('filters.tags.placeholder')"
-      />
-    </UFormField>
-
-    <UFormField :label="t('filters.status.label')">
-      <URadioGroup v-model="selectedStatus" :options="statusOptions" />
-    </UFormField>
 
     <div class="mt-4">
       <UCheckbox id="show-favorites" v-model="showOnlyFavorites" :label="t('filters.favorites')" />

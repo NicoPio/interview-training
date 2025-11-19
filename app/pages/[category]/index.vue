@@ -41,11 +41,9 @@ if (!questions.value || questions.value.length === 0) {
 const {
   searchQuery,
   selectedDifficulties,
-  selectedTags: _selectedTags,
   selectedStatus: _selectedStatus,
   showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
-  getAllUniqueTags,
   getAllCategories,
   getActiveFiltersCount,
   resetFilters,
@@ -56,12 +54,6 @@ const {
 const filteredQuestions = computed(() => {
   if (!questions.value) return []
   return filterQuestions(questions.value)
-})
-
-// Available tags for filter
-const availableTags = computed(() => {
-  if (!questions.value) return []
-  return getAllUniqueTags(questions.value)
 })
 
 // Available categories for filter
@@ -199,7 +191,7 @@ useSeoMeta({
               </UBadge>
             </div>
           </template>
-          <QuestionFilters :available-tags="availableTags" :available-categories="availableCategories" />
+          <QuestionFilters  :available-categories="availableCategories" />
         </UCard>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">

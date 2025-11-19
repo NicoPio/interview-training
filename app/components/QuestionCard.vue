@@ -162,9 +162,15 @@ const shareUrl = computed(() => {
       </div>
 
       <!-- Quiz Timer (if in quiz mode) -->
-      <div v-if="isQuizMode && quizTimer !== null && !showAnswer" class="flex justify-center">
+      <div
+        v-if="isQuizMode && quizTimer !== null && !showAnswer"
+        class="flex justify-center"
+        role="timer"
+        aria-live="polite"
+        :aria-label="`Auto-révélation dans ${quizTimer} secondes`"
+      >
         <UBadge color="warning" size="lg" class="px-4 py-2">
-          <UIcon name="i-heroicons-clock" class="mr-2" />
+          <UIcon name="i-heroicons-clock" class="mr-2" aria-hidden="true" />
           Auto-reveal dans {{ quizTimer }}s
         </UBadge>
       </div>
@@ -176,6 +182,9 @@ const shareUrl = computed(() => {
           :color="showAnswer ? 'neutral' : 'primary'"
           :disabled="isQuizMode && quizTimer !== null && quizTimer > 0"
           size="lg"
+          :aria-expanded="showAnswer"
+          aria-controls="answer-content"
+          :aria-label="showAnswer ? 'Masquer la réponse de la question' : 'Révéler la réponse de la question'"
           @click="toggleAnswer"
         >
           {{ showAnswer ? 'Masquer la réponse' : 'Voir la réponse' }}
@@ -186,6 +195,7 @@ const shareUrl = computed(() => {
           Raccourci:
           <kbd
             class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700"
+            aria-hidden="true"
           >Espace</kbd
           >
         </p>
@@ -210,10 +220,16 @@ const shareUrl = computed(() => {
       >
         <div
           v-if="showAnswer"
+          id="answer-content"
           ref="answerSection"
+          role="region"
+          aria-labelledby="answer-heading"
+          aria-live="polite"
           class="prose prose-gray dark:prose-invert max-w-none border-t pt-6"
         >
-          <h3 class="text-lg font-semibold text-green-600 dark:text-green-400 mb-4">Réponse</h3>
+          <h3 id="answer-heading" class="text-lg font-semibold text-green-600 dark:text-green-400 mb-4">
+            Réponse
+          </h3>
           <slot name="answer" />
         </div>
       </Transition>
@@ -227,6 +243,8 @@ const shareUrl = computed(() => {
             :color="favorited ? 'error' : 'neutral'"
             variant="ghost"
             size="sm"
+            :aria-pressed="favorited"
+            :aria-label="favorited ? 'Retirer des favoris' : 'Ajouter aux favoris'"
             @click="handleFavoriteClick"
           >
             {{ favorited ? 'Favorited' : 'Favorite' }}
@@ -236,6 +254,8 @@ const shareUrl = computed(() => {
             :color="isMastered ? 'success' : 'neutral'"
             variant="ghost"
             size="sm"
+            :aria-pressed="isMastered"
+            :aria-label="isMastered ? 'Marquer comme non maîtrisé' : 'Marquer comme maîtrisé'"
             @click="handleMasteredToggle"
           >
             {{ isMastered ? 'Mastered' : 'Mark as Mastered' }}

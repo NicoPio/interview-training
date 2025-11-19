@@ -29,7 +29,6 @@ export const useQuestionFilters = () => {
   const searchQuery = useState<string>('search-query', () => '')
   const selectedDifficulties = useState<DifficultyLevel[]>('selected-difficulties', () => [])
   const selectedCategories = useState<Category[]>('selected-categories', () => [])
-  const selectedTags = useState<string[]>('selected-tags', () => [])
   const selectedStatus = useState<FilterStatus>('selected-status', () => 'all')
   const showOnlyFavorites = useState<boolean>('show-only-favorites', () => false)
 
@@ -41,9 +40,6 @@ export const useQuestionFilters = () => {
     selectedCategories.value = parseQueryArray(
       route.query.categories as LocationQueryValue | LocationQueryValue[]
     ) as Category[]
-    selectedTags.value = parseQueryArray(
-      route.query.tags as LocationQueryValue | LocationQueryValue[]
-    )
     selectedStatus.value = (route.query.status as FilterStatus) || 'all'
     showOnlyFavorites.value = Boolean(route.query.favorites === 'true')
   }
@@ -63,10 +59,6 @@ export const useQuestionFilters = () => {
       query.categories = selectedCategories.value.join(',')
     }
 
-    if (selectedTags.value.length > 0) {
-      query.tags = selectedTags.value.join(',')
-    }
-
     if (selectedStatus.value !== 'all') {
       query.status = selectedStatus.value
     }
@@ -79,7 +71,7 @@ export const useQuestionFilters = () => {
   }
 
   watch(
-    [searchQuery, selectedDifficulties, selectedCategories, selectedTags, selectedStatus, showOnlyFavorites],
+    [searchQuery, selectedDifficulties, selectedCategories, selectedStatus, showOnlyFavorites],
     () => {
       updateURL()
     },
@@ -136,12 +128,6 @@ export const useQuestionFilters = () => {
         return false
       }
 
-      if (selectedTags.value.length > 0) {
-        const questionTags = question.meta.tags || []
-        const hasMatchingTag = selectedTags.value.some((tag) => questionTags.includes(tag))
-        if (!hasMatchingTag) return false
-      }
-
       if (!matchesStatus(question, selectedStatus.value)) return false
 
       if (showOnlyFavorites.value) {
@@ -151,14 +137,6 @@ export const useQuestionFilters = () => {
 
       return true
     })
-  }
-
-  const getAllUniqueTags = (questions: Question[]): string[] => {
-    const tagsSet = new Set<string>()
-    questions.forEach((question) => {
-      question.meta.tags?.forEach((tag) => tagsSet.add(tag))
-    })
-    return Array.from(tagsSet).sort()
   }
 
   const getAllCategories = (questions: Question[]): { category: Category; count: number }[] => {
@@ -180,7 +158,6 @@ export const useQuestionFilters = () => {
     if (searchQuery.value) count++
     if (selectedDifficulties.value.length > 0) count++
     if (selectedCategories.value.length > 0) count++
-    if (selectedTags.value.length > 0) count++
     if (selectedStatus.value !== 'all') count++
     if (showOnlyFavorites.value) count++
     return count
@@ -190,7 +167,6 @@ export const useQuestionFilters = () => {
     searchQuery.value = ''
     selectedDifficulties.value = []
     selectedCategories.value = []
-    selectedTags.value = []
     selectedStatus.value = 'all'
     showOnlyFavorites.value = false
   }
@@ -217,11 +193,9 @@ export const useQuestionFilters = () => {
     searchQuery,
     selectedDifficulties,
     selectedCategories,
-    selectedTags,
     selectedStatus,
     showOnlyFavorites,
     filterQuestions,
-    getAllUniqueTags,
     getAllCategories,
     getActiveFiltersCount,
     resetFilters,

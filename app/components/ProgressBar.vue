@@ -27,13 +27,22 @@ const notSeenCount = computed(() => props.totalQuestions - stats.value.total)
       <!-- Progress Bar -->
       <div class="space-y-2">
         <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-          <span>Overall Progress</span>
+          <span id="overall-progress-label">Overall Progress</span>
           <span>{{ stats.seen + stats.mastered }} / {{ totalQuestions }}</span>
         </div>
-        <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div
+          role="progressbar"
+          :aria-valuenow="progressPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          :aria-valuetext="`${progressPercentage}% des questions vues - ${stats.seen + stats.mastered} sur ${totalQuestions}`"
+          aria-labelledby="overall-progress-label"
+          class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"
+        >
           <div
             class="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
             :style="{ width: `${progressPercentage}%` }"
+            aria-hidden="true"
           />
         </div>
       </div>
@@ -41,13 +50,22 @@ const notSeenCount = computed(() => props.totalQuestions - stats.value.total)
       <!-- Mastery Bar -->
       <div class="space-y-2">
         <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-          <span>Mastered</span>
+          <span id="mastery-progress-label">Mastered</span>
           <span>{{ stats.mastered }} / {{ totalQuestions }}</span>
         </div>
-        <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div
+          role="progressbar"
+          :aria-valuenow="masteryPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          :aria-valuetext="`${masteryPercentage}% des questions maîtrisées - ${stats.mastered} sur ${totalQuestions}`"
+          aria-labelledby="mastery-progress-label"
+          class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"
+        >
           <div
             class="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-500"
             :style="{ width: `${masteryPercentage}%` }"
+            aria-hidden="true"
           />
         </div>
       </div>

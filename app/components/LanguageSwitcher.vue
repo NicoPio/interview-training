@@ -27,6 +27,8 @@ const handleLocaleChange = (newLocale: string | undefined) => {
     size="sm"
     color="neutral"
     variant="ghost"
+    aria-label="Changer la langue"
+    :aria-current="locale"
     @update:model-value="handleLocaleChange"
   />
 </template>

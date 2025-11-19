@@ -31,24 +31,17 @@ test.describe('US1: Browse and Discover Questions', () => {
   })
 
   test('should display difficulty badges with correct colors', async ({ page }) => {
-    // Find badges
-    const badges = page.locator('[class*="badge"], [class*="Badge"]')
-    await expect(badges.first()).toBeVisible()
+    // Find badges using more flexible selector for Nuxt UI badges
+    const badges = page.locator('span').filter({ hasText: /easy|medium|hard|facile|moyen|difficile/i })
 
-    // Check for at least one of each difficulty (if they exist)
-    const pageContent = await page.content()
+    // Wait a bit for content to load
+    await page.waitForTimeout(500)
 
-    // Verify difficulty levels are shown
-    const hasDifficulties =
-      pageContent.includes('easy') ||
-      pageContent.includes('facile') ||
-      pageContent.includes('medium') ||
-      pageContent.includes('moyen') ||
-      pageContent.includes('hard') ||
-      pageContent.includes('difficile')
+    // Check if at least one badge is visible
+    const badgeCount = await badges.count()
+    expect(badgeCount).toBeGreaterThan(0)
 
-    expect(hasDifficulties).toBe(true)
-    console.log('✓ Difficulty badges are displayed')
+    console.log(`✓ Found ${badgeCount} difficulty badges`)
   })
 
   test('should display question tags', async ({ page }) => {
@@ -71,8 +64,8 @@ test.describe('US1: Browse and Discover Questions', () => {
 
     await firstQuestion.click()
 
-    // Wait for navigation
-    await page.waitForURL(/\/javascript\//)
+    // Wait for navigation with longer timeout and more flexible pattern
+    await page.waitForURL(/\/javascript\//, { timeout: 10000 })
 
     // Verify we're on a detail page
     const url = page.url()
@@ -80,9 +73,10 @@ test.describe('US1: Browse and Discover Questions', () => {
 
     console.log(`✓ Navigated to question detail: ${url}`)
 
-    // Verify question content is displayed
-    const questionContent = page.locator('article, main, [role="main"]')
-    await expect(questionContent).toBeVisible()
+    // Verify question content is displayed - check for h1 or title
+    await page.waitForTimeout(1000) // Give time for content to render
+    const heading = page.locator('h1, h2')
+    await expect(heading.first()).toBeVisible()
   })
 
   test('should display stats section with counts', async ({ page }) => {

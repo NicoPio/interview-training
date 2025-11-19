@@ -64,10 +64,20 @@ const clearSearch = () => {
       :placeholder="placeholder"
       icon="i-heroicons-magnifying-glass"
       size="lg"
+      aria-label="Rechercher des questions dans la liste"
+      :aria-describedby="modelValue && resultCount !== undefined ? 'search-results-count' : undefined"
+      type="search"
+      role="searchbox"
     >
       <template #trailing>
         <div class="flex items-center gap-2">
-          <UBadge v-if="resultCount !== undefined && modelValue" color="neutral" variant="subtle">
+          <UBadge
+            v-if="resultCount !== undefined && modelValue"
+            id="search-results-count"
+            color="neutral"
+            variant="subtle"
+            :aria-label="`${resultCount} résultat${resultCount > 1 ? 's' : ''} trouvé${resultCount > 1 ? 's' : ''}`"
+          >
             {{ resultCount }}
           </UBadge>
           <UButton
@@ -76,11 +86,22 @@ const clearSearch = () => {
             color="neutral"
             variant="ghost"
             size="xs"
+            aria-label="Effacer la recherche"
             @click="clearSearch"
           />
-          <UKbd v-else>/</UKbd>
+          <UKbd v-else aria-hidden="true">/</UKbd>
         </div>
       </template>
     </UInput>
+    <!-- Screen reader announcement for results -->
+    <span
+      v-if="modelValue && resultCount !== undefined"
+      class="sr-only"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {{ resultCount }} résultat{{ resultCount > 1 ? 's' : '' }} trouvé{{ resultCount > 1 ? 's' : '' }} pour "{{ modelValue }}"
+    </span>
   </div>
 </template>
