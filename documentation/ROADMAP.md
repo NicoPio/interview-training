@@ -618,35 +618,13 @@ interface Props {
 
 ---
 
-### Tâche 10.2 : Déploiement alternatif (backup)
-
-**Options :** Vercel / Netlify / Cloudflare Pages
-
-**Actions :**
-
-- Configuration domaine
-- CI/CD automatique
-- Preview branches
-
----
-
-### Tâche 10.3 : Analytics
+### Tâche 10.2 : Analytics
 
 **Actions :**
 
 - Plausible ou Umami (privacy-friendly)
 - Tracker : questions vues, catégories populaires
 - Conversion quiz mode
-
----
-
-### Tâche 10.4 : Feedback utilisateur
-
-**Actions :**
-
-- Bouton "Was this helpful?" sur chaque question
-- Form de suggestion
-- Stockage (Supabase ou Firebase)
 
 ---
 

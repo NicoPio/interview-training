@@ -1,0 +1,259 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Aller au contenu principal" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e4]:
+      - banner [ref=e5]:
+        - generic [ref=e7]:
+          - link "JS Interview Prep" [ref=e9] [cursor=pointer]:
+            - /url: /interview-training/
+            - generic [ref=e11]: JS Interview Prep
+          - generic [ref=e12]:
+            - link "Search" [ref=e13] [cursor=pointer]:
+              - /url: /interview-training/
+              - generic [ref=e15]: Search
+            - button "Aide" [ref=e16]:
+              - generic [ref=e18]: Aide
+            - button "Changer la langue de l'interface" [ref=e19]:
+              - generic [ref=e21]: 🇬🇧
+              - generic: English
+            - button "Switch to dark mode" [ref=e24]
+      - generic [ref=e27]:
+        - complementary [ref=e28]:
+          - generic [ref=e30]:
+            - generic [ref=e32]:
+              - heading "Questions" [level=2] [ref=e33]
+              - generic [ref=e34]: "28"
+            - navigation [ref=e37]:
+              - link "What is the CSS Box Model? medium" [ref=e38] [cursor=pointer]:
+                - /url: /interview-training/en/css/what-is-the-box-model
+                - generic [ref=e41]:
+                  - paragraph [ref=e43]: What is the CSS Box Model?
+                  - generic [ref=e45]: medium
+              - link "What is Semantic HTML? easy" [ref=e46] [cursor=pointer]:
+                - /url: /interview-training/en/html/what-is-semantic-html
+                - generic [ref=e49]:
+                  - paragraph [ref=e51]: What is Semantic HTML?
+                  - generic [ref=e53]: easy
+              - link "How do you detect primitive or non-primitive value types in JavaScript? medium" [ref=e54] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                - generic [ref=e57]:
+                  - paragraph [ref=e59]: How do you detect primitive or non-primitive value types in JavaScript?
+                  - generic [ref=e61]: medium
+              - link "Explain the key features introduced in JavaScript ES6 easy" [ref=e63] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                - generic [ref=e66]:
+                  - paragraph [ref=e68]: Explain the key features introduced in JavaScript ES6
+                  - generic [ref=e70]: easy
+              - link "What are the differences between var, const & let in JavaScript? medium" [ref=e71] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                - generic [ref=e74]:
+                  - paragraph [ref=e76]: What are the differences between var, const & let in JavaScript?
+                  - generic [ref=e78]: medium
+              - link "What are arrow functions in JavaScript? medium" [ref=e79] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                - generic [ref=e82]:
+                  - paragraph [ref=e84]: What are arrow functions in JavaScript?
+                  - generic [ref=e86]: medium
+              - link "What is hoisting in JavaScript? medium" [ref=e87] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                - generic [ref=e90]:
+                  - paragraph [ref=e92]: What is hoisting in JavaScript?
+                  - generic [ref=e94]: medium
+              - link "What is Strict Mode in JavaScript? easy" [ref=e95] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                - generic [ref=e98]:
+                  - paragraph [ref=e100]: What is Strict Mode in JavaScript?
+                  - generic [ref=e102]: easy
+              - link "What is NaN? easy" [ref=e103] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-nan
+                - generic [ref=e106]:
+                  - paragraph [ref=e108]: What is NaN?
+                  - generic [ref=e110]: easy
+              - link "Is JavaScript a statically typed or a dynamically typed language? easy" [ref=e111] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                - generic [ref=e114]:
+                  - paragraph [ref=e116]: Is JavaScript a statically typed or a dynamically typed language?
+                  - generic [ref=e118]: easy
+              - link "What are Higher-Order Functions in JavaScript? easy" [ref=e119] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                - generic [ref=e122]:
+                  - paragraph [ref=e124]: What are Higher-Order Functions in JavaScript?
+                  - generic [ref=e126]: easy
+              - link "What is the difference between Null and Undefined easy" [ref=e127] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                - generic [ref=e130]:
+                  - paragraph [ref=e132]: What is the difference between Null and Undefined
+                  - generic [ref=e134]: easy
+              - link "What is DOM? easy" [ref=e135] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-dom
+                - generic [ref=e138]:
+                  - paragraph [ref=e140]: What is DOM?
+                  - generic [ref=e142]: easy
+              - link "What is BOM? easy" [ref=e143] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-bom
+                - generic [ref=e146]:
+                  - paragraph [ref=e148]: What is BOM?
+                  - generic [ref=e150]: easy
+              - link "Explain about this keyword in JavaScript with an example. easy" [ref=e151] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/explain-about-this-keyword-in-javascript-with-an-example
+                - generic [ref=e154]:
+                  - paragraph [ref=e156]: Explain about this keyword in JavaScript with an example.
+                  - generic [ref=e158]: easy
+              - link "What is scope in JavaScript? medium" [ref=e159] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-scope-in-javascript
+                - generic [ref=e162]:
+                  - paragraph [ref=e164]: What is scope in JavaScript?
+                  - generic [ref=e166]: medium
+              - link "What is closure in JavaScript? medium" [ref=e167] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-closure-in-javascript
+                - generic [ref=e170]:
+                  - paragraph [ref=e172]: What is closure in JavaScript?
+                  - generic [ref=e174]: medium
+              - link "Explain call(), apply() and bind() methods in JavaScript. medium" [ref=e175] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/explain-call-apply-and-bind-methods-in-javascript
+                - generic [ref=e178]:
+                  - paragraph [ref=e180]: Explain call(), apply() and bind() methods in JavaScript.
+                  - generic [ref=e182]: medium
+              - link "Explain pure and impure functions in JavaScript. easy" [ref=e183] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/explain-pure-and-impure-functions-in-javascript
+                - generic [ref=e186]:
+                  - paragraph [ref=e188]: Explain pure and impure functions in JavaScript.
+                  - generic [ref=e190]: easy
+              - link "What are prototypes in JavaScript? easy" [ref=e191] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-prototypes-in-javascript
+                - generic [ref=e194]:
+                  - paragraph [ref=e196]: What are prototypes in JavaScript?
+                  - generic [ref=e198]: easy
+              - link "What are callback functions in JavaScript and what is callback hell? medium" [ref=e199] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-callback-functions-in-javascript-and-what-is-callback-hell
+                - generic [ref=e202]:
+                  - paragraph [ref=e204]: What are callback functions in JavaScript and what is callback hell?
+                  - generic [ref=e206]: medium
+              - link "What is Temporal Dead Zone in JavaScript? easy" [ref=e207] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-temporal-dead-zone-in-javascript
+                - generic [ref=e210]:
+                  - paragraph [ref=e212]: What is Temporal Dead Zone in JavaScript?
+                  - generic [ref=e214]: easy
+              - link "What are promises in JavaScript? easy" [ref=e215] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-promises-in-javascript
+                - generic [ref=e218]:
+                  - paragraph [ref=e220]: What are promises in JavaScript?
+                  - generic [ref=e222]: easy
+              - link "Explain rest parameter in JavaScript easy" [ref=e223] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/explain-rest-parameter-in-javascript
+                - generic [ref=e226]:
+                  - paragraph [ref=e228]: Explain rest parameter in JavaScript
+                  - generic [ref=e230]: easy
+              - link "What is the correct way to use the rest parameter in JavaScript? easy" [ref=e231] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-the-correct-way-to-use-the-rest-parameter-in-javascript
+                - generic [ref=e234]:
+                  - paragraph [ref=e236]: What is the correct way to use the rest parameter in JavaScript?
+                  - generic [ref=e238]: easy
+              - link "What are generator functions in JavaScript? easy" [ref=e239] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-are-generator-functions-in-javascript
+                - generic [ref=e242]:
+                  - paragraph [ref=e244]: What are generator functions in JavaScript?
+                  - generic [ref=e246]: easy
+              - link "What is the difference between function declarations and function expressions? easy" [ref=e247] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-the-difference-between-function-declarations-and-function-expressions
+                - generic [ref=e250]:
+                  - paragraph [ref=e252]: What is the difference between function declarations and function expressions?
+                  - generic [ref=e254]: easy
+              - link "What is the difference between setTimeout, setImmediate and process.nextTick? easy" [ref=e255] [cursor=pointer]:
+                - /url: /interview-training/en/javascript/what-is-the-difference-between-settimeout-setimmediate-and-processnexttick
+                - generic [ref=e258]:
+                  - paragraph [ref=e260]: What is the difference between setTimeout, setImmediate and process.nextTick?
+                  - generic [ref=e262]: easy
+            - generic [ref=e265]:
+              - generic [ref=e266]: "Category: JavaScript"
+              - link "Home" [ref=e267] [cursor=pointer]:
+                - /url: /interview-training/
+                - text: Home
+        - main [ref=e269]:
+          - main [ref=e270]:
+            - generic [ref=e271]:
+              - navigation [ref=e272]:
+                - list [ref=e273]:
+                  - listitem [ref=e274]:
+                    - link "Home" [ref=e275] [cursor=pointer]:
+                      - /url: /interview-training/en
+                  - listitem [ref=e276]
+                  - listitem [ref=e278]:
+                    - link "javascript" [ref=e279] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript
+                  - listitem [ref=e280]
+                  - listitem [ref=e282]: "Question #content_en/javascript/q001-how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript.md"
+              - generic [ref=e283]:
+                - generic [ref=e286]:
+                  - generic [ref=e287]:
+                    - generic [ref=e288]: medium
+                    - generic [ref=e289]: javascript
+                    - generic [ref=e290]: "#NaN"
+                  - heading "How do you detect primitive or non-primitive value types in JavaScript?" [level=2] [ref=e291]
+                - generic [ref=e293]:
+                  - generic [ref=e294]:
+                    - heading "Question" [level=3] [ref=e295]
+                    - paragraph [ref=e296]: Cliquez sur "Voir la réponse" ci-dessous pour afficher la réponse détaillée.
+                  - generic [ref=e297]:
+                    - button "Révéler la réponse de la question" [ref=e298]: Voir la réponse
+                    - paragraph [ref=e300]: "Raccourci: Espace"
+                - generic [ref=e302]:
+                  - generic [ref=e303]:
+                    - button "Ajouter aux favoris" [ref=e304]: Favorite
+                    - button "Marquer comme maîtrisé" [ref=e306]: Mark as Mastered
+                    - button "Partager" [ref=e308]: Partager
+                  - link "Permalink" [ref=e311] [cursor=pointer]:
+                    - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+              - generic [ref=e312]:
+                - link "Previous" [ref=e313] [cursor=pointer]:
+                  - /url: /interview-training/en/html/what-is-semantic-html
+                  - text: Previous
+                - link "All Questions" [ref=e315] [cursor=pointer]:
+                  - /url: /interview-training/en
+                  - text: All Questions
+                - link "Next" [ref=e317] [cursor=pointer]:
+                  - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                  - text: Next
+              - generic [ref=e322]:
+                - generic [ref=e323]: "Tags:"
+                - generic [ref=e324]: primitives
+                - generic [ref=e325]: types
+                - generic [ref=e326]: variables
+                - generic [ref=e327]: var
+                - generic [ref=e328]: let
+      - contentinfo [ref=e329]:
+        - generic [ref=e331]:
+          - paragraph [ref=e332]: Built with using Nuxt 4 & Nuxt UI
+          - generic [ref=e333]:
+            - link "Home" [ref=e334] [cursor=pointer]:
+              - /url: /interview-training/
+            - link "GitHub" [ref=e335] [cursor=pointer]:
+              - /url: https://github.com
+              - text: GitHub
+      - button "Aide" [ref=e337]:
+        - generic [ref=e339]: Aide
+  - region "Notifications (F8)":
+    - list
+  - generic:
+    - img
+  - generic:
+    - generic:
+      - generic:
+        - button "Go to parent" [disabled]
+        - button "Open in editor"
+        - button "Close"
+  - generic [ref=e340]:
+    - button "Toggle Nuxt DevTools" [ref=e341] [cursor=pointer]:
+      - img [ref=e342]
+    - generic "Page load time" [ref=e345]:
+      - generic [ref=e346]: "485"
+      - generic [ref=e347]: ms
+    - button "Toggle Component Inspector" [ref=e349] [cursor=pointer]:
+      - img [ref=e350]
+  - region "Notifications (F8)":
+    - list
+```
