@@ -1,24 +1,6 @@
 <script setup lang="ts">
-import type { Question } from '~/types'
-
-// Get current locale from i18n
-const { locale } = useI18n()
-
 // Fetch all questions for the TOC with i18n support
-const { data: questions } = await useAsyncData(
-  `all-questions-${locale.value}`,
-  async () => {
-    // Use the correct collection based on locale
-    const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-    const allContent = await queryCollection(collectionName).all()
-    return allContent.sort(
-      (a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)
-    ) as unknown as Question[]
-  },
-  {
-    watch: [locale], // Refetch when locale changes
-  }
-)
+const { questions } = await useAllQuestions()
 
 // Mobile sidebar state
 const isSidebarOpen = ref(false)

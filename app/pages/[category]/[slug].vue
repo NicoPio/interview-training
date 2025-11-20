@@ -79,19 +79,7 @@ if (arrowRight) {
 }
 
 // Fetch all questions for navigation
-const { data: allQuestions } = await useAsyncData(
-  `all-questions-${locale.value}`,
-  async () => {
-    const collectionName = locale.value === 'fr' ? 'content_fr' : 'content_en'
-    const allContent = await queryCollection(collectionName).all()
-    return allContent.sort(
-      (a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)
-    ) as unknown as Question[]
-  },
-  {
-    watch: [locale],
-  }
-)
+const { questions: allQuestions } = await useAllQuestions()
 
 // Find current question index and prev/next
 const currentIndex = computed(() => {
