@@ -29,5 +29,10 @@
     "favorites": "Favoris uniquement",
     "reset": "Réinitialiser",
     "active": "actif(s)"
+  },
+  "carousel": {
+    "clickToReveal": "Cliquez sur la carte pour révéler la réponse",
+    "answerPreview": "Aperçu de la réponse disponible",
+    "viewFullQuestion": "Voir la question complète"
   }
 }

@@ -183,26 +183,49 @@ useHead({
       </ol>
     </nav>
 
-    <!-- Question Card -->
-    <QuestionCard
-      :id="Number(question.id)"
-      :title="question.title ?? question.meta.title"
-      :difficulty="question.meta.difficulty"
-      :category="question.meta.category"
-      :slug="question.meta.slug"
-    >
-      <template #question>
-        <!-- Question is already in the title, so we show a brief intro or nothing -->
-        <p class="text-gray-600 dark:text-gray-400">
-          Cliquez sur "Voir la réponse" ci-dessous pour afficher la réponse détaillée.
-        </p>
+    <!-- Question Content -->
+    <UCard>
+      <template #header>
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <UBadge
+                :color="
+                  question.meta.difficulty === 'easy'
+                    ? 'success'
+                    : question.meta.difficulty === 'hard'
+                      ? 'error'
+                      : 'warning'
+                "
+                variant="subtle"
+                size="xs"
+              >
+                {{ question.meta.difficulty || 'easy' }}
+              </UBadge>
+              <UBadge color="neutral" variant="subtle" size="xs">
+                {{ question.meta.category }}
+              </UBadge>
+              <UBadge color="neutral" variant="outline" size="xs"> #{{ question.id }} </UBadge>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+              {{ question.title ?? question.meta.title }}
+            </h1>
+          </div>
+        </div>
       </template>
 
-      <template #answer>
-        <!-- Full content with answer -->
+      <div class="prose prose-gray dark:prose-invert max-w-none">
         <ContentRenderer :value="question" />
+      </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div class="flex gap-2">
+            <ShareButton v-if="canonicalUrl" :url="canonicalUrl" :title="question.title ?? question.meta.title" />
+          </div>
+        </div>
       </template>
-    </QuestionCard>
+    </UCard>
 
     <!-- Navigation Between Questions -->
     <div class="mt-6 flex items-center justify-between gap-4">

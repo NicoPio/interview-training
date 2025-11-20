@@ -64,12 +64,21 @@ const stats = computed(() => {
 
 const activeFiltersCount = computed(() => getActiveFiltersCount())
 
-// Difficulty colors
-const difficultyColors: Record<string, 'success' | 'warning' | 'error'> = {
-  easy: 'success',
-  medium: 'warning',
-  hard: 'error',
-}
+const questionsByCategory = computed(() => {
+  if (!filteredQuestions.value) return {}
+
+  return filteredQuestions.value.reduce(
+    (acc, question) => {
+      const cat = question.meta.category
+      if (!acc[cat]) acc[cat] = []
+      acc[cat].push(question)
+      return acc
+    },
+    {} as Record<string, Question[]>
+  )
+})
+
+const categories = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
 
 // SEO
 const siteUrl = 'https://nicopio.github.io/interview-training'
@@ -253,53 +262,14 @@ useHead({
           <QuestionFilters  :available-categories="availableCategories" />
         </UCard>
 
-        <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-3">
-          <NuxtLink
-            v-for="(question, index) in filteredQuestions"
-            :key="question.id"
-            :to="localePath(`/${question.meta.category}/${question.meta.slug}`)"
-            class="block group animate-[fade-in-up_0.5s_ease-out_both]"
-            :style="{ animationDelay: `${index * 0.03}s` }"
-          >
-            <UCard
-              class="hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-primary-500/20"
-            >
-              <div class="flex items-start gap-4">
-                <div class="flex-1 min-w-0">
-                  <h3
-                    class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors duration-200 mb-2"
-                  >
-                    {{ question.title }}
-                  </h3>
-
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <UBadge
-                      :color="difficultyColors[question.meta.difficulty || 'easy']"
-                      variant="subtle"
-                      size="xs"
-                    >
-                      {{ question.meta.difficulty || 'easy' }}
-                    </UBadge>
-                    <UBadge
-                      v-for="tag in question.meta.tags?.slice(0, 3)"
-                      :key="tag"
-                      color="neutral"
-                      variant="subtle"
-                      size="xs"
-                    >
-                      {{ tag }}
-                    </UBadge>
-                  </div>
-                </div>
-
-                <UIcon
-                  name="i-heroicons-chevron-right"
-                  class="text-gray-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-200 shrink-0"
-                  aria-hidden="true"
-                />
-              </div>
-            </UCard>
-          </NuxtLink>
+        <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-12">
+          <CategoryCarousel
+            v-for="category in categories"
+            :key="category"
+            :category="category"
+            :questions="questionsByCategory[category] || []"
+            :max="10"
+          />
         </div>
 
         <div v-else-if="!questions" class="text-center py-12">

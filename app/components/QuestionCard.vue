@@ -7,6 +7,8 @@ interface Props {
   difficulty?: 'easy' | 'medium' | 'hard'
   category: string
   slug: string
+  compact?: boolean
+  clickable?: boolean
 }
 
 const props = defineProps<Props>()
@@ -132,7 +134,10 @@ const shareUrl = computed(() => {
 </script>
 
 <template>
-  <UCard>
+  <UCard
+    :class="compact && clickable !== false ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''"
+    @click="compact && clickable !== false ? toggleAnswer() : undefined"
+  >
     <!-- Card Header -->
     <template #header>
       <div class="flex items-start justify-between gap-4">
@@ -150,6 +155,11 @@ const shareUrl = computed(() => {
             {{ props.title }}
           </h2>
         </div>
+        <UIcon
+          v-if="compact"
+          :name="showAnswer ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
+          class="text-2xl text-gray-400 dark:text-gray-500 flex-shrink-0"
+        />
       </div>
     </template>
 
@@ -175,8 +185,8 @@ const shareUrl = computed(() => {
         </UBadge>
       </div>
 
-      <!-- Reveal Answer Button -->
-      <div class="flex flex-col items-center gap-2 pt-4">
+      <!-- Reveal Answer Button (hidden in compact mode) -->
+      <div v-if="!compact" class="flex flex-col items-center gap-2 pt-4">
         <UButton
           :icon="showAnswer ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
           :color="showAnswer ? 'neutral' : 'primary'"
@@ -207,6 +217,13 @@ const shareUrl = computed(() => {
             ({{ Math.round(revealState.timeToReveal / 1000) }}s avant première révélation)
           </span>
         </p>
+      </div>
+
+      <!-- Compact mode hint -->
+      <div v-if="compact && !showAnswer" class="text-center pt-2">
+        <UBadge color="primary" variant="subtle" size="xs">
+          Cliquer pour révéler
+        </UBadge>
       </div>
 
       <!-- Answer Section (Collapsible) -->

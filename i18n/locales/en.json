@@ -29,5 +29,10 @@
     "favorites": "Favorites only",
     "reset": "Reset",
     "active": "active"
+  },
+  "carousel": {
+    "clickToReveal": "Click on the card to reveal the answer",
+    "answerPreview": "Answer preview available",
+    "viewFullQuestion": "View full question"
   }
 }
