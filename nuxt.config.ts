@@ -37,6 +37,12 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/'],
       crawlLinks: true, // Auto-discover all routes
+      ignore: [
+        '/en/reactjs',
+        '/en/vuejs',
+        '/interview-training/en/reactjs',
+        '/interview-training/en/vuejs',
+      ],
     },
   },
 
@@ -47,12 +53,11 @@ export default defineNuxtConfig({
 
   // Sitemap configuration
   site: {
-    url: 'https://nicopio.github.io/interview-training',
+    url: 'https://nicopio.github.io',
     name: 'JS Interview Prep',
   },
 
   sitemap: {
-    strictNuxtContentPaths: true,
     exclude: ['/_studio/**', '/api/**'],
   },
   content: {
