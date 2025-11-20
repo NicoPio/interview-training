@@ -37,6 +37,9 @@ const {
   toggleDifficultyFilter,
 } = useQuestionFilters()
 
+// Filters visibility state
+const filtersVisible = ref(false)
+
 // Filtered questions
 const filteredQuestions = computed(() => {
   if (!questions.value) return []
@@ -252,14 +255,36 @@ useHead({
         <!-- Filters Section -->
         <UCard class="mb-8">
           <template #header>
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">Filtres</h3>
-              <UBadge v-if="activeFiltersCount > 0" color="primary">
-                {{ activeFiltersCount }}
-              </UBadge>
-            </div>
+            <button
+              class="flex items-center justify-between w-full hover:opacity-80 transition-opacity"
+              :aria-label="filtersVisible ? $t('filters.hideFilters') : $t('filters.showFilters')"
+              :aria-expanded="filtersVisible"
+              @click="filtersVisible = !filtersVisible"
+            >
+              <div class="flex items-center gap-2">
+                <h3 class="text-lg font-semibold">{{ $t('filters.title') }}</h3>
+                <UBadge v-if="activeFiltersCount > 0" color="primary">
+                  {{ activeFiltersCount }}
+                </UBadge>
+              </div>
+              <UIcon
+                :name="filtersVisible ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
+                class="text-xl transition-transform duration-300"
+              />
+            </button>
           </template>
-          <QuestionFilters  :available-categories="availableCategories" />
+          <Transition
+            enter-active-class="transition-all duration-300 ease-out"
+            enter-from-class="max-h-0 opacity-0"
+            enter-to-class="max-h-[1000px] opacity-100"
+            leave-active-class="transition-all duration-300 ease-in"
+            leave-from-class="max-h-[1000px] opacity-100"
+            leave-to-class="max-h-0 opacity-0"
+          >
+            <div v-show="filtersVisible" class="overflow-hidden">
+              <QuestionFilters :available-categories="availableCategories" />
+            </div>
+          </Transition>
         </UCard>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-12">

@@ -1,5 +1,8 @@
 {
   "filters": {
+    "title": "Filters",
+    "showFilters": "Show filters",
+    "hideFilters": "Hide filters",
     "difficulty": {
       "label": "Difficulty",
       "easy": "Easy",
