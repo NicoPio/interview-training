@@ -40,13 +40,16 @@ if (!questions.value || questions.value.length === 0) {
 const {
   searchQuery,
   selectedDifficulties,
-  selectedStatus: _selectedStatus,
-  showOnlyFavorites: _showOnlyFavorites,
+  selectedCategories,
+  selectedStatus,
+  showOnlyFavorites,
   filterQuestions,
   getAllCategories,
   getActiveFiltersCount,
   resetFilters,
   toggleDifficultyFilter,
+  toggleCategoryFilter,
+  toggleStatusFilter,
 } = useQuestionFilters()
 
 // Filtered questions
@@ -75,6 +78,73 @@ const stats = computed(() => {
 })
 
 const activeFiltersCount = computed(() => getActiveFiltersCount())
+
+// Category stats for filters
+const categoryStats = computed(() => {
+  if (!filteredQuestions.value) return []
+  return availableCategories.value.map(({ category: cat }) => ({
+    category: cat,
+    count: filteredQuestions.value.filter((q) => q.meta.category === cat).length,
+  }))
+})
+
+// Status stats
+const { getProgress } = useQuestionProgress()
+const statusStats = computed(() => {
+  if (!questions.value) return { notSeen: 0, seen: 0, mastered: 0 }
+  return {
+    notSeen: questions.value.filter((q) => {
+      const progress = getProgress(String(q.id))
+      return !progress || progress.status === 'not-seen'
+    }).length,
+    seen: questions.value.filter((q) => {
+      const progress = getProgress(String(q.id))
+      return progress?.status === 'seen'
+    }).length,
+    mastered: questions.value.filter((q) => {
+      const progress = getProgress(String(q.id))
+      return progress?.status === 'mastered'
+    }).length,
+  }
+})
+
+const getCategoryClasses = (cat: string) => {
+  const classes: Record<
+    string,
+    {
+      ring: string
+      text: string
+      hoverShadow: string
+    }
+  > = {
+    javascript: {
+      ring: 'ring-2 ring-blue-500',
+      text: 'text-blue-500',
+      hoverShadow: 'hover:shadow-blue-500/20',
+    },
+    html: {
+      ring: 'ring-2 ring-orange-500',
+      text: 'text-orange-500',
+      hoverShadow: 'hover:shadow-orange-500/20',
+    },
+    css: {
+      ring: 'ring-2 ring-indigo-500',
+      text: 'text-indigo-500',
+      hoverShadow: 'hover:shadow-indigo-500/20',
+    },
+    vuejs: {
+      ring: 'ring-2 ring-green-500',
+      text: 'text-green-500',
+      hoverShadow: 'hover:shadow-green-500/20',
+    },
+    reactjs: {
+      ring: 'ring-2 ring-cyan-500',
+      text: 'text-cyan-500',
+      hoverShadow: 'hover:shadow-cyan-500/20',
+    },
+  }
+  return classes[cat] || { ring: 'ring-2 ring-gray-500', text: 'text-gray-500', hoverShadow: 'hover:shadow-gray-500/20' }
+}
 
 // SEO Meta tags
 useSeoMeta({
@@ -174,25 +244,131 @@ useSeoMeta({
         </div>
 
         <!-- Filters Section -->
-        <UCard class="mb-8">
-          <template #header>
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">Filtres</h3>
-              <UBadge v-if="activeFiltersCount > 0" color="primary">
-                {{ activeFiltersCount }}
-              </UBadge>
+        <div class="mb-8 space-y-6">
+          <!-- Categories Filter -->
+          <div v-if="categoryStats.length > 0">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Catégories</h3>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <UCard
+                v-for="categoryData in categoryStats"
+                :key="categoryData.category"
+                class="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
+                :class="[
+                  getCategoryClasses(categoryData.category).hoverShadow,
+                  selectedCategories.includes(categoryData.category) ? getCategoryClasses(categoryData.category).ring : '',
+                ]"
+                @click="toggleCategoryFilter(categoryData.category)"
+              >
+                <div class="text-center">
+                  <div
+                    class="text-2xl font-bold"
+                    :class="getCategoryClasses(categoryData.category).text"
+                  >
+                    {{ categoryData.count }}
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    {{ $t(`filters.category.${categoryData.category}`) }}
+                  </div>
+                </div>
+              </UCard>
             </div>
-          </template>
-          <QuestionFilters  :available-categories="availableCategories" />
-        </UCard>
+          </div>
+
+          <!-- Status Filter -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Statut</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <UCard
+                class="cursor-pointer hover:shadow-lg hover:shadow-gray-500/20 transition-all duration-300 hover:scale-105"
+                :class="{ 'ring-2 ring-gray-500': selectedStatus === 'all' }"
+                @click="toggleStatusFilter('all')"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-gray-500">{{ stats.total }}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Toutes</div>
+                </div>
+              </UCard>
+              <UCard
+                class="cursor-pointer hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105"
+                :class="{ 'ring-2 ring-blue-500': selectedStatus === 'not-seen' }"
+                @click="toggleStatusFilter('not-seen')"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-500">{{ statusStats.notSeen }}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Non vues</div>
+                </div>
+              </UCard>
+              <UCard
+                class="cursor-pointer hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105"
+                :class="{ 'ring-2 ring-yellow-500': selectedStatus === 'seen' }"
+                @click="toggleStatusFilter('seen')"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-yellow-500">{{ statusStats.seen }}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Vues</div>
+                </div>
+              </UCard>
+              <UCard
+                class="cursor-pointer hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105"
+                :class="{ 'ring-2 ring-purple-500': selectedStatus === 'mastered' }"
+                @click="toggleStatusFilter('mastered')"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-purple-500">{{ statusStats.mastered }}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Maîtrisées</div>
+                </div>
+              </UCard>
+            </div>
+          </div>
+
+          <!-- Favorites Toggle -->
+          <div>
+            <UCard
+              class="cursor-pointer hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300"
+              :class="{ 'ring-2 ring-pink-500': showOnlyFavorites }"
+              @click="showOnlyFavorites = !showOnlyFavorites"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <UIcon
+                    name="i-heroicons-heart-solid"
+                    class="text-2xl"
+                    :class="showOnlyFavorites ? 'text-pink-500' : 'text-gray-400'"
+                  />
+                  <span class="font-semibold text-gray-900 dark:text-white">Favoris uniquement</span>
+                </div>
+                <UToggle v-model="showOnlyFavorites" />
+              </div>
+            </UCard>
+          </div>
+
+          <!-- Reset Button -->
+          <div v-if="activeFiltersCount > 0" class="flex justify-between items-center">
+            <UButton
+              variant="outline"
+              color="neutral"
+              @click="resetFilters"
+            >
+              Réinitialiser les filtres
+            </UButton>
+            <UBadge color="primary">
+              {{ activeFiltersCount }} {{ activeFiltersCount > 1 ? 'filtres actifs' : 'filtre actif' }}
+            </UBadge>
+          </div>
+        </div>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0">
-          <QuestionCarousel
-            :questions="filteredQuestions"
-            :show-arrows="true"
-            :show-dots="true"
-            :loop="true"
-          />
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <QuestionCardLink
+              v-for="question in filteredQuestions"
+              :id="Number(question.id)"
+              :key="question.id"
+              :title="question.meta.title"
+              :difficulty="question.meta.difficulty"
+              :category="question.meta.category"
+              :slug="question.meta.slug"
+            />
+          </div>
         </div>
 
         <div v-else class="text-center py-12">
