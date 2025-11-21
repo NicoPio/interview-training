@@ -38,17 +38,13 @@ if (!questions.value || questions.value.length === 0) {
 
 // Composables
 const {
-  searchQuery,
   selectedDifficulties,
-  selectedCategories,
   selectedStatus,
   showOnlyFavorites,
   filterQuestions,
-  getAllCategories,
   getActiveFiltersCount,
   resetFilters,
   toggleDifficultyFilter,
-  toggleCategoryFilter,
   toggleStatusFilter,
 } = useQuestionFilters()
 
@@ -58,11 +54,7 @@ const filteredQuestions = computed(() => {
   return filterQuestions(questions.value)
 })
 
-// Available categories for filter
-const availableCategories = computed(() => {
-  if (!questions.value) return []
-  return getAllCategories(questions.value)
-})
+
 
 // Count questions by difficulty for this category (based on filtered results)
 const stats = computed(() => {
@@ -79,14 +71,6 @@ const stats = computed(() => {
 
 const activeFiltersCount = computed(() => getActiveFiltersCount())
 
-// Category stats for filters
-const categoryStats = computed(() => {
-  if (!filteredQuestions.value) return []
-  return availableCategories.value.map(({ category: cat }) => ({
-    category: cat,
-    count: filteredQuestions.value.filter((q) => q.meta.category === cat).length,
-  }))
-})
 
 // Status stats
 const { getProgress } = useQuestionProgress()
@@ -107,44 +91,6 @@ const statusStats = computed(() => {
     }).length,
   }
 })
-
-const getCategoryClasses = (cat: string) => {
-  const classes: Record<
-    string,
-    {
-      ring: string
-      text: string
-      hoverShadow: string
-    }
-  > = {
-    javascript: {
-      ring: 'ring-2 ring-blue-500',
-      text: 'text-blue-500',
-      hoverShadow: 'hover:shadow-blue-500/20',
-    },
-    html: {
-      ring: 'ring-2 ring-orange-500',
-      text: 'text-orange-500',
-      hoverShadow: 'hover:shadow-orange-500/20',
-    },
-    css: {
-      ring: 'ring-2 ring-indigo-500',
-      text: 'text-indigo-500',
-      hoverShadow: 'hover:shadow-indigo-500/20',
-    },
-    vuejs: {
-      ring: 'ring-2 ring-green-500',
-      text: 'text-green-500',
-      hoverShadow: 'hover:shadow-green-500/20',
-    },
-    reactjs: {
-      ring: 'ring-2 ring-cyan-500',
-      text: 'text-cyan-500',
-      hoverShadow: 'hover:shadow-cyan-500/20',
-    },
-  }
-  return classes[cat] || { ring: 'ring-2 ring-gray-500', text: 'text-gray-500', hoverShadow: 'hover:shadow-gray-500/20' }
-}
 
 // SEO Meta tags
 useSeoMeta({
@@ -238,41 +184,8 @@ useSeoMeta({
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">All Questions</h2>
         </div>
 
-        <!-- Search Bar -->
-        <div class="mb-6">
-          <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
-        </div>
-
         <!-- Filters Section -->
         <div class="mb-8 space-y-6">
-          <!-- Categories Filter -->
-          <div v-if="categoryStats.length > 0">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Catégories</h3>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <UCard
-                v-for="categoryData in categoryStats"
-                :key="categoryData.category"
-                class="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
-                :class="[
-                  getCategoryClasses(categoryData.category).hoverShadow,
-                  selectedCategories.includes(categoryData.category) ? getCategoryClasses(categoryData.category).ring : '',
-                ]"
-                @click="toggleCategoryFilter(categoryData.category)"
-              >
-                <div class="text-center">
-                  <div
-                    class="text-2xl font-bold"
-                    :class="getCategoryClasses(categoryData.category).text"
-                  >
-                    {{ categoryData.count }}
-                  </div>
-                  <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    {{ $t(`filters.category.${categoryData.category}`) }}
-                  </div>
-                </div>
-              </UCard>
-            </div>
-          </div>
 
           <!-- Status Filter -->
           <div>
@@ -337,7 +250,7 @@ useSeoMeta({
                   />
                   <span class="font-semibold text-gray-900 dark:text-white">Favoris uniquement</span>
                 </div>
-                <UToggle v-model="showOnlyFavorites" />
+                <USwitch v-model="showOnlyFavorites" />
               </div>
             </UCard>
           </div>
@@ -363,7 +276,7 @@ useSeoMeta({
               v-for="question in filteredQuestions"
               :id="Number(question.id)"
               :key="question.id"
-              :title="question.meta.title"
+              :title="question.title"
               :difficulty="question.meta.difficulty"
               :category="question.meta.category"
               :slug="question.meta.slug"

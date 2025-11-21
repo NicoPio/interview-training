@@ -135,7 +135,14 @@ const shareUrl = computed(() => {
 
 <template>
   <UCard
+    class="h-full"
     :class="compact && clickable !== false ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''"
+    :ui="{
+      root: 'flex flex-col',
+      header: 'shrink-0',
+      body: 'flex-1',
+      footer: 'shrink-0'
+    }"
     @click="compact && clickable !== false ? toggleAnswer() : undefined"
   >
     <!-- Card Header -->
@@ -164,12 +171,7 @@ const shareUrl = computed(() => {
     </template>
 
     <!-- Card Body -->
-    <div class="space-y-6">
-      <!-- Question Section (Always visible) -->
-      <div class="prose prose-gray dark:prose-invert max-w-none">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Question</h3>
-        <slot name="question" />
-      </div>
+    <div :class="compact && !showAnswer ? 'flex items-center justify-center' : 'space-y-6'">
 
       <!-- Quiz Timer (if in quiz mode) -->
       <div
@@ -220,10 +222,10 @@ const shareUrl = computed(() => {
       </div>
 
       <!-- Compact mode hint -->
-      <div v-if="compact && !showAnswer" class="text-center pt-2">
-        <UBadge color="primary" variant="subtle" size="xs">
+      <div v-if="compact && !showAnswer" class="text-center">
+        <UButton color="primary" variant="subtle" size="md">
           Cliquer pour révéler
-        </UBadge>
+        </UButton>
       </div>
 
       <!-- Answer Section (Collapsible) -->
