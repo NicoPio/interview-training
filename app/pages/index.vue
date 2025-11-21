@@ -5,6 +5,9 @@ import type { Question } from '~/types'
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
+// Fetch homepage content from Studio
+const { homeContent } = useHomeContent()
+
 // Fetch all JavaScript questions using queryCollection (Nuxt Content v3 API) with i18n
 const { data: questions } = await useAsyncData(
   `questions-${locale.value}`,
@@ -85,11 +88,16 @@ const questionsByCategory = computed(() => {
   )
 })
 
-const categories = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
+const categories = computed(() => {
+  if (homeContent.value?.categories) {
+    return homeContent.value.categories.map(cat => cat.id)
+  }
+  return ['javascript', 'html', 'css', 'vuejs', 'reactjs']
+})
 
 // Filter categories to only show those with questions after filtering
 const categoriesWithQuestions = computed(() => {
-  return categories.filter((category) => {
+  return categories.value.filter((category: string) => {
     const questionsForCategory = questionsByCategory.value[category]
     return questionsForCategory && questionsForCategory.length > 0
   })
@@ -141,22 +149,19 @@ const canonicalUrl = computed(() => {
 })
 
 useSeoMeta({
-  title: 'JS Interview Prep - Master JavaScript Interview Questions',
-  description:
-    'Practice JavaScript interview questions with interactive flashcards. Prepare for your next technical interview with curated questions covering ES6, closures, promises, and more.',
-  ogTitle: 'JS Interview Prep - Master JavaScript Interview Questions',
-  ogDescription:
-    'Interactive flashcard system with 26+ JavaScript interview questions. Track your progress, test yourself with quiz mode, and ace your next technical interview.',
+  title: computed(() => homeContent.value?.seo?.title || 'JS Interview Prep - Master JavaScript Interview Questions'),
+  description: computed(() => homeContent.value?.seo?.description || 'Practice JavaScript interview questions with interactive flashcards.'),
+  ogTitle: computed(() => homeContent.value?.seo?.title || 'JS Interview Prep - Master JavaScript Interview Questions'),
+  ogDescription: computed(() => homeContent.value?.seo?.description || 'Interactive flashcard system with 26+ JavaScript interview questions.'),
   ogUrl: canonicalUrl.value,
   ogType: 'website',
-  ogImage: `${siteUrl}/og-image.svg`,
+  ogImage: computed(() => homeContent.value?.seo?.og_image ? `${siteUrl}${homeContent.value.seo.og_image}` : `${siteUrl}/og-image.svg`),
   ogImageWidth: 1200,
   ogImageHeight: 630,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'JS Interview Prep - Master JavaScript Interview Questions',
-  twitterDescription:
-    '26+ JavaScript interview questions with interactive flashcards, progress tracking, and quiz mode',
-  twitterImage: `${siteUrl}/og-image.svg`,
+  twitterTitle: computed(() => homeContent.value?.seo?.title || 'JS Interview Prep - Master JavaScript Interview Questions'),
+  twitterDescription: computed(() => homeContent.value?.seo?.description || '26+ JavaScript interview questions with interactive flashcards'),
+  twitterImage: computed(() => homeContent.value?.seo?.og_image ? `${siteUrl}${homeContent.value.seo.og_image}` : `${siteUrl}/og-image.svg`),
 })
 
 useHead({
@@ -201,39 +206,33 @@ useHead({
         <h1
           class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 animate-[fade-in-up_0.6s_ease-out_0.1s_both]"
         >
-          Master Frontend
-          <span class="text-primary-500">Interview Questions</span>
+          {{ homeContent?.hero?.title || 'Master Frontend Interview Questions' }}
         </h1>
 
         <p
           class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-[fade-in-up_0.6s_ease-out_0.2s_both]"
         >
-          Practice with interactive flashcards covering essential JavaScript concepts. Reveal
-          answers when ready and track your progress.
+          {{ homeContent?.hero?.subtitle || 'Practice with interactive flashcards covering essential JavaScript concepts. Reveal answers when ready and track your progress.' }}
         </p>
 
         <div
           class="flex flex-wrap justify-center gap-4 animate-[fade-in-up_0.6s_ease-out_0.3s_both]"
         >
           <UButton
-            :to="
-              localePath(
-                '/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript'
-              )
-            "
+            :to="localePath(homeContent?.hero?.primary_cta?.link || '/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript')"
             size="xl"
             icon="i-heroicons-play"
           >
-            Start Practicing
+            {{ homeContent?.hero?.primary_cta?.text || 'Start Practicing' }}
           </UButton>
           <UButton
-            to="#questions"
+            :to="homeContent?.hero?.secondary_cta?.link || '#questions'"
             size="xl"
             color="neutral"
             variant="outline"
             icon="i-heroicons-queue-list"
           >
-            Browse Questions
+            {{ homeContent?.hero?.secondary_cta?.text || 'Browse Questions' }}
           </UButton>
         </div>
       </div>
@@ -253,7 +252,7 @@ useHead({
           <UCard class="animate-[fade-in-up_0.6s_ease-out_0.4s_both]">
             <div class="text-center">
               <div class="text-3xl font-bold text-primary-500">{{ stats.total }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Questions</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.total_label || 'Total Questions' }}</div>
             </div>
           </UCard>
           <UCard
@@ -263,7 +262,7 @@ useHead({
           >
             <div class="text-center">
               <div class="text-3xl font-bold text-green-500">{{ stats.easy }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Easy</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.easy_label || 'Easy' }}</div>
             </div>
           </UCard>
           <UCard
@@ -273,7 +272,7 @@ useHead({
           >
             <div class="text-center">
               <div class="text-3xl font-bold text-yellow-500">{{ stats.medium }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Medium</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.medium_label || 'Medium' }}</div>
             </div>
           </UCard>
           <UCard
@@ -283,7 +282,7 @@ useHead({
           >
             <div class="text-center">
               <div class="text-3xl font-bold text-red-500">{{ stats.hard }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hard</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.hard_label || 'Hard' }}</div>
             </div>
           </UCard>
         </div>
@@ -325,7 +324,7 @@ useHead({
     <section id="questions" class="container mx-auto px-4 pt-16">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white">All Questions</h2>
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white">{{ homeContent?.questions_section?.title || 'All Questions' }}</h2>
           <!-- Search Bar -->
           <div >
             <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
@@ -348,18 +347,18 @@ useHead({
 
         <div v-else class="text-center py-12">
           <UIcon
-            name="i-heroicons-magnifying-glass"
+            :name="homeContent?.empty_state?.icon || 'i-heroicons-magnifying-glass'"
             class="text-6xl text-gray-300 dark:text-gray-700 mb-4"
             aria-hidden="true"
           />
           <p class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            Aucun résultat trouvé
+            {{ homeContent?.empty_state?.title || 'Aucun résultat trouvé' }}
           </p>
           <p class="text-gray-600 dark:text-gray-400 mb-6">
-            Aucune question ne correspond aux filtres sélectionnés.
+            {{ homeContent?.empty_state?.description || 'Aucune question ne correspond aux filtres sélectionnés.' }}
           </p>
           <UButton color="primary" variant="outline" @click="resetFilters">
-            Réinitialiser les filtres
+            {{ homeContent?.empty_state?.reset_button || 'Réinitialiser les filtres' }}
           </UButton>
         </div>
       </div>
@@ -369,11 +368,8 @@ useHead({
     <footer class="border-t mt-12 bg-white dark:bg-gray-950 dark:border-gray-800">
       <div class="container mx-auto px-4 py-8">
         <div class="max-w-4xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>
-            Built with
-            <UIcon name="i-heroicons-heart-solid" class="text-red-500 inline" aria-hidden="true" />
-            using Nuxt 4, Nuxt Content & Nuxt UI
-          </p>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <p v-html="(homeContent?.footer?.text || 'Built with ❤️ using Nuxt 4, Nuxt Content & Nuxt UI').replace('❤️', '<span class=\'text-red-500\'>\u2764\uFE0F</span>')" />
         </div>
       </div>
     </footer>
