@@ -63,7 +63,7 @@ const categoryIcons: Record<string, string> = {
       :loop="false"
       :ui="{
         item: 'basis-full md:basis-1/2 lg:basis-1/3 px-2',
-        container: 'gap-4 items-stretch',
+        container: 'items-stretch',
       }"
       class="w-full"
     >
