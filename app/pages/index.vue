@@ -232,14 +232,14 @@ useHead({
     </section>
 
     <!-- Progress Section -->
-    <section v-if="questions && questions.length > 0" class="container mx-auto px-4 py-12">
+    <section v-if="questions && questions.length > 0" class="container mx-auto px-4 pt-4">
       <div class="max-w-4xl mx-auto">
         <ProgressBar :total-questions="stats.total" />
       </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="container mx-auto px-4 py-12">
+    <section class="container mx-auto px-4 pt-4">
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <UCard class="animate-[fade-in-up_0.6s_ease-out_0.4s_both]">
@@ -283,7 +283,7 @@ useHead({
     </section>
 
     <!-- Categories Section -->
-    <section class="container mx-auto px-4 py-12">
+    <section class="container mx-auto px-4 pt-4">
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
           <UCard
@@ -314,15 +314,14 @@ useHead({
     </section>
 
     <!-- Questions List -->
-    <section id="questions" class="container mx-auto px-4 py-12">
+    <section id="questions" class="container mx-auto px-4 pt-16">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
           <h2 class="text-3xl font-bold text-gray-900 dark:text-white">All Questions</h2>
-        </div>
-
-        <!-- Search Bar -->
-        <div class="mb-6">
-          <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
+          <!-- Search Bar -->
+          <div >
+            <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
+          </div>
         </div>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-12">
