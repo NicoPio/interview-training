@@ -1,10 +1,14 @@
 ---
 id: 38
 slug: flexbox
-title: 'Comment fonctionne Flexbox en CSS ?'
+title: Comment fonctionne Flexbox en CSS ?
 category: css
 difficulty: medium
-tags: ['flexbox', 'layout', 'alignment', 'responsive']
+tags:
+  - flexbox
+  - layout
+  - alignment
+  - responsive
 ---
 
 # Comment fonctionne Flexbox en CSS ?
@@ -20,6 +24,7 @@ Flexbox (Flexible Box Layout) est un modèle de mise en page CSS qui permet d'or
 ```
 
 **Axes** :
+
 - **Main axis** (axe principal) : Direction des flex items
 - **Cross axis** (axe transversal) : Perpendiculaire au main axis
 
@@ -296,6 +301,7 @@ Flexbox (Flexible Box Layout) est un modèle de mise en page CSS qui permet d'or
 ## Résumé
 
 **Container** :
+
 - `display: flex`
 - `flex-direction` : Direction
 - `justify-content` : Alignement main axis
@@ -304,6 +310,7 @@ Flexbox (Flexible Box Layout) est un modèle de mise en page CSS qui permet d'or
 - `gap` : Espacement
 
 **Items** :
+
 - `flex: 1` : Grandir/rétrécir
 - `align-self` : Alignement individuel
 - `order` : Ordre d'affichage
