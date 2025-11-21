@@ -150,7 +150,7 @@ export const useQuestionFilters = () => {
     const orderedCategories: Category[] = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
     return orderedCategories
       .filter((cat) => categoryCount.has(cat))
-      .map((cat) => ({ category: cat, count: categoryCount.get(cat)! }))
+      .map((cat) => ({ category: cat, count: categoryCount.get(cat) || 0 }))
   }
 
   const getActiveFiltersCount = (): number => {
