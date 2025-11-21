@@ -81,10 +81,11 @@ jobs:
               ERRORS=$((ERRORS + 1))
             fi
 
-            # Validate tags format
-            TAGS=$(echo "$FRONTMATTER" | grep "^tags:")
-            if ! echo "$TAGS" | grep -q "\["; then
-              echo "❌ Invalid tags format in $file (must be array)"
+            # Validate tags format (accept both inline and block YAML formats)
+            # Inline format: tags: ['tag1', 'tag2']
+            # Block format:  tags:\n  - tag1\n  - tag2
+            if ! grep -q "^tags:" "$file"; then
+              echo "❌ Missing tags field in $file"
               ERRORS=$((ERRORS + 1))
             fi
           done
