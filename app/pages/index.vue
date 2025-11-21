@@ -64,11 +64,9 @@ const stats = computed(() => {
   }
 })
 
-const activeFiltersCount = computed(() => getActiveFiltersCount())
-
 const categoryStats = computed(() => {
   if (!filteredQuestions.value) return []
-  return availableCategories.value.map(({ category, count }) => ({
+  return availableCategories.value.map(({ category }) => ({
     category,
     count: filteredQuestions.value.filter((q) => q.meta.category === category).length,
   }))
