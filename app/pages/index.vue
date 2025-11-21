@@ -28,6 +28,7 @@ const { getFavoriteCount: _getFavoriteCount } = useFavorites()
 const {
   searchQuery,
   selectedDifficulties,
+  selectedCategories,
   selectedStatus: _selectedStatus,
   showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
@@ -35,10 +36,8 @@ const {
   getActiveFiltersCount,
   resetFilters,
   toggleDifficultyFilter,
+  toggleCategoryFilter,
 } = useQuestionFilters()
-
-// Filters visibility state
-const filtersVisible = ref(false)
 
 // Filtered questions
 const filteredQuestions = computed(() => {
@@ -67,6 +66,14 @@ const stats = computed(() => {
 
 const activeFiltersCount = computed(() => getActiveFiltersCount())
 
+const categoryStats = computed(() => {
+  if (!filteredQuestions.value) return []
+  return availableCategories.value.map(({ category, count }) => ({
+    category,
+    count: filteredQuestions.value.filter((q) => q.meta.category === category).length,
+  }))
+})
+
 const questionsByCategory = computed(() => {
   if (!filteredQuestions.value) return {}
 
@@ -82,6 +89,44 @@ const questionsByCategory = computed(() => {
 })
 
 const categories = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
+
+const getCategoryClasses = (category: string) => {
+  const classes: Record<
+    string,
+    {
+      ring: string
+      text: string
+      hoverShadow: string
+    }
+  > = {
+    javascript: {
+      ring: 'ring-2 ring-blue-500',
+      text: 'text-blue-500',
+      hoverShadow: 'hover:shadow-blue-500/20',
+    },
+    html: {
+      ring: 'ring-2 ring-orange-500',
+      text: 'text-orange-500',
+      hoverShadow: 'hover:shadow-orange-500/20',
+    },
+    css: {
+      ring: 'ring-2 ring-indigo-500',
+      text: 'text-indigo-500',
+      hoverShadow: 'hover:shadow-indigo-500/20',
+    },
+    vuejs: {
+      ring: 'ring-2 ring-green-500',
+      text: 'text-green-500',
+      hoverShadow: 'hover:shadow-green-500/20',
+    },
+    reactjs: {
+      ring: 'ring-2 ring-cyan-500',
+      text: 'text-cyan-500',
+      hoverShadow: 'hover:shadow-cyan-500/20',
+    },
+  }
+  return classes[category] || { ring: 'ring-2 ring-gray-500', text: 'text-gray-500', hoverShadow: 'hover:shadow-gray-500/20' }
+}
 
 // SEO
 const siteUrl = 'https://nicopio.github.io/interview-training'
@@ -240,6 +285,37 @@ useHead({
       </div>
     </section>
 
+    <!-- Categories Section -->
+    <section class="container mx-auto px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <UCard
+            v-for="(categoryData, index) in categoryStats"
+            :key="categoryData.category"
+            class="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_both]"
+            :class="[
+              getCategoryClasses(categoryData.category).hoverShadow,
+              selectedCategories.includes(categoryData.category) ? getCategoryClasses(categoryData.category).ring : '',
+            ]"
+            :style="{ animationDelay: `${0.6 + index * 0.05}s` }"
+            @click="toggleCategoryFilter(categoryData.category)"
+          >
+            <div class="text-center">
+              <div
+                class="text-3xl font-bold"
+                :class="getCategoryClasses(categoryData.category).text"
+              >
+                {{ categoryData.count }}
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                {{ $t(`filters.category.${categoryData.category}`) }}
+              </div>
+            </div>
+          </UCard>
+        </div>
+      </div>
+    </section>
+
     <!-- Questions List -->
     <section id="questions" class="container mx-auto px-4 py-12">
       <div class="max-w-4xl mx-auto">
@@ -251,41 +327,6 @@ useHead({
         <div class="mb-6">
           <SearchBar v-model="searchQuery" :result-count="filteredQuestions.length" />
         </div>
-
-        <!-- Filters Section -->
-        <UCard class="mb-8">
-          <template #header>
-            <button
-              class="flex items-center justify-between w-full hover:opacity-80 transition-opacity"
-              :aria-label="filtersVisible ? $t('filters.hideFilters') : $t('filters.showFilters')"
-              :aria-expanded="filtersVisible"
-              @click="filtersVisible = !filtersVisible"
-            >
-              <div class="flex items-center gap-2">
-                <h3 class="text-lg font-semibold">{{ $t('filters.title') }}</h3>
-                <UBadge v-if="activeFiltersCount > 0" color="primary">
-                  {{ activeFiltersCount }}
-                </UBadge>
-              </div>
-              <UIcon
-                :name="filtersVisible ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
-                class="text-xl transition-transform duration-300"
-              />
-            </button>
-          </template>
-          <Transition
-            enter-active-class="transition-all duration-300 ease-out"
-            enter-from-class="max-h-0 opacity-0"
-            enter-to-class="max-h-[1000px] opacity-100"
-            leave-active-class="transition-all duration-300 ease-in"
-            leave-from-class="max-h-[1000px] opacity-100"
-            leave-to-class="max-h-0 opacity-0"
-          >
-            <div v-show="filtersVisible" class="overflow-hidden">
-              <QuestionFilters :available-categories="availableCategories" />
-            </div>
-          </Transition>
-        </UCard>
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-12">
           <CategoryCarousel
