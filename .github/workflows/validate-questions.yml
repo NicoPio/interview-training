@@ -100,54 +100,86 @@ jobs:
 
       - name: Check for duplicate IDs
         run: |
-          echo "🔍 Checking for duplicate question IDs..."
+          echo "🔍 Checking for duplicate question IDs within each locale..."
 
-          # Extract all IDs from frontmatter
-          IDS=$(find content -name "*.md" -not -name "index.md" -exec grep -h "^id:" {} \; | sed 's/id: *//' | sort -n)
+          HAS_ERRORS=0
 
-          # Check for duplicates
-          DUPLICATES=$(echo "$IDS" | uniq -d)
+          # Check each locale separately
+          for locale in fr en; do
+            if [ ! -d "content/$locale" ]; then
+              continue
+            fi
 
-          if [ -n "$DUPLICATES" ]; then
-            echo "❌ Found duplicate IDs:"
-            echo "$DUPLICATES"
+            echo "Checking locale: $locale"
 
-            # Show which files have duplicate IDs
-            for id in $DUPLICATES; do
-              echo ""
-              echo "Files with ID $id:"
-              find content -name "*.md" -not -name "index.md" -exec grep -l "^id: $id$" {} \;
-            done
+            # Extract all IDs from frontmatter for this locale
+            IDS=$(find content/$locale -name "*.md" -not -name "index.md" -exec grep -h "^id:" {} \; | sed 's/id: *//' | sort -n)
 
+            # Check for duplicates
+            DUPLICATES=$(echo "$IDS" | uniq -d)
+
+            if [ -n "$DUPLICATES" ]; then
+              echo "❌ Found duplicate IDs in $locale locale:"
+              echo "$DUPLICATES"
+
+              # Show which files have duplicate IDs
+              for id in $DUPLICATES; do
+                echo ""
+                echo "Files with ID $id in $locale:"
+                find content/$locale -name "*.md" -not -name "index.md" -exec grep -l "^id: $id$" {} \;
+              done
+
+              HAS_ERRORS=1
+            else
+              echo "✅ No duplicate IDs in $locale locale"
+            fi
+            echo ""
+          done
+
+          if [ $HAS_ERRORS -eq 1 ]; then
             exit 1
-          else
-            echo "✅ No duplicate IDs found"
           fi
 
       - name: Check for duplicate slugs
         run: |
-          echo "🔍 Checking for duplicate slugs..."
+          echo "🔍 Checking for duplicate slugs within each locale..."
 
-          # Extract all slugs from frontmatter
-          SLUGS=$(find content -name "*.md" -not -name "index.md" -exec grep -h "^slug:" {} \; | sed 's/slug: *//' | tr -d "'\"" | sort)
+          HAS_ERRORS=0
 
-          # Check for duplicates
-          DUPLICATES=$(echo "$SLUGS" | uniq -d)
+          # Check each locale separately
+          for locale in fr en; do
+            if [ ! -d "content/$locale" ]; then
+              continue
+            fi
 
-          if [ -n "$DUPLICATES" ]; then
-            echo "❌ Found duplicate slugs:"
-            echo "$DUPLICATES"
+            echo "Checking locale: $locale"
 
-            # Show which files have duplicate slugs
-            for slug in $DUPLICATES; do
-              echo ""
-              echo "Files with slug '$slug':"
-              find content -name "*.md" -not -name "index.md" -exec grep -l "^slug: ['\"]\\?$slug['\"]\\?$" {} \;
-            done
+            # Extract all slugs from frontmatter for this locale
+            SLUGS=$(find content/$locale -name "*.md" -not -name "index.md" -exec grep -h "^slug:" {} \; | sed 's/slug: *//' | tr -d "'\"" | sort)
 
+            # Check for duplicates
+            DUPLICATES=$(echo "$SLUGS" | uniq -d)
+
+            if [ -n "$DUPLICATES" ]; then
+              echo "❌ Found duplicate slugs in $locale locale:"
+              echo "$DUPLICATES"
+
+              # Show which files have duplicate slugs
+              for slug in $DUPLICATES; do
+                echo ""
+                echo "Files with slug '$slug' in $locale:"
+                find content/$locale -name "*.md" -not -name "index.md" -exec grep -l "^slug: ['\"]\\?$slug['\"]\\?$" {} \;
+              done
+
+              HAS_ERRORS=1
+            else
+              echo "✅ No duplicate slugs in $locale locale"
+            fi
+            echo ""
+          done
+
+          if [ $HAS_ERRORS -eq 1 ]; then
             exit 1
-          else
-            echo "✅ No duplicate slugs found"
           fi
 
       - name: Validate markdown syntax
