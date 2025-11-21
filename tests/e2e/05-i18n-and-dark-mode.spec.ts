@@ -19,21 +19,30 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
     await page.goto('/')
   })
 
-  test('should switch language from French to English', async ({ page }) => {
-    // Look for language switcher
-    const langSwitcher = page
-      .locator('button, a, select')
-      .filter({
-        hasText: /EN|English|FR|Français|langue|language/i,
-      })
-      .or(page.locator('[data-testid*="lang"], [aria-label*="language"]'))
+  // Helper function to switch language
+  async function switchToEnglish(page: any) {
+    const langSwitcher = page.locator('[data-testid="language-switcher"]')
+    await langSwitcher.click()
+    await page.waitForTimeout(300)
+    // Click on the English option in the dropdown (not the current value)
+    await page.locator('[role="option"]:has-text("English")').click()
+    await page.waitForTimeout(500)
+  }
 
-    if (await langSwitcher.first().isVisible()) {
+  test('should switch language from French to English', async ({ page }) => {
+    // Look for language switcher using specific data-testid
+    const langSwitcher = page.locator('[data-testid="language-switcher"]')
+
+    if (await langSwitcher.isVisible()) {
       // Get current URL
       const currentUrl = page.url()
 
-      // Click language switcher
-      await langSwitcher.first().click()
+      // Click language switcher to open the dropdown
+      await langSwitcher.click()
+      await page.waitForTimeout(300)
+
+      // Click on the English option in the dropdown
+      await page.locator('text=English').click()
       await page.waitForTimeout(500)
 
       // Check if URL changed to include /en
@@ -69,24 +78,18 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
     console.log('✓ French UI detected:', hasFrench)
 
     // Switch to English
-    const langSwitcher = page.locator('button, a').filter({
-      hasText: /EN|English/i,
-    })
+    await switchToEnglish(page)
+    await page.waitForLoadState('networkidle')
 
-    if (await langSwitcher.first().isVisible()) {
-      await langSwitcher.first().click()
-      await page.waitForLoadState('networkidle')
+    // Check English
+    pageContent = await page.content()
 
-      // Check English
-      pageContent = await page.content()
+    const hasEnglish =
+      pageContent.includes('Search') ||
+      pageContent.includes('Difficulty') ||
+      pageContent.includes('Questions')
 
-      const hasEnglish =
-        pageContent.includes('Search') ||
-        pageContent.includes('Difficulty') ||
-        pageContent.includes('Questions')
-
-      console.log('✓ English UI detected:', hasEnglish)
-    }
+    console.log('✓ English UI detected:', hasEnglish)
   })
 
   test('should stay on equivalent page when switching language', async ({ page }) => {
@@ -101,46 +104,34 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
     const slug = frUrl.split('/').pop()
 
     // Switch language
-    const langSwitcher = page.locator('button, a').filter({
-      hasText: /EN|English/i,
-    })
+    await switchToEnglish(page)
+    await page.waitForLoadState('networkidle')
 
-    if (await langSwitcher.first().isVisible()) {
-      await langSwitcher.first().click()
-      await page.waitForLoadState('networkidle')
+    const enUrl = page.url()
 
-      const enUrl = page.url()
+    // Should stay on same question, just in English
+    expect(enUrl).toContain('/en/')
+    expect(enUrl).toContain(slug || '')
 
-      // Should stay on same question, just in English
-      expect(enUrl).toContain('/en/')
-      expect(enUrl).toContain(slug || '')
-
-      console.log('✓ Stayed on equivalent page:', frUrl, '→', enUrl)
-    }
+    console.log('✓ Stayed on equivalent page:', frUrl, '→', enUrl)
   })
 
   test('should persist language preference', async ({ page }) => {
     // Switch to English
-    const langSwitcher = page.locator('button, a').filter({
-      hasText: /EN|English/i,
-    })
+    await switchToEnglish(page)
+    await page.waitForLoadState('networkidle')
 
-    if (await langSwitcher.first().isVisible()) {
-      await langSwitcher.first().click()
-      await page.waitForLoadState('networkidle')
+    // Check we're on English version (could be /en or /interview-training/en)
+    expect(page.url()).toContain('/en')
 
-      // Check we're on English version (could be /en or /interview-training/en)
-      expect(page.url()).toContain('/en')
+    // Reload page
+    await page.reload()
+    await page.waitForLoadState('networkidle')
 
-      // Reload page
-      await page.reload()
-      await page.waitForLoadState('networkidle')
+    // Should still be on English version
+    expect(page.url()).toContain('/en')
 
-      // Should still be on English version
-      expect(page.url()).toContain('/en')
-
-      console.log('✓ Language preference persists')
-    }
+    console.log('✓ Language preference persists')
   })
 
   test('should load content in selected language', async ({ page }) => {
@@ -153,57 +144,50 @@ test.describe('US7-US8: i18n and Dark Mode', () => {
     const frContent = await page.content()
 
     // Switch to English
-    const langSwitcher = page.locator('button, a').filter({
-      hasText: /EN|English/i,
-    })
+    await switchToEnglish(page)
+    await page.waitForLoadState('networkidle')
 
-    if (await langSwitcher.first().isVisible()) {
-      await langSwitcher.first().click()
-      await page.waitForLoadState('networkidle')
+    const enContent = await page.content()
 
-      const enContent = await page.content()
+    // Content should be different
+    expect(enContent).not.toBe(frContent)
 
-      // Content should be different
-      expect(enContent).not.toBe(frContent)
-
-      console.log('✓ Content switches with language')
-    }
+    console.log('✓ Content switches with language')
   })
 
   test('should toggle dark mode on and off', async ({ page }) => {
-    // Look for dark mode toggle
-    const darkModeToggle = page
-      .locator('button')
-      .filter({
-        hasText: /dark|mode|theme|sombre/i,
-      })
-      .or(
-        page.locator('[data-testid*="color-mode"], [data-testid*="theme"], [aria-label*="theme"]')
-      )
+    // Look for dark mode toggle using the specific data-testid
+    const darkModeToggle = page.locator('[data-testid="dark-mode-toggle"]')
 
-    if (await darkModeToggle.first().isVisible()) {
-      // Get initial color scheme
-      const initialBg = await page.evaluate(() => {
-        return window.getComputedStyle(document.body).backgroundColor
+    if (await darkModeToggle.isVisible()) {
+      // Get initial dark mode state (check if html has 'dark' class)
+      const initialIsDark = await page.evaluate(() => {
+        return document.documentElement.classList.contains('dark')
       })
 
       // Toggle dark mode
-      await darkModeToggle.first().click()
-      await page.waitForTimeout(300)
+      await darkModeToggle.click()
+      await page.waitForTimeout(500)
 
-      // Get new color scheme
-      const newBg = await page.evaluate(() => {
-        return window.getComputedStyle(document.body).backgroundColor
+      // Get new dark mode state
+      const newIsDark = await page.evaluate(() => {
+        return document.documentElement.classList.contains('dark')
       })
 
-      // Background should change
-      expect(newBg).not.toBe(initialBg)
+      // Dark mode state should change
+      expect(newIsDark).not.toBe(initialIsDark)
 
-      console.log('✓ Dark mode toggle works:', initialBg, '→', newBg)
+      console.log('✓ Dark mode toggle works:', initialIsDark ? 'dark' : 'light', '→', newIsDark ? 'dark' : 'light')
 
       // Toggle back
-      await darkModeToggle.first().click()
-      await page.waitForTimeout(300)
+      await darkModeToggle.click()
+      await page.waitForTimeout(500)
+
+      // Verify it toggled back
+      const finalIsDark = await page.evaluate(() => {
+        return document.documentElement.classList.contains('dark')
+      })
+      expect(finalIsDark).toBe(initialIsDark)
 
       console.log('✓ Dark mode toggles on and off')
     } else {

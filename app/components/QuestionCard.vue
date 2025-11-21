@@ -165,7 +165,7 @@ const shareUrl = computed(() => {
         <UIcon
           v-if="compact"
           :name="showAnswer ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
-          class="text-2xl text-gray-400 dark:text-gray-500 flex-shrink-0"
+          class="text-2xl text-gray-400 dark:text-gray-500 shrink-0"
         />
       </div>
     </template>

@@ -113,32 +113,32 @@ const getCategoryClasses = (category: string) => {
     }
   > = {
     javascript: {
-      ring: 'ring-2 ring-blue-500',
-      text: 'text-blue-500',
+      ring: 'ring-2 ring-blue-600 dark:ring-blue-500',
+      text: 'text-blue-700 dark:text-blue-500',
       hoverShadow: 'hover:shadow-blue-500/20',
     },
     html: {
-      ring: 'ring-2 ring-orange-500',
-      text: 'text-orange-500',
+      ring: 'ring-2 ring-orange-600 dark:ring-orange-500',
+      text: 'text-orange-700 dark:text-orange-500',
       hoverShadow: 'hover:shadow-orange-500/20',
     },
     css: {
-      ring: 'ring-2 ring-indigo-500',
-      text: 'text-indigo-500',
+      ring: 'ring-2 ring-indigo-600 dark:ring-indigo-500',
+      text: 'text-indigo-700 dark:text-indigo-500',
       hoverShadow: 'hover:shadow-indigo-500/20',
     },
     vuejs: {
-      ring: 'ring-2 ring-green-500',
-      text: 'text-green-500',
+      ring: 'ring-2 ring-green-600 dark:ring-green-500',
+      text: 'text-green-700 dark:text-green-500',
       hoverShadow: 'hover:shadow-green-500/20',
     },
     reactjs: {
-      ring: 'ring-2 ring-cyan-500',
-      text: 'text-cyan-500',
+      ring: 'ring-2 ring-cyan-600 dark:ring-cyan-500',
+      text: 'text-cyan-700 dark:text-cyan-500',
       hoverShadow: 'hover:shadow-cyan-500/20',
     },
   }
-  return classes[category] || { ring: 'ring-2 ring-gray-500', text: 'text-gray-500', hoverShadow: 'hover:shadow-gray-500/20' }
+  return classes[category] || { ring: 'ring-2 ring-gray-600 dark:ring-gray-500', text: 'text-gray-700 dark:text-gray-500', hoverShadow: 'hover:shadow-gray-500/20' }
 }
 
 // SEO
@@ -251,38 +251,38 @@ useHead({
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <UCard class="animate-[fade-in-up_0.6s_ease-out_0.4s_both]">
             <div class="text-center">
-              <div class="text-3xl font-bold text-primary-500">{{ stats.total }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.total_label || 'Total Questions' }}</div>
+              <div class="text-3xl font-bold text-primary-600 dark:text-primary-500">{{ stats.total }}</div>
+              <div class="text-sm text-gray-700 dark:text-gray-300 mt-1">{{ homeContent?.stats?.total_label || 'Total Questions' }}</div>
             </div>
           </UCard>
           <UCard
             class="cursor-pointer hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.45s_both]"
-            :class="{ 'ring-2 ring-green-500': selectedDifficulties.includes('easy') }"
+            :class="{ 'ring-2 ring-green-600 dark:ring-green-500': selectedDifficulties.includes('easy') }"
             @click="toggleDifficultyFilter('easy')"
           >
             <div class="text-center">
-              <div class="text-3xl font-bold text-green-500">{{ stats.easy }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.easy_label || 'Easy' }}</div>
+              <div class="text-3xl font-bold text-green-700 dark:text-green-500">{{ stats.easy }}</div>
+              <div class="text-sm text-gray-700 dark:text-gray-300 mt-1">{{ homeContent?.stats?.easy_label || 'Easy' }}</div>
             </div>
           </UCard>
           <UCard
             class="cursor-pointer hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.5s_both]"
-            :class="{ 'ring-2 ring-yellow-500': selectedDifficulties.includes('medium') }"
+            :class="{ 'ring-2 ring-yellow-600 dark:ring-yellow-500': selectedDifficulties.includes('medium') }"
             @click="toggleDifficultyFilter('medium')"
           >
             <div class="text-center">
-              <div class="text-3xl font-bold text-yellow-500">{{ stats.medium }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.medium_label || 'Medium' }}</div>
+              <div class="text-3xl font-bold text-yellow-700 dark:text-yellow-500">{{ stats.medium }}</div>
+              <div class="text-sm text-gray-700 dark:text-gray-300 mt-1">{{ homeContent?.stats?.medium_label || 'Medium' }}</div>
             </div>
           </UCard>
           <UCard
             class="cursor-pointer hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 hover:scale-105 animate-[fade-in-up_0.6s_ease-out_0.55s_both]"
-            :class="{ 'ring-2 ring-red-500': selectedDifficulties.includes('hard') }"
+            :class="{ 'ring-2 ring-red-600 dark:ring-red-500': selectedDifficulties.includes('hard') }"
             @click="toggleDifficultyFilter('hard')"
           >
             <div class="text-center">
-              <div class="text-3xl font-bold text-red-500">{{ stats.hard }}</div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ homeContent?.stats?.hard_label || 'Hard' }}</div>
+              <div class="text-3xl font-bold text-red-700 dark:text-red-500">{{ stats.hard }}</div>
+              <div class="text-sm text-gray-700 dark:text-gray-300 mt-1">{{ homeContent?.stats?.hard_label || 'Hard' }}</div>
             </div>
           </UCard>
         </div>
@@ -311,7 +311,7 @@ useHead({
               >
                 {{ categoryData.count }}
               </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <div class="text-sm text-gray-700 dark:text-gray-300 mt-1">
                 {{ $t(`filters.category.${categoryData.category}`) }}
               </div>
             </div>

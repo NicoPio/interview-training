@@ -80,10 +80,10 @@ test.describe('US2-US3: Answer Reveal and Progress Tracking', () => {
 
     await firstQuestion.click()
     await page.waitForURL(/\/javascript\//, { timeout: 10000 })
-    await page.waitForTimeout(1000) // Wait for content to render
+    await page.waitForLoadState('networkidle')
 
-    // Wait a moment for state to update
-    await page.waitForTimeout(500)
+    // Wait longer for the composable to initialize and save to localStorage
+    await page.waitForTimeout(2000)
 
     // Check localStorage for progress state
     const progressState = await page.evaluate(() => {
@@ -164,7 +164,10 @@ test.describe('US2-US3: Answer Reveal and Progress Tracking', () => {
     const firstQuestion = page.locator('a[href*="/javascript/"]').first()
     await firstQuestion.click()
     await page.waitForURL(/\/javascript\//, { timeout: 10000 })
-    await page.waitForTimeout(1000)
+    await page.waitForLoadState('networkidle')
+
+    // Wait longer for progress to save
+    await page.waitForTimeout(2000)
 
     // Get progress state
     const progressBefore = await page.evaluate(() => {
@@ -176,7 +179,6 @@ test.describe('US2-US3: Answer Reveal and Progress Tracking', () => {
     // Reload page
     await page.reload()
     await page.waitForLoadState('networkidle')
-    await page.waitForTimeout(500)
 
     // Check progress state persists (compare structure, not exact timestamp)
     const progressAfter = await page.evaluate(() => {

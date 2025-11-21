@@ -123,11 +123,11 @@ test.describe('US4-US5: Favorites and Advanced Filtering', () => {
       console.log(`✓ Search filter: ${initialCount} → ${filteredCount} questions`)
 
       // Clear search
-      await searchInput.clear()
+      await searchInput.fill('')
       await page.waitForTimeout(500)
 
       const finalCount = await page.locator('a[href*="/javascript/"]').count()
-      expect(finalCount).toBeGreaterThanOrEqual(filteredCount)
+      expect(finalCount).toBeGreaterThanOrEqual(initialCount)
 
       console.log('✓ Search filter works')
     } else {

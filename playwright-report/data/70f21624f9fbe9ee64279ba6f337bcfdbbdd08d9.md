@@ -1,0 +1,459 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "Aller au contenu principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e8]:
+        - link "JS Interview Prep" [ref=e9] [cursor=pointer]:
+          - /url: /interview-training/
+          - generic [ref=e11]: JS Interview Prep
+        - generic [ref=e12]:
+          - button "Changer la langue de l'interface" [ref=e13]:
+            - generic [ref=e15]: 🇬🇧
+            - generic: English
+          - button "Switch to dark mode" [active] [ref=e18]
+      - generic [ref=e21]:
+        - heading "Master Frontend Interview Questions" [level=1] [ref=e24]
+        - paragraph [ref=e25]: Practice with interactive flashcards covering essential JavaScript concepts. Reveal answers when ready and track your progress.
+        - generic [ref=e26]:
+          - link "Start Practicing" [ref=e27] [cursor=pointer]:
+            - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+            - text: Start Practicing
+          - link "Browse Questions" [ref=e29] [cursor=pointer]:
+            - /url: "#questions"
+            - text: Browse Questions
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Your Progress" [level=2] [ref=e37]
+          - generic [ref=e38]: 0% Complete
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: Overall Progress
+            - generic [ref=e42]: 0 / 28
+          - progressbar "Overall Progress" [ref=e43]
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]: Mastered
+            - generic [ref=e47]: 0 / 28
+          - progressbar "Mastered" [ref=e48]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: "28"
+            - generic [ref=e52]: Not Seen
+          - generic [ref=e53]:
+            - generic [ref=e54]: "0"
+            - generic [ref=e55]: Seen
+          - generic [ref=e56]:
+            - generic [ref=e57]: "0"
+            - generic [ref=e58]: Mastered
+      - generic [ref=e61]:
+        - generic [ref=e64]:
+          - generic [ref=e65]: "28"
+          - generic [ref=e66]: Total Questions
+        - generic [ref=e69] [cursor=pointer]:
+          - generic [ref=e70]: "19"
+          - generic [ref=e71]: Easy
+        - generic [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]: "9"
+          - generic [ref=e76]: Medium
+        - generic [ref=e79] [cursor=pointer]:
+          - generic [ref=e80]: "0"
+          - generic [ref=e81]: Hard
+      - generic [ref=e84]:
+        - generic [ref=e87] [cursor=pointer]:
+          - generic [ref=e88]: "26"
+          - generic [ref=e89]: JavaScript
+        - generic [ref=e92] [cursor=pointer]:
+          - generic [ref=e93]: "1"
+          - generic [ref=e94]: HTML
+        - generic [ref=e97] [cursor=pointer]:
+          - generic [ref=e98]: "1"
+          - generic [ref=e99]: CSS
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - heading "All Questions" [level=2] [ref=e103]
+          - generic [ref=e106]:
+            - searchbox "Rechercher des questions dans la liste" [ref=e107]
+            - generic [ref=e112]: /
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - heading "JavaScript" [level=2] [ref=e118]
+                - generic [ref=e119]: 26 questions
+              - link "Voir tout" [ref=e120] [cursor=pointer]:
+                - /url: /interview-training/en/javascript
+                - text: Voir tout
+            - region [ref=e122]:
+              - generic [ref=e124]:
+                - group [ref=e125]:
+                  - generic [ref=e126]:
+                    - link [ref=e127] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                    - generic [ref=e128]:
+                      - 'link "medium javascript #NaN How do you detect primitive or non-primitive value types in JavaScript? Cliquer pour révéler" [ref=e129] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                        - generic [ref=e132]:
+                          - generic [ref=e133]:
+                            - generic [ref=e134]: medium
+                            - generic [ref=e135]: javascript
+                            - generic [ref=e136]: "#NaN"
+                          - heading "How do you detect primitive or non-primitive value types in JavaScript?" [level=2] [ref=e137]
+                        - button "Cliquer pour révéler" [ref=e142]
+                      - generic [ref=e143]:
+                        - link [ref=e144] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                        - generic [ref=e145]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e146] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                            - generic [ref=e147]:
+                              - button "Ajouter aux favoris" [ref=e148]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e150]: Mark as Mastered
+                          - generic [ref=e152]:
+                            - link:
+                              - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                            - link "Permalink" [ref=e153] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/how-do-you-detect-primitive-or-non-primitive-value-types-in-javascript
+                - group [ref=e154]:
+                  - generic [ref=e155]:
+                    - link [ref=e156] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                    - generic [ref=e157]:
+                      - 'link "easy javascript #NaN Explain the key features introduced in JavaScript ES6 Cliquer pour révéler" [ref=e158] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                        - generic [ref=e161]:
+                          - generic [ref=e162]:
+                            - generic [ref=e163]: easy
+                            - generic [ref=e164]: javascript
+                            - generic [ref=e165]: "#NaN"
+                          - heading "Explain the key features introduced in JavaScript ES6" [level=2] [ref=e166]
+                        - button "Cliquer pour révéler" [ref=e171]
+                      - generic [ref=e172]:
+                        - link [ref=e173] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                        - generic [ref=e174]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e175] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                            - generic [ref=e176]:
+                              - button "Ajouter aux favoris" [ref=e177]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e179]: Mark as Mastered
+                          - generic [ref=e181]:
+                            - link:
+                              - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                            - link "Permalink" [ref=e182] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/explain-the-key-features-introduced-in-javascript-es6
+                - group [ref=e183]:
+                  - generic [ref=e184]:
+                    - link [ref=e185] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                    - generic [ref=e186]:
+                      - 'link "medium javascript #NaN What are the differences between var, const & let in JavaScript? Cliquer pour révéler" [ref=e187] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                        - generic [ref=e190]:
+                          - generic [ref=e191]:
+                            - generic [ref=e192]: medium
+                            - generic [ref=e193]: javascript
+                            - generic [ref=e194]: "#NaN"
+                          - heading "What are the differences between var, const & let in JavaScript?" [level=2] [ref=e195]
+                        - button "Cliquer pour révéler" [ref=e200]
+                      - generic [ref=e201]:
+                        - link [ref=e202] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                        - generic [ref=e203]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e204] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                            - generic [ref=e205]:
+                              - button "Ajouter aux favoris" [ref=e206]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e208]: Mark as Mastered
+                          - generic [ref=e210]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                            - link "Permalink" [ref=e211] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-are-the-differences-between-var-const-let-in-javascript
+                - group [ref=e212]:
+                  - generic [ref=e213]:
+                    - link [ref=e214] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                    - generic [ref=e215]:
+                      - 'link "medium javascript #NaN What are arrow functions in JavaScript? Cliquer pour révéler" [ref=e216] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                        - generic [ref=e219]:
+                          - generic [ref=e220]:
+                            - generic [ref=e221]: medium
+                            - generic [ref=e222]: javascript
+                            - generic [ref=e223]: "#NaN"
+                          - heading "What are arrow functions in JavaScript?" [level=2] [ref=e224]
+                        - button "Cliquer pour révéler" [ref=e229]
+                      - generic [ref=e230]:
+                        - link [ref=e231] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                        - generic [ref=e232]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e233] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                            - generic [ref=e234]:
+                              - button "Ajouter aux favoris" [ref=e235]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e237]: Mark as Mastered
+                          - generic [ref=e239]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                            - link "Permalink" [ref=e240] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-are-arrow-functions-in-javascript
+                - group [ref=e241]:
+                  - generic [ref=e242]:
+                    - link [ref=e243] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                    - generic [ref=e244]:
+                      - 'link "medium javascript #NaN What is hoisting in JavaScript? Cliquer pour révéler" [ref=e245] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                        - generic [ref=e248]:
+                          - generic [ref=e249]:
+                            - generic [ref=e250]: medium
+                            - generic [ref=e251]: javascript
+                            - generic [ref=e252]: "#NaN"
+                          - heading "What is hoisting in JavaScript?" [level=2] [ref=e253]
+                        - button "Cliquer pour révéler" [ref=e258]
+                      - generic [ref=e259]:
+                        - link [ref=e260] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                        - generic [ref=e261]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e262] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                            - generic [ref=e263]:
+                              - button "Ajouter aux favoris" [ref=e264]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e266]: Mark as Mastered
+                          - generic [ref=e268]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                            - link "Permalink" [ref=e269] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-is-hoisting-in-javascript
+                - group [ref=e270]:
+                  - generic [ref=e271]:
+                    - link [ref=e272] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                    - generic [ref=e273]:
+                      - 'link "easy javascript #NaN What is Strict Mode in JavaScript? Cliquer pour révéler" [ref=e274] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                        - generic [ref=e277]:
+                          - generic [ref=e278]:
+                            - generic [ref=e279]: easy
+                            - generic [ref=e280]: javascript
+                            - generic [ref=e281]: "#NaN"
+                          - heading "What is Strict Mode in JavaScript?" [level=2] [ref=e282]
+                        - button "Cliquer pour révéler" [ref=e287]
+                      - generic [ref=e288]:
+                        - link [ref=e289] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                        - generic [ref=e290]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e291] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                            - generic [ref=e292]:
+                              - button "Ajouter aux favoris" [ref=e293]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e295]: Mark as Mastered
+                          - generic [ref=e297]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                            - link "Permalink" [ref=e298] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-is-strict-mode-in-javascript
+                - group [ref=e299]:
+                  - generic [ref=e300]:
+                    - link [ref=e301] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-is-nan
+                    - generic [ref=e302]:
+                      - 'link "easy javascript #NaN What is NaN? Cliquer pour révéler" [ref=e303] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-is-nan
+                        - generic [ref=e306]:
+                          - generic [ref=e307]:
+                            - generic [ref=e308]: easy
+                            - generic [ref=e309]: javascript
+                            - generic [ref=e310]: "#NaN"
+                          - heading "What is NaN?" [level=2] [ref=e311]
+                        - button "Cliquer pour révéler" [ref=e316]
+                      - generic [ref=e317]:
+                        - link [ref=e318] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-is-nan
+                        - generic [ref=e319]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e320] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-is-nan
+                            - generic [ref=e321]:
+                              - button "Ajouter aux favoris" [ref=e322]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e324]: Mark as Mastered
+                          - generic [ref=e326]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-is-nan
+                            - link "Permalink" [ref=e327] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-is-nan
+                - group [ref=e328]:
+                  - generic [ref=e329]:
+                    - link [ref=e330] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                    - generic [ref=e331]:
+                      - 'link "easy javascript #NaN Is JavaScript a statically typed or a dynamically typed language? Cliquer pour révéler" [ref=e332] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                        - generic [ref=e335]:
+                          - generic [ref=e336]:
+                            - generic [ref=e337]: easy
+                            - generic [ref=e338]: javascript
+                            - generic [ref=e339]: "#NaN"
+                          - heading "Is JavaScript a statically typed or a dynamically typed language?" [level=2] [ref=e340]
+                        - button "Cliquer pour révéler" [ref=e345]
+                      - generic [ref=e346]:
+                        - link [ref=e347] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                        - generic [ref=e348]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e349] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                            - generic [ref=e350]:
+                              - button "Ajouter aux favoris" [ref=e351]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e353]: Mark as Mastered
+                          - generic [ref=e355]:
+                            - link:
+                              - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                            - link "Permalink" [ref=e356] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/is-javascript-a-statically-typed-or-a-dynamically-typed-language
+                - group [ref=e357]:
+                  - generic [ref=e358]:
+                    - link [ref=e359] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                    - generic [ref=e360]:
+                      - 'link "easy javascript #NaN What are Higher-Order Functions in JavaScript? Cliquer pour révéler" [ref=e361] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                        - generic [ref=e364]:
+                          - generic [ref=e365]:
+                            - generic [ref=e366]: easy
+                            - generic [ref=e367]: javascript
+                            - generic [ref=e368]: "#NaN"
+                          - heading "What are Higher-Order Functions in JavaScript?" [level=2] [ref=e369]
+                        - button "Cliquer pour révéler" [ref=e374]
+                      - generic [ref=e375]:
+                        - link [ref=e376] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                        - generic [ref=e377]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e378] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                            - generic [ref=e379]:
+                              - button "Ajouter aux favoris" [ref=e380]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e382]: Mark as Mastered
+                          - generic [ref=e384]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                            - link "Permalink" [ref=e385] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-are-higher-order-functions-in-javascript
+                - group [ref=e386]:
+                  - generic [ref=e387]:
+                    - link [ref=e388] [cursor=pointer]:
+                      - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                    - generic [ref=e389]:
+                      - 'link "easy javascript #NaN What is the difference between Null and Undefined Cliquer pour révéler" [ref=e390] [cursor=pointer]':
+                        - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                        - generic [ref=e393]:
+                          - generic [ref=e394]:
+                            - generic [ref=e395]: easy
+                            - generic [ref=e396]: javascript
+                            - generic [ref=e397]: "#NaN"
+                          - heading "What is the difference between Null and Undefined" [level=2] [ref=e398]
+                        - button "Cliquer pour révéler" [ref=e403]
+                      - generic [ref=e404]:
+                        - link [ref=e405] [cursor=pointer]:
+                          - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                        - generic [ref=e406]:
+                          - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e407] [cursor=pointer]:
+                            - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                            - generic [ref=e408]:
+                              - button "Ajouter aux favoris" [ref=e409]: Favorite
+                              - button "Marquer comme maîtrisé" [ref=e411]: Mark as Mastered
+                          - generic [ref=e413]:
+                            - link:
+                              - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+                            - link "Permalink" [ref=e414] [cursor=pointer]:
+                              - /url: /interview-training/en/javascript/what-is-the-difference-between-null-and-undefined
+              - generic:
+                - generic:
+                  - button "Prev" [disabled] [ref=e415]
+                  - button "Next" [disabled] [ref=e417]
+          - generic [ref=e419]:
+            - generic [ref=e420]:
+              - generic [ref=e421]:
+                - heading "HTML" [level=2] [ref=e423]
+                - generic [ref=e424]: 1 question
+              - link "Voir tout" [ref=e425] [cursor=pointer]:
+                - /url: /interview-training/en/html
+                - text: Voir tout
+            - region [ref=e427]:
+              - group [ref=e430]:
+                - generic [ref=e431]:
+                  - link [ref=e432] [cursor=pointer]:
+                    - /url: /interview-training/en/html/what-is-semantic-html
+                  - generic [ref=e433]:
+                    - 'link "easy html #NaN What is Semantic HTML? Cliquer pour révéler" [ref=e434] [cursor=pointer]':
+                      - /url: /interview-training/en/html/what-is-semantic-html
+                      - generic [ref=e437]:
+                        - generic [ref=e438]:
+                          - generic [ref=e439]: easy
+                          - generic [ref=e440]: html
+                          - generic [ref=e441]: "#NaN"
+                        - heading "What is Semantic HTML?" [level=2] [ref=e442]
+                      - button "Cliquer pour révéler" [ref=e447]
+                    - generic [ref=e448]:
+                      - link [ref=e449] [cursor=pointer]:
+                        - /url: /interview-training/en/html/what-is-semantic-html
+                      - generic [ref=e450]:
+                        - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e451] [cursor=pointer]:
+                          - /url: /interview-training/en/html/what-is-semantic-html
+                          - generic [ref=e452]:
+                            - button "Ajouter aux favoris" [ref=e453]: Favorite
+                            - button "Marquer comme maîtrisé" [ref=e455]: Mark as Mastered
+                        - generic [ref=e457]:
+                          - link:
+                            - /url: /interview-training/en/html/what-is-semantic-html
+                          - link "Permalink" [ref=e458] [cursor=pointer]:
+                            - /url: /interview-training/en/html/what-is-semantic-html
+              - generic:
+                - generic:
+                  - button "Prev" [disabled] [ref=e459]
+                  - button "Next" [disabled] [ref=e461]
+          - generic [ref=e463]:
+            - generic [ref=e464]:
+              - generic [ref=e465]:
+                - heading "CSS" [level=2] [ref=e467]
+                - generic [ref=e468]: 1 question
+              - link "Voir tout" [ref=e469] [cursor=pointer]:
+                - /url: /interview-training/en/css
+                - text: Voir tout
+            - region [ref=e471]:
+              - group [ref=e474]:
+                - generic [ref=e475]:
+                  - link [ref=e476] [cursor=pointer]:
+                    - /url: /interview-training/en/css/what-is-the-box-model
+                  - generic [ref=e477]:
+                    - 'link "medium css #NaN What is the CSS Box Model? Cliquer pour révéler" [ref=e478] [cursor=pointer]':
+                      - /url: /interview-training/en/css/what-is-the-box-model
+                      - generic [ref=e481]:
+                        - generic [ref=e482]:
+                          - generic [ref=e483]: medium
+                          - generic [ref=e484]: css
+                          - generic [ref=e485]: "#NaN"
+                        - heading "What is the CSS Box Model?" [level=2] [ref=e486]
+                      - button "Cliquer pour révéler" [ref=e491]
+                    - generic [ref=e492]:
+                      - link [ref=e493] [cursor=pointer]:
+                        - /url: /interview-training/en/css/what-is-the-box-model
+                      - generic [ref=e494]:
+                        - link "Ajouter aux favoris Marquer comme maîtrisé" [ref=e495] [cursor=pointer]:
+                          - /url: /interview-training/en/css/what-is-the-box-model
+                          - generic [ref=e496]:
+                            - button "Ajouter aux favoris" [ref=e497]: Favorite
+                            - button "Marquer comme maîtrisé" [ref=e499]: Mark as Mastered
+                        - generic [ref=e501]:
+                          - link:
+                            - /url: /interview-training/en/css/what-is-the-box-model
+                          - link "Permalink" [ref=e502] [cursor=pointer]:
+                            - /url: /interview-training/en/css/what-is-the-box-model
+              - generic:
+                - generic:
+                  - button "Prev" [disabled] [ref=e503]
+                  - button "Next" [disabled] [ref=e505]
+      - paragraph [ref=e510]: Built with ❤️ using Nuxt 4, Nuxt Content & Nuxt UI
+```
