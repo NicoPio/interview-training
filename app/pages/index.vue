@@ -87,6 +87,14 @@ const questionsByCategory = computed(() => {
 
 const categories = ['javascript', 'html', 'css', 'vuejs', 'reactjs']
 
+// Filter categories to only show those with questions after filtering
+const categoriesWithQuestions = computed(() => {
+  return categories.filter((category) => {
+    const questionsForCategory = questionsByCategory.value[category]
+    return questionsForCategory && questionsForCategory.length > 0
+  })
+})
+
 const getCategoryClasses = (category: string) => {
   const classes: Record<
     string,
@@ -327,7 +335,7 @@ useHead({
 
         <div v-if="filteredQuestions && filteredQuestions.length > 0" class="space-y-12">
           <CategoryCarousel
-            v-for="category in categories"
+            v-for="category in categoriesWithQuestions"
             :key="category"
             :category="category"
             :questions="questionsByCategory[category] || []"
