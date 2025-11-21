@@ -33,7 +33,6 @@ const {
   showOnlyFavorites: _showOnlyFavorites,
   filterQuestions,
   getAllCategories,
-  getActiveFiltersCount,
   resetFilters,
   toggleDifficultyFilter,
   toggleCategoryFilter,
