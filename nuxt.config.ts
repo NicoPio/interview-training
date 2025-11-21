@@ -67,7 +67,7 @@ export default defineNuxtConfig({
   },
   studio: {
     // Studio admin route (default: '/_studio')
-    route: '/_studio',
+    route: '/interview-training/_studio',
 
     // GitHub repository configuration (owner and repo are required)
     repository: {
