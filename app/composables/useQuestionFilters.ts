@@ -189,6 +189,10 @@ export const useQuestionFilters = () => {
     }
   }
 
+  const toggleStatusFilter = (status: FilterStatus) => {
+    selectedStatus.value = status
+  }
+
   return {
     searchQuery,
     selectedDifficulties,
@@ -201,5 +205,6 @@ export const useQuestionFilters = () => {
     resetFilters,
     toggleDifficultyFilter,
     toggleCategoryFilter,
+    toggleStatusFilter,
   }
 }
