@@ -73,7 +73,7 @@ const { showHelp } = useKeyboardShortcuts()
                 <span class="hidden sm:inline">Aide</span>
               </UButton>
               <LanguageSwitcher />
-              <UColorModeButton />
+              <UColorModeButton data-testid="dark-mode-toggle" />
             </div>
           </div>
         </div>

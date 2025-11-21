@@ -28,6 +28,7 @@ const handleLocaleChange = (newLocale: string | undefined) => {
     color="neutral"
     variant="ghost"
     aria-label="Changer la langue de l'interface"
+    data-testid="language-switcher"
     @update:model-value="handleLocaleChange"
   />
 </template>

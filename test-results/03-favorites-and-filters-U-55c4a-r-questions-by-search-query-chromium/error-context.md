@@ -1,7 +1,7 @@
 # Page snapshot
 
 ```yaml
-- generic [active] [ref=e1]:
+- generic [ref=e1]:
   - generic [ref=e2]:
     - link "Aller au contenu principal" [ref=e3] [cursor=pointer]:
       - /url: "#main-content"
@@ -77,7 +77,7 @@
           - generic [ref=e102]:
             - heading "All Questions" [level=2] [ref=e103]
             - generic [ref=e106]:
-              - searchbox "Rechercher des questions dans la liste" [ref=e107]
+              - searchbox "Rechercher des questions dans la liste" [active] [ref=e107]
               - generic [ref=e112]: /
           - generic [ref=e113]:
             - generic [ref=e114]:
@@ -351,7 +351,7 @@
     - button "Toggle Nuxt DevTools" [ref=e500] [cursor=pointer]:
       - img [ref=e501]
     - generic "Page load time" [ref=e504]:
-      - generic [ref=e505]: "115"
+      - generic [ref=e505]: "133"
       - generic [ref=e506]: ms
     - button "Toggle Component Inspector" [ref=e508] [cursor=pointer]:
       - img [ref=e509]

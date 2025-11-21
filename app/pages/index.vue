@@ -190,7 +190,7 @@ useHead({
           </NuxtLink>
           <div class="flex items-center gap-2">
             <LanguageSwitcher />
-            <UColorModeButton />
+            <UColorModeButton data-testid="dark-mode-toggle" />
           </div>
         </div>
       </div>
